@@ -13,6 +13,7 @@ import Common from "../../common/Common";
 import Modal from "../datediary/Modal";
 import GoogleAndNaverNotLogin from "../../img/loginImg/구글,네이버 간편 로그인.gif";
 import LoginModal from "../../common/utils/Modal";
+import LetterOpenImg from "../../img/background/mobile/편지봉투3.jpg";
 
 const Contain = styled.div`
   width: 100%;
@@ -21,6 +22,16 @@ const Contain = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  /* background-color: black; */
+`;
+
+const LetterOpen = styled.div`
+  /* background-image: url(${LetterOpenImg}); */
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 const IconDiv = styled.div`
@@ -37,16 +48,12 @@ const Icon = styled.div`
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-
-  @media screen and (max-width: 654px) {
-    width: 30%;
-    height: 100%;
-  }
+  margin-left: 12%;
 `;
 
 const LoginDiv = styled.div`
   width: 100%;
-  height: 32%;
+  height: 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -57,12 +64,9 @@ const InputContainer = styled.div`
   position: relative;
   width: 60%;
   height: 5vh;
-  font-size: 16px;
+  font-size: 30px;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 
 const IconWrapper = styled.div`
@@ -77,7 +81,7 @@ const IconWrapper = styled.div`
 const InputDiv = styled.input`
   width: 100%;
   height: 100%;
-  padding-left: 20%;
+  padding-left: 15%;
   border: none;
   border-bottom: 0.21vh solid gray;
   background-color: transparent;
@@ -86,17 +90,10 @@ const InputDiv = styled.input`
   outline: none;
   &::placeholder {
     text-align: center;
+    padding-left: -15%;
     font-size: 15px;
     color: #b44a4a;
     font-weight: bolder;
-    @media screen and (max-width: 654px) {
-      font-size: 2vw;
-    }
-  }
-  @media screen and (max-width: 654px) {
-    width: 90%;
-    height: 80%;
-    font-size: 2vw;
   }
 `;
 const Message = styled.div`
@@ -105,16 +102,14 @@ const Message = styled.div`
   display: flex;
   justify-content: center;
   color: ${({ isCorrect }) => (isCorrect ? "green" : "red")};
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 
 const FindDiv = styled.div`
-  width: 80%;
+  width: 100%;
   height: 8%;
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
+  justify-content: center;
   & > div {
     display: flex;
     justify-content: flex-end;
@@ -127,15 +122,13 @@ const FindDiv = styled.div`
     justify-content: center;
     align-items: center;
   }
-  @media screen and (max-height: 654px) {
-    width: 270px;
-  }
 `;
 
 const SigninDiv = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  /* background-color: black; */
 `;
 
 const Signin = styled.div`
@@ -184,7 +177,7 @@ const ForgotPassword = styled.div`
 
 const ButtonDiv = styled.div`
   width: 100%;
-  height: 20%;
+  height: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,7 +188,7 @@ const LoginButton = styled.div`
   height: 50px;
   background-color: ${({ isActive }) =>
     isActive ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.1)"};
-  border-radius: 1.042vw;
+  border-radius: 25px;
   font-size: 20px;
   color: #b44a4a;
   display: flex;
@@ -206,11 +199,6 @@ const LoginButton = styled.div`
   &:hover {
     background-color: ${({ isActive }) =>
       isActive ? "rgba(0, 0, 0, 0.6)" : "rgba(0, 0, 0, 0.1)"};
-  }
-  @media screen and (max-width: 654px) {
-    width: 40%;
-    height: 50%;
-    font-size: 3vw;
   }
 `;
 
@@ -417,73 +405,73 @@ const LoginPage = () => {
           {modalContent}
         </LoginModal>
       )}
-      <IconDiv>
-        <Icon />
-      </IconDiv>
-      <LoginDiv>
-        <>
+      <LetterOpen>
+        <IconDiv>{/* <Icon /> */}</IconDiv>
+        <LoginDiv>
+          <>
+            <InputContainer>
+              <IconWrapper>
+                <MdOutlineMailOutlineStyle />
+              </IconWrapper>
+              <InputDiv
+                type="text"
+                placeholder="Email ID"
+                value={inputEmail}
+                onChange={onChangeEmail}
+              />
+            </InputContainer>
+            {inputEmail && <Message isCorrect={isId}>{idMessage}</Message>}
+          </>
           <InputContainer>
             <IconWrapper>
-              <MdOutlineMailOutlineStyle />
+              <MdLockOutlineStyled />
             </IconWrapper>
             <InputDiv
-              type="text"
-              placeholder="Email ID"
-              value={inputEmail}
-              onChange={onChangeEmail}
+              type="password"
+              placeholder="Password"
+              value={inputpwd}
+              onChange={onChangePwd}
+              onKeyDown={handleKeyDown} //패스워드를 입력하고 엔터를 눌렀을 경우
             />
           </InputContainer>
-          {inputEmail && <Message isCorrect={isId}>{idMessage}</Message>}
-        </>
-        <InputContainer>
-          <IconWrapper>
-            <MdLockOutlineStyled />
-          </IconWrapper>
-          <InputDiv
-            type="password"
-            placeholder="Password"
-            value={inputpwd}
-            onChange={onChangePwd}
-            onKeyDown={handleKeyDown} //패스워드를 입력하고 엔터를 눌렀을 경우
-          />
-        </InputContainer>
-      </LoginDiv>
-      <FindDiv>
-        <>
-          <Link to="/signup-page" style={{ textDecoration: "none" }}>
-            <SigninDiv>
-              <SiGnuprivacyguardStyle />
-              <Signin>&nbsp;Sign in</Signin>
-            </SigninDiv>
-          </Link>
-        </>
-        <>
-          <Link to="/find-email" style={{ textDecoration: "none" }}>
-            <ForgotId>Forgot ID</ForgotId>
-          </Link>
-          <Link to="/find-password" style={{ textDecoration: "none" }}>
-            <ForgotPassword>Password?</ForgotPassword>
-          </Link>
-        </>
-      </FindDiv>
-      <SimpleLogin>
-        <div>
-          <CircleSide>
-            <GoogleIcon onClick={() => modalClickHandler()} />
-          </CircleSide>
-          <CircleSide>
-            <NaverIcon onClick={() => modalClickHandler()} />
-          </CircleSide>
-          <CircleSide>
-            <KakaoIcon onClick={kakaoLoginOnClick} />
-          </CircleSide>
-        </div>
-      </SimpleLogin>
-      <ButtonDiv>
-        <LoginButton isActive={isId && isPwd} onClick={loginBtnHandler}>
-          Login
-        </LoginButton>
-      </ButtonDiv>
+        </LoginDiv>
+        <FindDiv>
+          <>
+            <Link to="/signup-page" style={{ textDecoration: "none" }}>
+              <SigninDiv>
+                <SiGnuprivacyguardStyle />
+                <Signin>&nbsp;Sign in</Signin>
+              </SigninDiv>
+            </Link>
+          </>
+          <>
+            <Link to="/find-email" style={{ textDecoration: "none" }}>
+              <ForgotId>Forgot ID</ForgotId>
+            </Link>
+            <Link to="/find-password" style={{ textDecoration: "none" }}>
+              <ForgotPassword>Password?</ForgotPassword>
+            </Link>
+          </>
+        </FindDiv>
+        <SimpleLogin>
+          <div>
+            <CircleSide>
+              <GoogleIcon onClick={() => modalClickHandler()} />
+            </CircleSide>
+            <CircleSide>
+              <NaverIcon onClick={() => modalClickHandler()} />
+            </CircleSide>
+            <CircleSide>
+              <KakaoIcon onClick={kakaoLoginOnClick} />
+            </CircleSide>
+          </div>
+        </SimpleLogin>
+        <ButtonDiv>
+          <LoginButton isActive={isId && isPwd} onClick={loginBtnHandler}>
+            Login
+          </LoginButton>
+        </ButtonDiv>
+      </LetterOpen>
     </Contain>
   );
 };

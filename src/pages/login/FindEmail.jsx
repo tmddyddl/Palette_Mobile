@@ -11,7 +11,8 @@ const Contain = styled.div`
 `;
 const IconDiv = styled.div`
   width: 100%;
-  height: 40%;
+  height: 20%;
+  margin-top:40% ;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +20,7 @@ const IconDiv = styled.div`
 
 const InputDiv = styled.div`
   width: 100%;
-  height: 30%;
+  height: 20%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -27,16 +28,17 @@ const InputDiv = styled.div`
 `;
 const ButtonDiv = styled.div`
   width: 100%;
-  height: 30%;
+  height: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const FindButton = styled.div`
   width: 27%;
-  height: 44%;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 1.042vw;
+  height: 32px;
+  background-color: rgba(46, 46, 46, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 6px 9px rgba(0, 0, 0, 0.3);
   font-size: 20px;
   color: #b44a4a;
   display: flex;
@@ -49,14 +51,10 @@ const FindButton = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
   }
 
-  @media screen and (max-width: 654px) {
-    font-size: 3vw;
-  }
-
 `;
 const InputDetailDiv = styled.div`
   width: 100%;
-  height: 20%;
+  height: 32px;
   display: flex;
   gap: 2px;
 
@@ -70,9 +68,7 @@ const InputDetailDiv = styled.div`
     color: #b44a4a;
     text-align: center;
     font-weight: bolder;
-    @media screen and (max-width: 654px) {
-      font-size: 2vw;
-    }
+
   }
 
   & > .InputClass {
@@ -86,9 +82,7 @@ const InputDetailDiv = styled.div`
     padding-left: 0.521vw;
     font-size: 14px;
     font-weight: 600;
-    @media screen and (max-width: 654px) {
-      font-size: 3vw;
-    }
+    
   }
 `;
 
@@ -103,9 +97,7 @@ const RegisterationInput1 = styled.input`
   padding-left: 0.521vw;
   font-size: 14px;
   font-weight: 600;
-  @media screen and (max-width: 654px) {
-    font-size: 3vw;
-  }
+
 `;
 const Text = styled.div`
   width: 3%;
@@ -116,9 +108,7 @@ const Text = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
+
 `;
 const RegisterationInput2 = styled.input`
   width: 7%;
@@ -131,18 +121,13 @@ const RegisterationInput2 = styled.input`
   padding-left: 0.208vw;
   font-size: 14px;
   font-weight: 600;
-  @media screen and (max-width: 654px) {
-    font-size: 3vw;
-  }
+
 `;
 const FaMagnifyingGlassStyle = styled(FaMagnifyingGlass)`
   width: calc(110px - 1vw);
   height: calc(110px - 1vh);
   color: rgba(0, 0, 0, 0.7);
-  @media screen and (max-width: 654px) {
-    width: 24%;
-    height: 60%;
-  }
+
 
 `;
 const Message = styled.div`
@@ -151,9 +136,7 @@ const Message = styled.div`
   display: flex;
   justify-content: center;
   color: ${({ isCorrect }) => (isCorrect ? "green" : "red")};
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
+
 `;
 const FindEmail = () => {
   //주민등록번호 표현 상태 변수

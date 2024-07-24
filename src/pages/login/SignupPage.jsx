@@ -7,6 +7,7 @@ import Modal from "../../common/utils/Modal";
 import Common from "../../common/Common";
 import termNote from "../../img/loginImg/note.png";
 import coupleMatching from "../../img/loginImg/coupleMatching.png";
+
 const Contain = styled.div`
   width: 100%;
   height: 100%;
@@ -23,18 +24,20 @@ const TitleDiv = styled.div`
   align-items: center;
   font-size: 18px;
   font-weight: 900;
+  /* background-color: aqua; */
   color: #b44a4a;
-  @media screen and (max-width: 654px) {
-    font-size: 3vw;
-  }
 `;
 const InputDiv = styled.div`
   width: 100%;
-  height: 80%;
+  height: 50%;
+  /* background-color: aqua; */
   display: flex;
+  margin-top: 10%;
   flex-direction: column;
   justify-content: space-evenly;
+  /* gap: 10px; */
   align-items: center;
+  /* background-color: black; */
 `;
 const JuminDiv = styled.div`
   width: 100%;
@@ -43,10 +46,7 @@ const InputDetailDiv = styled.div`
   width: 100%;
   height: 32px;
   display: flex;
-  gap: 2px;
-  @media screen and (max-width: 654px) {
-    height: 5vw;
-  }
+  /* gap: 2px; */
 
   & > label {
     display: flex;
@@ -58,9 +58,6 @@ const InputDetailDiv = styled.div`
     color: #b44a4a;
     text-align: center;
     font-weight: bolder;
-    @media screen and (max-width: 654px) {
-      font-size: 2vw;
-    }
   }
   & > .InputClass,
   & > .InputEmail,
@@ -76,9 +73,6 @@ const InputDetailDiv = styled.div`
     padding-left: 0.521vw;
     font-size: 14px;
     font-weight: 600;
-    @media screen and (max-width: 654px) {
-      font-size: 2vw;
-    }
   }
 `;
 const Empty = styled.div`
@@ -96,15 +90,12 @@ const EmailAthouized = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 14px;
-  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#ccc")};
+  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#b44a4a")};
   font-weight: 600;
   cursor: ${({ isActive }) => (isActive ? "pointer" : "not-allowed")};
   &:hover {
     background-color: ${({ isActive }) =>
       isActive ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.2)"};
-  }
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
   }
 `;
 const RegisterationInput1 = styled.input`
@@ -118,9 +109,6 @@ const RegisterationInput1 = styled.input`
   padding-left: 0.521vw;
   font-size: 14px;
   font-weight: 600;
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 const Text = styled.div`
   width: 3%;
@@ -131,9 +119,6 @@ const Text = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 const RegisterationInput2 = styled.input`
   width: 7%;
@@ -146,9 +131,6 @@ const RegisterationInput2 = styled.input`
   padding-left: 0.208vw;
   font-size: 14px;
   font-weight: 600;
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 const CoupleText = styled.div`
   font-size: 15px;
@@ -156,26 +138,23 @@ const CoupleText = styled.div`
   color: #b44a4a;
   display: flex;
   align-items: center;
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 const ButtonDiv = styled.div`
   width: 100%;
-  height: 14%;
+  height: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const SignupButton = styled.div`
   width: 30%;
-  height: 80%;
+  height: 32px;
   background-color: ${({ isActive }) =>
     isActive ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)"};
-  border-radius: 1.042vw;
+  border-radius: 16px;
   font-weight: 600;
   font-size: 15px;
-  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#ccc")};
+  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#b44a4a")};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,9 +163,6 @@ const SignupButton = styled.div`
   &:hover {
     background-color: ${({ isActive }) =>
       isActive ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)"};
-  }
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
   }
 `;
 const InputDetailDiv2 = styled.div`
@@ -201,9 +177,6 @@ const Message = styled.div`
   display: flex;
   justify-content: center;
   color: ${({ isCorrect }) => (isCorrect ? "green" : "red")};
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 const TermsForm = styled.div`
   width: 400px;
@@ -212,13 +185,6 @@ const TermsForm = styled.div`
   padding: 20px;
   position: absolute;
   overflow-y: auto;
-
-  @media screen and (max-width: 715px) {
-    width: 42%;
-    height: auto;
-    aspect-ratio: 358 / 482; /* 너비와 높이 비율 설정 */
-    min-width: 267;
-  }
 `;
 // focus-in-expand 애니메이션 정의
 const focusInExpand = keyframes`
@@ -243,10 +209,6 @@ const TermImgDiv = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   animation: ${focusInExpand} 0.5s ease-in-out; /* 애니메이션 적용 */
-  @media screen and (max-width: 715px) {
-    width: 135%;
-    min-width: 687px;
-  }
 `;
 const TermsTitle = styled.div`
   font-size: 24px; /* Adjust size as needed */

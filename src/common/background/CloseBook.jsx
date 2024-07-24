@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
-import closebook from "../../img/background/closebook2.png";
-import background from "../../img/background/theme/background3.jpg";
+import closebook from "../../img/background/mobile/편지봉투4-removebg-preview.png";
+import background from "../../img/background/mobile/background-6517956_1920.jpg";
 import logo from "../../img/background/logo.png";
 import { Outlet, Link } from "react-router-dom";
 import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
@@ -24,7 +24,7 @@ const Background = styled.div`
   width: 100vw;
   height: 100vh;
   background-image: url(${background});
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
@@ -46,33 +46,27 @@ const Book = styled.div`
   align-items: center;
   justify-content: center;
   animation: ${zoomInDown} 2s ease-out;
+  box-sizing: border-box;
 `;
 
 const BookTheme = styled.div`
   width: 100%;
   height: 100%;
-  margin-left: 52px;
-  margin-bottom: 63px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 654px) {
-    margin-left: 8%;
-    margin-bottom: 10%;
-  }
+  box-sizing: border-box;
 `;
 
 const LogoDiv = styled.div`
-  width: 420px;
-  aspect-ratio: 420 /170;
+  width: 430px;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 654px) {
-    width: 70%;
-    height: auto; /* 높이 자동 조절 */
-  }
+  background-color: aliceblue;
+  margin-top: 50px;
+  margin-right: 50px;
 `;
 
 const Logo = styled.div`
@@ -82,32 +76,26 @@ const Logo = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   border-radius: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
+  position: absolute;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   &:hover {
-    transform: scale(0.95);
+    transform: translateX(-50%) scale(0.95);
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.4);
-  }
-
-  @media screen and (max-width: 654px) {
-    width: 22vw;
-    height: 22vw;
   }
 `;
 
 const Contents = styled.div`
-  width: 420px;
-  aspect-ratio: 420 /460;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-
   justify-content: space-between;
   align-items: center;
+  /* background-color: aqua; */
   font-size: 16px;
-
-  @media screen and (max-width: 654px) {
-    width: 70%;
-    height: auto; /* 높이 자동 조절 */
-  }
+  box-sizing: border-box;
 `;
 
 const CloseBook = ({ modify }) => {
@@ -126,18 +114,18 @@ const CloseBook = ({ modify }) => {
     <Background>
       <Book>
         <BookTheme>
-          <LogoDiv>
-            {!modify && (
-              <Link to="/">
-                <Logo />
-              </Link>
-            )}
-            {modify && (
-              <Link to={`/${coupleName}/main-page`}>
-                <Logo />
-              </Link>
-            )}
-          </LogoDiv>
+          {/* <LogoDiv> */}
+          {!modify && (
+            <Link to="/">
+              <Logo />
+            </Link>
+          )}
+          {modify && (
+            <Link to={`/${coupleName}/main-page`}>
+              <Logo />
+            </Link>
+          )}
+          {/* </LogoDiv> */}
           <Contents>
             <Outlet />
           </Contents>

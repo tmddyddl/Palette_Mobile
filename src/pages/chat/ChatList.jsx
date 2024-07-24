@@ -285,7 +285,7 @@ const EnterBtn = styled.div`
   }
 `;
 
-function ChatList({url, clearUrl}) {
+function ChatList({ url, clearUrl }) {
   const [chatRooms, setChatRooms] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [previewMessages, setPreviewMessages] = useState([]);
@@ -340,7 +340,7 @@ function ChatList({url, clearUrl}) {
     fetchChatRooms(); // 최초 한 번 호출
 
     // 1초마다 채팅방 목록 업데이트
-    const intervalId = setInterval(fetchChatRooms, 0);
+    const intervalId = setInterval(fetchChatRooms, 1000);
 
     // 컴포넌트 언마운트 시 인터벌 해제
     return () => clearInterval(intervalId);
@@ -405,37 +405,37 @@ function ChatList({url, clearUrl}) {
       </BookTheme>
       <BookTheme2>
         <BookSign2 animate={animate}>
-        {selectedRoom && (
-          <>
-            <PreviewContainer animate={animate}>
-              <HeaderDiv>
-                <HeaderView>미리보기</HeaderView>
-                <HeaderName>
-                  {" "}
-                  (채팅방 :{" "}
-                  {chatRooms
-                    .find((room) => room.roomId === selectedRoom)
-                    ?.name.slice(0, 5)}
-                  )
-                </HeaderName>
-              </HeaderDiv>
-              {previewMessages.map((message, index) => (
-                <PreviewMessage key={index} isMe={message.sender === email}>
-                  {message.sender
-                    ? `${getNickNameByEmail(message.sender)} : ${
-                        message.message
-                      }`
-                    : message.message}
-                </PreviewMessage>
-              ))}
-            </PreviewContainer>
-            <BtnBox animate={animate}>
-              <EnterBtn onClick={() => enterChatRoom(selectedRoom)}>
-                입장하기
-              </EnterBtn>
-            </BtnBox>
-          </>
-        )}
+          {selectedRoom && (
+            <>
+              <PreviewContainer animate={animate}>
+                <HeaderDiv>
+                  <HeaderView>미리보기</HeaderView>
+                  <HeaderName>
+                    {" "}
+                    (채팅방 :{" "}
+                    {chatRooms
+                      .find((room) => room.roomId === selectedRoom)
+                      ?.name.slice(0, 5)}
+                    )
+                  </HeaderName>
+                </HeaderDiv>
+                {previewMessages.map((message, index) => (
+                  <PreviewMessage key={index} isMe={message.sender === email}>
+                    {message.sender
+                      ? `${getNickNameByEmail(message.sender)} : ${
+                          message.message
+                        }`
+                      : message.message}
+                  </PreviewMessage>
+                ))}
+              </PreviewContainer>
+              <BtnBox animate={animate}>
+                <EnterBtn onClick={() => enterChatRoom(selectedRoom)}>
+                  입장하기
+                </EnterBtn>
+              </BtnBox>
+            </>
+          )}
         </BookSign2>
       </BookTheme2>
       <ChatModal isOpen={createModal} onClose={closeModal}></ChatModal>

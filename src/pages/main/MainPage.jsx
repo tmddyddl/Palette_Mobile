@@ -6,7 +6,7 @@ import couple1 from "../../img/mainImg/커플1.jpg";
 import couple2 from "../../img/mainImg/커플2.jpg";
 import couple3 from "../../img/mainImg/커플3.jpg";
 import couple4 from "../../img/mainImg/커플4.jpg";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
@@ -15,272 +15,161 @@ import AlbumAxiosApi from "../../axiosapi/AlbumAxiosApi";
 import MainAxios from "../../axiosapi/MainAxios";
 import { GiArchiveResearch } from "react-icons/gi";
 import BoardAxios from "../../axiosapi/BoardAxios";
-import theme3 from "../../img/background/theme/new.jpg";
-import theme3_1 from "../../img/background/theme/new-1.jpg";
 import postIt from "../../img/mainImg/postIt.png";
 
-const turnPageLeft = keyframes`
-  0% {
-    transform: perspective(1000px) rotateY(0deg);
-    transform-origin: left;
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    overflow: hidden;
   }
-  30% {
-    transform: perspective(1600px) rotateY(-25deg);
-    transform-origin: left;
-  } 
-  100% {
-    transform: perspective(1000px) rotateY(-180deg);
-    transform-origin: left;
+
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
+  .slick-dots {
+    bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    button:before {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .slick-active button:before {
+      color: black;
+    }
+  }
+`;
+
+const BookContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
 `;
 
 const BookTheme = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.7vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${theme3});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #fff9f2;
   display: flex;
   justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  border-radius: 5px;
 `;
 
 const BookTheme2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.1vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${theme3_1});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #fff9f2;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  border-radius: 5px;
 `;
 
 const BookSign = styled.div`
-  width: 497px;
+  width: 425px;
   height: 100%;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 1vh;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 const BookSign2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  background-image: url(${theme3_1});
-  background-size: cover;
-  border: 1px solid #696969;
-  transform: perspective(1000px) rotateY(0deg); /* 애니메이션 초기 위치 */
-  transform-origin: left;
-  position: absolute;
-  ${({ animate }) =>
-    animate &&
-    css`
-      animation: ${turnPageLeft} 1.8s forwards;
-    `}
-
-  @media screen and (max-width: 1200px) {
-    width: 430px;
-    height: 56vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-  }
+  width: 425px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const CoupleDiv = styled.div`
-  width: 497px;
-  height: 22vh;
+  width: 100%;
+  height: 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 16vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 10vh;
-  }
 `;
 const PaletteBanner = styled.div`
-  width: 470px;
-  height: 15vh;
+  width: 100%;
+  height: 50%;
   display: flex;
   background-image: url(${iu});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  @media screen and (max-width: 1200px) {
-    width: 400px;
-    height: 12vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 360px;
-    height: 7vh;
-  }
 `;
 const DdayDiv = styled.div`
-  width: 490px;
-  height: 23vh;
+  width: 100%;
+  height: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1.4s;
-    `}
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 18vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 11vh;
-  }
 `;
 const GalleryDiv = styled.div`
-  width: 497px;
-  height: 38vh;
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1.4s;
-    `}
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 32vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 20vh;
-  }
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 const RecentPostDiv = styled.div`
-  width: 330px;
-  height: 24vh;
+  width: 60%;
+  height: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #000;
-  @media screen and (max-width: 1200px) {
-    width: 290px;
-    height: 17vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 180px;
-    height: 11vh;
-  }
 `;
 const RecentPosts = styled.div`
-  width: 308px;
-  height: 20vh;
+  width: 95%;
+  height: 80%;
   border: 1px solid #000;
-  @media screen and (max-width: 1200px) {
-    width: 270px;
-    height: 15vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 170px;
-    height: 10vh;
-  }
 `;
 const DdayFormDiv = styled.div`
-  width: 150px;
-  height: 24vh;
+  width: 30%;
+  height: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #000;
-  @media screen and (max-width: 1200px) {
-    width: 130px;
-    height: 17vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 80px;
-    height: 11vh;
-  }
 `;
 const Dday = styled.div`
-  width: 150px;
-  height: 20vh;
+  width: 95%;
+  height: 80%;
   border: 1px solid #000;
-  @media screen and (max-width: 1200px) {
-    width: 130px;
-    height: 15vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 80px;
-    height: 10vh;
-  }
 `;
 const RecentTitle = styled.div`
-  width: 308px;
-  height: 4vh;
+  width: 100%;
+  height: 20%;
+  font-size: 10px;
   border-bottom: 1px solid #000;
   display: flex;
   align-items: center;
   color: #000;
   font-weight: 800;
-  font-size: 17px;
-  @media screen and (max-width: 1200px) {
-    width: 268px;
-    height: 3.5vh;
-    font-size: 15px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 168px;
-    height: 2vh;
-    font-size: 10px;
-  }
 `;
 const Recents = styled.div`
-  width: 308px;
-  height: 4vh;
-  padding-left: 3%;
+  width: 100%;
+  height: 20%;
+  font-size: 10px;
+  padding: 0% 3%;
   display: flex;
   align-items: center;
   color: #000;
   font-weight: 800;
-  font-size: 16px;
   border-radius: 0.521vw;
   cursor: pointer;
   transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -289,72 +178,36 @@ const Recents = styled.div`
     color: royalblue;
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.2);
   }
-  @media screen and (max-width: 1200px) {
-    width: 268px;
-    height: 2.8vh;
-    font-size: 15px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 168px;
-    height: 2vh;
-    font-size: 10px;
-  }
 `;
 const Ddays = styled.div`
-  width: 150px;
-  height: 4vh;
-  font-size: 16px;
+  width: 80px;
+  height: 1.9vh;
+  font-size: 9px;
   display: flex;
   align-items: center;
   color: #000;
   font-weight: 600;
-  @media screen and (max-width: 1200px) {
-    width: 120px;
-    height: 3vh;
-    font-size: 13px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 80px;
-    height: 1.9vh;
-    font-size: 9px;
-  }
 `;
 const Picture = styled.div`
-  width: 150px;
-  height: 15.74vh;
+  width: 42%;
+  height: 90%;
   background-image: ${({ imageurl }) => `url(${imageurl})`};
   background-size: cover;
   border: 1px solid black;
   &:hover {
     transform: scale(1.02);
   }
-  @media screen and (max-width: 1200px) {
-    width: 130px;
-    height: 13vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 75px;
-    height: 8vh;
-  }
 `;
 const PictureDiv = styled.div`
-  width: 497px;
-  height: 20vh;
+  width: 90%;
+  height: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 16vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 300px;
-    height: 11vh;
-  }
 `;
 const VisitDiv = styled.div`
   width: 64%;
-  height: 3.5vh;
+  height: 2.5vh;
   border-radius: 10px;
   border: 1px solid #fff;
   & > .visitDiv {
@@ -362,7 +215,7 @@ const VisitDiv = styled.div`
   }
   & > div > input {
     width: 89%;
-    height: 3vh;
+    height: 2vh;
     padding-left: 1.083vw;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
@@ -371,28 +224,16 @@ const VisitDiv = styled.div`
     font-size: 0.8vw;
     font-weight: 500;
   }
-  @media screen and (max-width: 1200px) {
-    height: 3vh;
-    & > div > input {
-      height: 2.5vh;
-    }
-  }
-  @media screen and (max-width: 768px) {
-    height: 2.5vh;
-    & > div > input {
-      height: 2vh;
-    }
-  }
 `;
 const VisitList = styled.div`
   width: 100%;
-  height: 3vh;
+  height: 2.4vh;
+  font-size: 12px;
   border-radius: 10px;
   margin-top: 1%;
   border: 1px solid #fff;
   color: #fff;
   background-color: #d2e2eb;
-  font-size: 16px;
   font-weight: 500;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   display: flex;
@@ -404,30 +245,17 @@ const VisitList = styled.div`
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.4);
     color: #5549f7;
   }
-  @media screen and (max-width: 1200px) {
-    height: 2.5vh;
-    font-size: 14px;
-  }
-  @media screen and (max-width: 768px) {
-    height: 2.4vh;
-    font-size: 12px;
-  }
 `;
 const VisitSearchBtn = styled(GiArchiveResearch)`
   width: 11%;
-  height: 3.148vh;
+  height: 2.5vh;
   color: green;
   cursor: pointer;
-  @media screen and (max-width: 1200px) {
-    height: 3vh;
-  }
-  @media screen and (max-width: 768px) {
-    height: 2.5vh;
-  }
 `;
 const SettingDiv = styled.div`
-  width: 497px;
-  height: 4vh;
+  width: 100%;
+  height: 10%;
+  padding: 0% 4%;
   display: flex;
   justify-content: end;
   align-items: center;
@@ -438,15 +266,7 @@ const SettingDiv = styled.div`
       transition: opacity 1.4s;
     `}
   & > .space {
-    width: 1vw;
-  }
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 3.5vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 1.7vh;
+    width: 3%;
   }
 `;
 // flipInX 애니메이션 정의
@@ -474,35 +294,29 @@ const flipInX = keyframes`
   }
 `;
 const Setting = styled(IoSettingsSharp)`
-  width: 1.563vw;
+  width: 5%;
   height: 3.148vh;
   color: rgba(0, 0, 0, 0.8);
-  margin-right: 2%;
   cursor: pointer;
   &:hover {
     color: rgba(131, 55, 55, 0.8);
   }
 `;
 const SettingFormat = styled.div`
-  width: 380px;
-  padding-left: 150px;
+  width: 200px;
+  /* padding-left: 150px; */
   height: auto;
   border-radius: 10px;
-  margin-top: 22vh;
+  margin-top: 18vh;
   display: flex;
   justify-content: end;
   align-items: center;
-  animation: ${flipInX} 0.5s ease-in-out; /* 애니메이션 적용 */
-  @media screen and (max-width: 1200px) {
-    margin-top: 20vh;
-  }
-  @media screen and (max-width: 768px) {
-    margin-top: 18vh;
-  }
+  animation: ${flipInX} 0.5s ease-in-out;
 `;
+
 const SettingForm = styled.div`
-  width: 500px;
-  height: 360px;
+  width: 400px;
+  height: 300px;
   background-image: url(${postIt});
   background-size: cover;
   background-position: center;
@@ -511,10 +325,6 @@ const SettingForm = styled.div`
   justify-content: center;
   align-items: first baseline;
   z-index: 10;
-  @media screen and (max-width: 768px) {
-    width: 400px;
-    height: 300px;
-  }
 `;
 const Btn = styled.div`
   width: 70px;
@@ -534,61 +344,42 @@ const Btn = styled.div`
   }
 `;
 const BtnDiv = styled.div`
-  width: 260px;
-  height: 20vh;
-
+  width: 230px;
+  height: 17vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  @media screen and (max-width: 768px) {
-    width: 230px;
-    height: 17vh;
-  }
 `;
 
 const XbtnDiv = styled.div`
-  width: 250px;
-  height: 10vh;
+  width: 230px;
+  height: 8vh;
   padding-right: 20px;
   display: flex;
   justify-content: end;
   align-items: end;
-  @media screen and (max-width: 768px) {
-    width: 230px;
-    height: 8vh;
-  }
 `;
 const CloseBtn = styled(IoMdCloseCircleOutline)`
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   color: rgba(0, 0, 0, 0.8);
   cursor: pointer;
   &:hover {
     color: rgba(131, 55, 55, 0.8);
   }
-  @media screen and (max-width: 768px) {
-    width: 20px;
-    height: 20px;
-  }
 `;
 const VisitContainer = styled.div`
   width: 90%;
-  height: 13vh;
+  height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    height: 10vh;
-  }
-  @media screen and (max-width: 768px) {
-    height: 7vh;
-  }
 `;
 const BackMyHome = styled.div`
-  width: 96px;
-  height: 3vh;
-  font-size: 0.6vw;
+  width: 20%;
+  height: 30%;
+  font-size: 10px;
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
@@ -600,25 +391,16 @@ const BackMyHome = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
     color: #fff;
   }
-  @media screen and (max-width: 1200px) {
-    width: 70px;
-    height: 2.5vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 40px;
-    height: 1.5vh;
-  }
 `;
 
-const MainPage = ({url, clearUrl}) => {
+const MainPage = () => {
   const coupleName = sessionStorage.getItem("coupleName");
   const navigate = useNavigate();
   // 커플 이름 검색 후 추가
   const [searchTerm, setSearchTerm] = useState("");
-
   // 설정 폼 변화
   const [settingForm, setSettingForm] = useState(false);
-  // 커플 이름 검색 함수
+  // 커플 이름 검색 함
 
   //디데이 값 저장
   const [saveDday, setSaveDday] = useState("");
@@ -641,21 +423,15 @@ const MainPage = ({url, clearUrl}) => {
     const updatedImages = galleries.slice(0, 4).map((image) => image.urls[0]);
     setGallaryImg(updatedImages);
   };
-  const [animate, setAnimate] = useState(false);
 
-  const pageMove = useCallback(() => {
-    setAnimate(true);
-    setTimeout(() => {
-      navigate(url);
-      clearUrl(); // URL 초기화
-    }, 1800);
-  }, [navigate, url, clearUrl]);
-
-  useEffect(() => {
-    if (url) {
-      pageMove();
-    }
-  }, [url, pageMove]);
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
 
   useEffect(() => {
     listGallaryImg(coupleName);
@@ -777,136 +553,138 @@ const MainPage = ({url, clearUrl}) => {
   };
 
   return (
-    <>
-      <BookTheme>
-        <BookSign>
-          <CoupleDiv>
-            <PaletteBanner />
-          </CoupleDiv>
-          <CoupleDiv>
-            <CoupleImg isMyHome={isMyHome} />
-          </CoupleDiv>
-          <CoupleDiv>
-            <CoupleDday isMyHome={isMyHome} />
-            <VisitContainer>
-              <VisitDiv>
-                <div className="visitDiv">
-                  <input
-                    type="text"
-                    placeholder="다른 미니홈피 검색"
-                    value={searchTerm}
-                    onChange={visitSearchOnChange}
-                    onKeyDown={handleKeyPress}
-                  />
-                  <VisitSearchBtn />
-                </div>
-                {/* 여기 검색단어 맵으로 뿌려줄 예정 */}
-                {searchCoupleList.map((couple, index) => (
-                  <VisitList key={index} onClick={() => handleSearch(index)}>
-                    {truncateText(couple, 15)}
-                  </VisitList>
-                ))}
-              </VisitDiv>
-            </VisitContainer>
-          </CoupleDiv>
-        </BookSign>
-      </BookTheme>
-      <BookTheme2>
-        <BookSign2 animate={animate}>
-          <SettingDiv animate={animate}>
-            <BackMyHome onClick={goHomeOnClickHandler}>
-              내 홈으로 돌아가기
-            </BackMyHome>
-            <div className="space" />
-            {!settingForm && (
-              <Setting onClick={settingFromStatus} openform={settingForm} />
-            )}
-            {settingForm && (
-              <SettingFormat>
-                <SettingForm>
-                  <div className="settingDiv">
-                    <XbtnDiv>
-                      <CloseBtn onClick={closeFromStatus} />
-                    </XbtnDiv>
-                    <BtnDiv>
-                      <Btn
-                        onClick={() => {
-                          navigate("/modify");
-                        }}
-                      >
-                        수정하기
-                      </Btn>
-                      <Btn
-                        onClick={() => {
-                          sessionStorage.setItem("email", "");
-                          navigate("/");
-                        }}
-                      >
-                        로그아웃
-                      </Btn>
-                      <Btn
-                        onClick={() => {
-                          navigate("/withdrawal");
-                        }}
-                      >
-                        회원탈퇴
-                      </Btn>
-                    </BtnDiv>
+    <BookContainer>
+      <StyledSlider {...settings}>
+        <BookTheme>
+          <BookSign>
+            <CoupleDiv>
+              <PaletteBanner />
+            </CoupleDiv>
+            <CoupleDiv>
+              <CoupleImg isMyHome={isMyHome} />
+            </CoupleDiv>
+            <CoupleDiv>
+              <CoupleDday isMyHome={isMyHome} />
+              <VisitContainer>
+                <VisitDiv>
+                  <div className="visitDiv">
+                    <input
+                      type="text"
+                      placeholder="다른 미니홈피 검색"
+                      value={searchTerm}
+                      onChange={visitSearchOnChange}
+                      onKeyDown={handleKeyPress}
+                    />
+                    <VisitSearchBtn />
                   </div>
-                </SettingForm>
-              </SettingFormat>
-            )}
-          </SettingDiv>
-          <DdayDiv animate={animate}>
-            <RecentPostDiv>
-              <RecentPosts>
-                <RecentTitle>&nbsp;최근 게시물</RecentTitle>
-                {boardSaveData.slice(0, 4).map((item, index) => (
-                  <Recents
-                    key={index}
-                    onClick={() => {
-                      boardOnClickHandler(item.id);
-                    }}
-                  >
-                    &nbsp;{item.title}
-                  </Recents>
-                ))}
-              </RecentPosts>
-            </RecentPostDiv>
-            <DdayFormDiv>
-              <Dday>
-                <Ddays>&nbsp;TODAY : 8 </Ddays>
-                {isDday ? (
-                  <>
-                    <Ddays>&nbsp;TOTAL : {saveDday} day</Ddays>
-                    <Ddays>&nbsp;100일 : {hundredCalculate()} day</Ddays>
-                    <Ddays>&nbsp;500일 : {fiveHundredCalculate()} day</Ddays>
-                  </>
-                ) : (
-                  <>
-                    <Ddays>&nbsp;TOTAL : 입력해주세요. </Ddays>
-                    <Ddays>&nbsp;100일 : 입력해주세요. </Ddays>
-                    <Ddays>&nbsp;500일 : 입력해주세요.</Ddays>
-                  </>
-                )}
+                  {/* 여기 검색단어 맵으로 뿌려줄 예정 */}
+                  {searchCoupleList.map((couple, index) => (
+                    <VisitList key={index} onClick={() => handleSearch(index)}>
+                      {truncateText(couple, 15)}
+                    </VisitList>
+                  ))}
+                </VisitDiv>
+              </VisitContainer>
+            </CoupleDiv>
+          </BookSign>
+        </BookTheme>
+        <BookTheme2>
+          <BookSign2>
+            <SettingDiv>
+              <BackMyHome onClick={goHomeOnClickHandler}>
+                내 홈으로 돌아가기
+              </BackMyHome>
+              <div className="space" />
+              {!settingForm && (
+                <Setting onClick={settingFromStatus} openform={settingForm} />
+              )}
+              {settingForm && (
+                <SettingFormat>
+                  <SettingForm>
+                    <div className="settingDiv">
+                      <XbtnDiv>
+                        <CloseBtn onClick={closeFromStatus} />
+                      </XbtnDiv>
+                      <BtnDiv>
+                        <Btn
+                          onClick={() => {
+                            navigate("/modify");
+                          }}
+                        >
+                          수정하기
+                        </Btn>
+                        <Btn
+                          onClick={() => {
+                            sessionStorage.setItem("email", "");
+                            navigate("/");
+                          }}
+                        >
+                          로그아웃
+                        </Btn>
+                        <Btn
+                          onClick={() => {
+                            navigate("/withdrawal");
+                          }}
+                        >
+                          회원탈퇴
+                        </Btn>
+                      </BtnDiv>
+                    </div>
+                  </SettingForm>
+                </SettingFormat>
+              )}
+            </SettingDiv>
+            <DdayDiv>
+              <RecentPostDiv>
+                <RecentPosts>
+                  <RecentTitle>&nbsp;최근 게시물</RecentTitle>
+                  {boardSaveData.slice(0, 4).map((item, index) => (
+                    <Recents
+                      key={index}
+                      onClick={() => {
+                        boardOnClickHandler(item.id);
+                      }}
+                    >
+                      &nbsp;{item.title}
+                    </Recents>
+                  ))}
+                </RecentPosts>
+              </RecentPostDiv>
+              <DdayFormDiv>
+                <Dday>
+                  <Ddays>&nbsp;TODAY : 8 </Ddays>
+                  {isDday ? (
+                    <>
+                      <Ddays>&nbsp;TOTAL : {saveDday} day</Ddays>
+                      <Ddays>&nbsp;100일 : {hundredCalculate()} day</Ddays>
+                      <Ddays>&nbsp;500일 : {fiveHundredCalculate()} day</Ddays>
+                    </>
+                  ) : (
+                    <>
+                      <Ddays>&nbsp;TOTAL : 입력해주세요. </Ddays>
+                      <Ddays>&nbsp;100일 : 입력해주세요. </Ddays>
+                      <Ddays>&nbsp;500일 : 입력해주세요.</Ddays>
+                    </>
+                  )}
 
-                <Ddays>&nbsp;알콩이 생일 : D - 70 </Ddays>
-              </Dday>
-            </DdayFormDiv>
-          </DdayDiv>
-          <GalleryDiv animate={animate}>
-            <PictureDiv>
-              <Picture imageurl={gallaryImg[0] ? gallaryImg[0] : couple1} />
-              <Picture imageurl={gallaryImg[1] ? gallaryImg[1] : couple2} />
-            </PictureDiv>
-            <PictureDiv>
-              <Picture imageurl={gallaryImg[2] ? gallaryImg[2] : couple3} />
-              <Picture imageurl={gallaryImg[3] ? gallaryImg[3] : couple4} />
-            </PictureDiv>
-          </GalleryDiv>
-        </BookSign2>
-      </BookTheme2>
-    </>
+                  <Ddays>&nbsp;알콩이 생일 : D - 70 </Ddays>
+                </Dday>
+              </DdayFormDiv>
+            </DdayDiv>
+            <GalleryDiv>
+              <PictureDiv>
+                <Picture imageurl={gallaryImg[0] ? gallaryImg[0] : couple1} />
+                <Picture imageurl={gallaryImg[1] ? gallaryImg[1] : couple2} />
+              </PictureDiv>
+              <PictureDiv>
+                <Picture imageurl={gallaryImg[2] ? gallaryImg[2] : couple3} />
+                <Picture imageurl={gallaryImg[3] ? gallaryImg[3] : couple4} />
+              </PictureDiv>
+            </GalleryDiv>
+          </BookSign2>
+        </BookTheme2>
+      </StyledSlider>
+    </BookContainer>
   );
 };
 

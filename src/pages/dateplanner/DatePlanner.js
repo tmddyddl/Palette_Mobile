@@ -92,8 +92,7 @@ const RBookContainer = styled.div`
     `}
 `;
 
-
-const DatePlanner = ({url, clearUrl}) => {
+const DatePlanner = ({ url, clearUrl }) => {
   const { location } = useAddress();
   const [currCategory, setCurrCategory] = useState("");
   const [places, setPlaces] = useState([]);
@@ -271,10 +270,6 @@ const DatePlanner = ({url, clearUrl}) => {
     // displayPlaceInfo(place);
   };
 
-  
-
- 
-
   // 모달 열기
   const openModal = async (index) => {
     try {
@@ -406,30 +401,30 @@ const DatePlanner = ({url, clearUrl}) => {
         />
       </LBookContainer>
       <BookTheme2>
-      <BookSign2 animate={animate}>
-        <RBookContainer animate={animate}>
-          <MapContainer
-            clearOverlay={clearOverlay}
-            mapContainer={mapContainer}
-            displayPlaceInfo={displayPlaceInfo}
-            placeOverlay={placeOverlay}
-            map={map}
-            setMap={setMap}
-            currCategory={currCategory}
-            setCurrCategory={setCurrCategory}
-            places={places}
-            setPlaces={setPlaces}
-            location={location}
-          />
-          <PlaceCardList
-            places={places}
-            onClickPlaceBtn={handlePlaceCardClick}
-            onClickPlaceCard={onClickPlaceCard}
-            selectedPlaces={selectedPlaces}
-            currCategory={currCategory}
-          />
-        </RBookContainer>
-      </BookSign2>
+        <BookSign2 animate={animate}>
+          <RBookContainer animate={animate}>
+            <MapContainer
+              clearOverlay={clearOverlay}
+              mapContainer={mapContainer}
+              displayPlaceInfo={displayPlaceInfo}
+              placeOverlay={placeOverlay}
+              map={map}
+              setMap={setMap}
+              currCategory={currCategory}
+              setCurrCategory={setCurrCategory}
+              places={places}
+              setPlaces={setPlaces}
+              location={location}
+            />
+            <PlaceCardList
+              places={places}
+              onClickPlaceBtn={handlePlaceCardClick}
+              onClickPlaceCard={onClickPlaceCard}
+              selectedPlaces={selectedPlaces}
+              currCategory={currCategory}
+            />
+          </RBookContainer>
+        </BookSign2>
       </BookTheme2>
       <MapModal
         isOpen={isModalOpen}

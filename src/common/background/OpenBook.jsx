@@ -2,6 +2,7 @@ import styled from "styled-components";
 import logo from "../../img/background/logo.png";
 import chatLogo from "../../img/background/chatLogo.png";
 import { Outlet, Link } from "react-router-dom";
+import BookMark from "../bookmark/BookMark";
 
 const Background = styled.div`
   width: 430px;
@@ -64,6 +65,7 @@ const OpenBook = () => {
       <Book>
         <Outlet />
       </Book>
+      <BookMark />
     </Background>
   );
 };

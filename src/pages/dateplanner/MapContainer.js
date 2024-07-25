@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const MapSection = styled.div`
-  width: 100%;
+  width: 98%;
   height: 55%;
+  margin-top: 1%;
   display: flex;
   flex-direction: column;
 `;

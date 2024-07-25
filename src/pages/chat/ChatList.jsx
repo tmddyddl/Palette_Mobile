@@ -7,6 +7,40 @@ import chat from "../../img/background/theme/chat.jpg";
 import chat_1 from "../../img/background/theme/chat-1.jpg";
 import MainAxios from "../../axiosapi/MainAxios";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    overflow: hidden;
+  }
+
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slick-dots {
+    bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    button:before {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .slick-active button:before {
+      color: black;
+    }
+  }
+`;
+
+
 const turnPageLeft = keyframes`
   0% {
     transform: perspective(1000px) rotateY(0deg);
@@ -22,78 +56,51 @@ const turnPageLeft = keyframes`
   }
 `;
 
+const BookWrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
 const BookTheme = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.7vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${chat});
-  /* background-color: #d0d7e9; */
-  background-size: cover;
+  background-color: #fff9f2;
+  /* background-image: url(${chat});
+  background-size: cover; */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  justify-content: space-between;
+  border-radius: 5px;
 `;
 
 const BookTheme2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.05vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${chat_1});
-  /* background-color: #d0d7e9; */
-  background-size: cover;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  background-color: #fff9f2;
+  /* background-image: url(${chat});
+  background-size: cover; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 `;
 
 const BookSign2 = styled.div`
-  width: 100%;
+  width: 425px;
   height: 100%;
-  background-image: url(${chat_1});
-  background-size: cover;
-  transform: perspective(1000px) rotateY(0deg); /* 애니메이션 초기 위치 */
-  transform-origin: left;
   display: flex;
-  flex-direction: column;
+  justify-content: end;
   align-items: center;
-  justify-content: center;
-  ${({ animate }) =>
-    animate &&
-    css`
-      animation: ${turnPageLeft} 1.8s forwards;
-    `}
+  flex-direction: column;
 `;
 
 const ChatListContainer = styled.div`
-  width: 90%;
-  height: 90%;
+  width: 425px;
+  height: 100%;
   padding: 22px;
+  border-radius: 5px;
   position: relative;
-  background-color: #f3f3f3;
-  opacity: 0.9;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #dbe5f8;
   overflow: auto;
 `;
@@ -217,8 +224,7 @@ const CircleFixedButton = styled.button`
 
 const PreviewContainer = styled.div`
   width: 90%;
-  height: 65%;
-  background: rgba(255, 255, 255, 0.9);
+  height: 75%;
   border-radius: 10px;
   padding: 22px;
   overflow-y: hidden;
@@ -253,7 +259,6 @@ const BtnBox = styled.div`
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   align-items: center;
-  background-color: rgb(255, 255, 255, 0.8);
   ${({ animate }) =>
     animate &&
     css`
@@ -295,6 +300,15 @@ function ChatList({ url, clearUrl }) {
   const [coupleNickName, setCoupleNickName] = useState(["", ""]);
 
   const [animate, setAnimate] = useState(false);
+  
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
 
   const pageMove = useCallback(() => {
     setAnimate(true);
@@ -386,7 +400,8 @@ function ChatList({ url, clearUrl }) {
   };
 
   return (
-    <>
+    <BookWrapper>
+      <StyledSlider {...settings}>
       <BookTheme>
         <ChatListContainer>
           <Header>채팅방 목록</Header>
@@ -438,8 +453,9 @@ function ChatList({ url, clearUrl }) {
           )}
         </BookSign2>
       </BookTheme2>
+      </StyledSlider>
       <ChatModal isOpen={createModal} onClose={closeModal}></ChatModal>
-    </>
+    </BookWrapper>
   );
 }
 

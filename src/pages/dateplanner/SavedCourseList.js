@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const SavedCoursesContainer = styled.div`
     display: flex;
+    width: 95%;
     flex-direction: column;
     /* max-width: 100%; */
     overflow-x: hidden;

@@ -19,6 +19,39 @@ import {
 import TemaChange from "./import/TemaChange";
 import MainAxios from "../../axiosapi/MainAxios";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    overflow: hidden;
+  }
+
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slick-dots {
+    bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    button:before {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .slick-active button:before {
+      color: black;
+    }
+  }
+`;
+
 const turnPageLeft = keyframes`
   0% {
     transform: perspective(1000px) rotateY(0deg);
@@ -34,104 +67,53 @@ const turnPageLeft = keyframes`
   }
 `;
 
+const BookContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
 const BookTheme = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.7vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${theme8});
-  background-size: cover;
+  background-color: #fff9f2;
+  /* background-image: url(${theme8});
+  background-size: cover; */
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  border-radius: 5px;
 `;
 
 const BookTheme2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.05vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${theme8_1});
-  background-size: cover;
+  background-color: #fff9f2;
+  /* background-image: url(${theme8_1});
+  background-size: cover; */
   display: flex;
-  align-items: center;
   justify-content: center;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  align-items: center;
+  border-radius: 5px;
 `;
 
+
 const BookSign = styled.div`
-  width: 497px;
-  height: 67vh;
+  width: 425px;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-  }
+  flex-direction: column;
 `;
 
 const BookSign2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  background-image: url(${theme8_1});
-  background-size: cover;
-  border: 1px solid #696969;
-  transform: perspective(1000px) rotateY(0deg); /* 애니메이션 초기 위치 */
-  transform-origin: left;
-  position: absolute;
-  ${({ animate }) =>
-    animate &&
-    css`
-      animation: ${turnPageLeft} 1.8s forwards;
-    `}
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-  }
-`;
-
-const ContentWrapper = styled.div`
-  width: 100%;
+  width: 425px;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1.4s;
-    `}
+  flex-direction: column;
 `;
 
 const NextButton = styled.div`
@@ -170,7 +152,7 @@ const ImgWrapper = styled.div`
 
 const ImgWrapper2 = styled.div`
   width: 90%;
-  height: 82%;
+  height: 79%;
   background-color: ${(props) => props.bgColor};
   padding-left: 0.4%;
   margin-top: 6%;
@@ -184,8 +166,8 @@ const Img = styled.img`
 `;
 
 const ImgBox = styled.div`
-  width: 141px;
-  height: 15.4vh;
+  width: 120px;
+  height: 17vh;
   background-color: gray;
   display: flex;
   align-items: center;
@@ -211,34 +193,20 @@ const ImgBox = styled.div`
         color: white;
         padding: 2px 5px;
         border-radius: 3px;
-        font-size: 0.78vw;
+        font-size: 10px;
       }
     `}
-  }
-  @media screen and (max-width: 1200px) {
-    width: 120px;
-    height: 13vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 80px;
-    height: 8vh;
   }
 `;
 
 const Dday = styled.div`
   width: 90%;
-  height: 11%;
-  font-size: 22px;
-  margin-left: 5%;
+  height: 8%;
+  font-size: 13px;
   display: flex;
   justify-content: left;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    font-size: 18px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 13px;
-  }
+  padding-left: 3%;
 `;
 
 const AlbumTitle = styled.div`
@@ -376,6 +344,16 @@ const DateAlbum = ({ url, clearUrl }) => {
   //디데이 값 저장
   const [saveDday, setSaveDday] = useState("");
   //코드 모달 확인
+
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
+
 
   const pageMove = useCallback(() => {
     setAnimate(true);
@@ -664,8 +642,8 @@ const DateAlbum = ({ url, clearUrl }) => {
   };
 
   return (
-    <>
-      <InputDetailDiv />
+    <BookContainer>
+      <StyledSlider {...settings}>
       <BookTheme>
         <BookSign>
           <CoupleDiv>
@@ -677,8 +655,7 @@ const DateAlbum = ({ url, clearUrl }) => {
         </BookSign>
       </BookTheme>
       <BookTheme2>
-        <BookSign2 animate={animate}>
-          <ContentWrapper animate={animate}>
+        <BookSign2>
             <AddButton>
               <AddTema onClick={handleTemaPopup}>테마 추가</AddTema>
               <AddAlbum onClick={handlePagePopup}>앨범 추가</AddAlbum>
@@ -691,12 +668,12 @@ const DateAlbum = ({ url, clearUrl }) => {
               )}
               {renderImageBoxes(6, 15)}
             </ImgWrapper2>
-          </ContentWrapper>
         </BookSign2>
       </BookTheme2>
-      <InputDetailDiv>
+      </StyledSlider>      
+      {/* <InputDetailDiv>
         <NextButton onClick={handleNext}>▶▶</NextButton>
-      </InputDetailDiv>
+      </InputDetailDiv> */}
       <TemaChange
         open={temaChange}
         close={closeModal}
@@ -714,7 +691,7 @@ const DateAlbum = ({ url, clearUrl }) => {
       >
         {modalContent}
       </Modal>
-    </>
+    </BookContainer>
   );
 };
 

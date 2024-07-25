@@ -5,6 +5,40 @@ import { useCallback, useEffect, useState } from "react";
 import clothesBg1 from "../../img/background/theme/clothes_background.jpg";
 import { useNavigate } from "react-router-dom";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    overflow: hidden;
+  }
+
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slick-dots {
+    bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    button:before {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .slick-active button:before {
+      color: black;
+    }
+  }
+`;
+
+
 const turnPageLeft = keyframes`
   0% {
     transform: perspective(1000px) rotateY(0deg);
@@ -43,76 +77,52 @@ const CoupleimgCon = styled.div`
   }
 `;
 
+const BookContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
 const BookTheme = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.7vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${clothesBg1});
-  background-size: cover;
-  background-position: left;
-  background-repeat: no-repeat;
+  background-color: #fff9f2;
+  /* background-image: url(${clothesBg1});
+  background-size: cover; */
   display: flex;
   justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 41.5%;
-    height: 56vh;
-    margin-top: 4vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 41.5%;
-    height: 34.5vh;
-    margin-top: 3vh;
-  }
+  border-radius: 5px;
 `;
 
 const BookTheme2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.1vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${clothesBg1});
-  background-size: cover;
-  background-position: right;
-  background-repeat: no-repeat;
+  background-color: #fff9f2;
+  /* background-image: url(${clothesBg1});
+  background-size: cover; */
   display: flex;
-  justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 41.5%;
-    height: 56vh;
-    margin-top: 4vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 41.5%;
-    height: 34.5vh;
-    margin-top: 3vh;
-  }
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 `;
 
 const BookSign = styled.div`
-  width: 100%;
-  aspect-ratio: 50/20;
-  height: auto;
+  width: 425px;
+  height: 100%;
   display: flex;
   justify-content: end;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 `;
 
 const BookSign2 = styled.div`
-  width: 100%;
-  aspect-ratio: 50/20;
-  height: auto;
+  width: 425px;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: end;
   align-items: center;
-  justify-content: end;  
-  background-image: url(${clothesBg1});
-  background-size: cover;
-  transform: perspective(1000px) rotateY(0deg); /* 애니메이션 초기 위치 */
-  transform-origin: left;
+  flex-direction: column;
 
   & > .save2 {
     justify-content: end;
@@ -126,11 +136,6 @@ const BookSign2 = styled.div`
     display: flex;
     justify-content: flex-end;
   }
-  ${({ animate }) =>
-    animate &&
-    css`
-      animation: ${turnPageLeft} 1.8s forwards;
-    `}
 `;
 
 const Title = styled.div`
@@ -316,6 +321,15 @@ const DateClothes = ({ url, clearUrl }) => {
   const [animate, setAnimate] = useState(false);
   const navigate = useNavigate();
 
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
+
   const pageMove = useCallback(() => {
     setAnimate(true);
     setTimeout(() => {
@@ -335,7 +349,8 @@ const DateClothes = ({ url, clearUrl }) => {
   }, [url, pageMove, clearUrl]);
 
   return (
-    <>
+    <BookContainer>
+      <StyledSlider {...settings}>
       <BookTheme>
         <BookSign>
           <Title>데이트 룩 코디</Title>
@@ -388,7 +403,8 @@ const DateClothes = ({ url, clearUrl }) => {
           </ClothesFormContainer>
         </BookSign2>
       </BookTheme2>
-    </>
+      </StyledSlider>
+    </BookContainer>
   );
 };
 export default DateClothes;

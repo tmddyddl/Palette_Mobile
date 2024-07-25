@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const PlannerContainer = styled.div`
   padding: 10px;
+  width: 95%;
   height: 56%;
   background-color: ${({ isEditing }) =>
     isEditing ? "rgba(236, 205, 175, 1)" : "rgba(135, 163, 159, 1)"};
@@ -15,6 +16,7 @@ const PlannerContainer = styled.div`
 
 const CourseTitleInput = styled.input`
   padding: 10px;
+  margin-top: 2%;
   border: 1px solid #e6e6fa;
   border-radius: 4px;
 `;

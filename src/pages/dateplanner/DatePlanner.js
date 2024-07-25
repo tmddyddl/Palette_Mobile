@@ -13,6 +13,40 @@ import useAddress from "../../hooks/useLocation";
 import { useNavigate, useParams } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    overflow: hidden;
+  }
+
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slick-dots {
+    bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    button:before {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .slick-active button:before {
+      color: black;
+    }
+  }
+`;
+
+
 const turnPageLeft = keyframes`
   0% {
     transform: perspective(1000px) rotateY(0deg);
@@ -29,67 +63,60 @@ const turnPageLeft = keyframes`
 `;
 
 const BookWrapper = styled.div`
-  border: 1px solid green;
-  width: 85%;
-  height: 82.5%;
-  margin-top: 3.5%;
-  margin-left: 14px;
-  background-size: cover;
-  /* opacity: 0.8; */
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
 `;
 
 const LBookContainer = styled.div`
-  border: 1px solid red;
-  background-image: url(${theme6});
-  background-size: cover;
-  background-position: left;
-  width: 50%;
-  height: 100%;
+  width: 100%;
+  height: 75vh;
+  border: 1px solid #696969;
+  background-color: #fff9f2;
+  /* background-image: url(${theme6});
+  background-size: cover; */
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
 `;
 
 const BookTheme2 = styled.div`
-  width: 50%;
-  height: 100%;
-  background-image: url(${theme6});
-  background-size: cover;
-  transform: perspective(1000px) rotateY(0deg); /* 애니메이션 초기 위치 */
-  transform-origin: left;
-  background-position: right;
+  width: 100%;
+  height: 75vh;
+  background-color: #fff9f2;
+  border: 1px solid #696969;
+  /* background-image: url(${theme6});
+  background-size: cover; */
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+`;
+
+const BookSign = styled.div`
+  width: 425px;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const BookSign2 = styled.div`
-  width: 100%;
+  width: 425px;
   height: 100%;
-  background-image: url(${theme6});
-  background-size: cover;
-  transform: perspective(1000px) rotateY(0deg); /* 애니메이션 초기 위치 */
-  transform-origin: left;
-  background-position: right;
   display: flex;
-  align-items: center;
   justify-content: center;
-  ${({ animate }) =>
-    animate &&
-    css`
-      animation: ${turnPageLeft} 1.8s forwards;
-    `}
+  align-items: center;
+  flex-direction: column;
 `;
 
 const RBookContainer = styled.div`
-  border: 1px solid blue;
   width: 100%;
   height: 100%;
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1.4s;
-    `}
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const DatePlanner = ({ url, clearUrl }) => {
@@ -118,6 +145,15 @@ const DatePlanner = ({ url, clearUrl }) => {
 
   const [animate, setAnimate] = useState(false);
   const navigate = useNavigate();
+  
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
 
   const pageMove = useCallback(() => {
     setAnimate(true);
@@ -381,7 +417,9 @@ const DatePlanner = ({ url, clearUrl }) => {
 
   return (
     <BookWrapper>
+      <StyledSlider {...settings}>
       <LBookContainer>
+      <BookSign>
         <PlannerForm
           title={title}
           selectedPlaces={selectedPlaces}
@@ -399,6 +437,7 @@ const DatePlanner = ({ url, clearUrl }) => {
           handleDeleteCourse={handleDeleteCourse}
           openModal={(index) => openModal(index)}
         />
+        </BookSign>
       </LBookContainer>
       <BookTheme2>
         <BookSign2 animate={animate}>
@@ -426,6 +465,7 @@ const DatePlanner = ({ url, clearUrl }) => {
           </RBookContainer>
         </BookSign2>
       </BookTheme2>
+      </StyledSlider>
       <MapModal
         isOpen={isModalOpen}
         onClose={closeModal}

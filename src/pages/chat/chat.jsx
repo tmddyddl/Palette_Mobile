@@ -45,28 +45,23 @@ const GlobalStyle = styled.div`
     background: #a3a59c; /* 스크롤바 호버 색상 */
   }
 `;
+
+const BookWrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
 const Chatpage = styled.div`
-  width: 997px;
-  height: 67vh;
-  margin-top: 4.5%;
-  margin-left: 0.7vw;
-  border: 1px solid #696969;  
+  width: 425px;
+  height: 75vh;
+  border: 1px solid #696969;
+  border-radius: 5px;
   background: url(${(props) => props.backgroundImage}) no-repeat center center;
   /* background-color: #9b9b9b; */
   background-size: cover;
   position: relative;
-
-  @media screen and (max-width: 1200px) {
-    width: 100%;
-    height: 56vh;
-    margin-top: 4vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    height: 34.5vh;
-    margin-top: 3vh;
-  }
 `;
+
 const Textarea = styled.div`
   width: 100%;
   display: flex;
@@ -78,21 +73,7 @@ const Textarea = styled.div`
   height: ${({ isPlusMenuVisible }) =>
     isPlusMenuVisible
       ? "calc(68vh - 25vh)"
-      : "calc(68vh - 11.5vh); border-bottom: 1px solid gray;"}; // 기본 화면 크기
-  @media screen and (max-width: 1200px) {
-    width: 832px;
-    height: ${({ isPlusMenuVisible }) =>
-      isPlusMenuVisible
-        ? "calc(60vh - 24.7vh)"
-        : "calc(60vh - 14vh)"}; // 중간 화면 크기
-  }
-  @media screen and (max-width: 768px) {
-    width: 560px;
-    height: ${({ isPlusMenuVisible }) =>
-      isPlusMenuVisible
-        ? "calc(36vh - 15vh)"
-        : "calc(36vh - 9vh)"}; // 작은 화면 크기
-  }
+      : "calc(68vh - 4.5vh); border-bottom: 1px solid gray;"}; // 기본 화면 크기
 `;
 
 // const MessageBox = styled.div`
@@ -133,13 +114,7 @@ const TopText = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 20px;
-  @media screen and (max-width: 1200px) {
-    font-size: 15px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-  }
+  font-size: 15px;
 `;
 
 const TopName = styled.div`
@@ -149,13 +124,7 @@ const TopName = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  font-size: 16px;
-  @media screen and (max-width: 1200px) {
-    font-size: 13px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-  }
+  font-size: 13px;
 `;
 
 const TopBtn = styled.div`
@@ -188,12 +157,6 @@ const PlusMenu = styled.div`
   display: ${(props) => (props.isVisible ? "flex" : "none")};
   position: absolute;
   bottom: 8%;
-  @media screen and (max-width: 1200px) {
-    bottom: 9%;
-  }
-  @media screen and (max-width: 768px) {
-    bottom: 14%;
-  }
 `;
 
 const TemaMenu = styled.div`
@@ -592,6 +555,7 @@ const ChatMain = ({url, clearUrl}) => {
       >
         {modalContent}
       </Modal>
+      <BookWrapper>
       <Chatpage backgroundImage={backgroundImage}>
         <TopDiv>
           <TopText>{coupleNickName[1]} 의 채팅</TopText>
@@ -714,6 +678,7 @@ const ChatMain = ({url, clearUrl}) => {
           </button>
         </InputText>
       </Chatpage>
+      </BookWrapper>
     </GlobalStyle>
   );
 };

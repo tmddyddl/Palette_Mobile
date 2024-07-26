@@ -84,6 +84,7 @@ const BookSign = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
 const BookSign2 = styled.div`
   width: 425px;
   height: 100%;

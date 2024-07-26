@@ -23,8 +23,8 @@ const Popup = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 700px;
-  height: 350px;
+  width: 95%;
+  height: 200px;
   background: white;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ const PopTitle = styled.div`
   width: 90%;
   height: 15%;
   padding-left: 1%;
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   display: flex;
   flex-direction: row;
   border-bottom: 1px solid #c8c8c8;
@@ -73,7 +73,7 @@ const BuyTema = styled.div`
 const TemaInfo = styled.div`
   width: 100%;
   height: 100%;
-  font-size: 1rem;
+  font-size: 0.9rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,7 +82,7 @@ const TemaInfo = styled.div`
 const TemaOne = styled.div`
   width: 100%;
   height: 30%;
-  font-size: 1.3rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,6 +90,7 @@ const TemaOne = styled.div`
 const TemaTwo = styled.div`
   width: 100%;
   height: 20%;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,6 +98,7 @@ const TemaTwo = styled.div`
 const TemaThr = styled.div`
   width: 100%;
   height: 30%;
+  font-size: 0.8rem;
   display: flex;
   white-space: nowrap;
   align-items: center;
@@ -120,7 +122,7 @@ const CloseButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.93rem;
+  font-size: 0.7rem;
   margin-top: 2px;
   border: none;
   border-radius: 0.6rem;

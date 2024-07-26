@@ -16,20 +16,12 @@ const GuestbookSide = styled.div`
 const GuestbookTitle = styled.div`
   margin-top: 2.5vh;
   width: 100%;
-  height: 5vh;
-  font-size: 20px;
+  height: 3vh;
+  font-size: 16px;
   font-weight: 700;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    height: 3vh;
-    font-size: 16px;
-  }
-  @media screen and (max-width: 768px) {
-    height: 1vh;
-    font-size: 12px;
-  }
 `;
 const GuestbookGrayBar = styled.div`
   margin-top: 1.5vh;
@@ -43,17 +35,9 @@ const GuestbookGrayBar = styled.div`
 const GuestbookWriteArea = styled.div`
   margin-top: 2vh;
   width: 400px;
-  height: 10vh;
+  height: 9vh;
   border: 1px solid black;
   background-color: #eccdb0;
-  @media screen and (max-width: 1200px) {
-    width: 350px;
-    height: 9vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 230px;
-    height: 6vh;
-  }
 `;
 const GuestbookWriteMain = styled.div`
   margin-left: 1vw;
@@ -74,12 +58,6 @@ const GuestbookInput = styled.textarea`
   font-size: 13px;
   resize: none;
   overflow-y: aute;
-  @media screen and (max-width: 1200px) {
-    font-size: 12px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-  }
 `;
 const GuestbookWriteButton = styled.div`
   margin-top: 0.1vh;
@@ -95,44 +73,21 @@ const GuestbookWriteButton = styled.div`
   &:hover {
     color: blue;
   }
-  @media screen and (max-width: 1200px) {
-    font-size: 11px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 8px;
-  }
 `;
 const GuestbookList = styled.div`
   width: 420px;
   margin-right: 13px;
-  height: 60%;
+  height: 55%;
   overflow-y: auto; /* 세로 스크롤 추가 */
   overflow-x: hidden;
-  @media screen and (max-width: 1200px) {
-    width: 380px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 250px;
-    height: 55%;
-  }
 `;
 const GuestbookArea = styled.div`
   margin-top: 2vh;
   margin-left: 16px;
   background-color: #eccdb0;
   width: 400px;
-  height: 12vh;
+  height: 10vh;
   border: 1px solid black;
-
-  @media screen and (max-width: 1200px) {
-    width: 355px;
-    height: 10vh;
-  }
-  @media screen and (max-width: 768px) {
-    margin-top: 1vh;
-    width: 230px;
-    height: 6vh;
-  }
 `;
 const GuestbookHead = styled.div`
   height: 25%;
@@ -143,19 +98,16 @@ const GuestbookHead = styled.div`
 const GuestbookNo = styled.div`
   width: 10%;
   height: 100%;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 500;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 768px) {
-    font-size: 11px;
-  }
 `;
 const GuestbookNickname = styled.div`
   width: 25%;
   height: 100%;
-  font-size: 16px;
+  font-size: 11px;
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -163,27 +115,21 @@ const GuestbookNickname = styled.div`
   cursor: pointer;
   &:hover {
     color: blue;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 11px;
   }
 `;
 const GuestbookDate = styled.div`
   width: 50%;
   height: 100%;
-  font-size: 16px;
+  font-size: 11px;
   font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 768px) {
-    font-size: 11px;
-  }
 `;
 const GuestbookDelete = styled.div`
   width: 15%;
   height: 100%;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -192,10 +138,8 @@ const GuestbookDelete = styled.div`
   &:hover {
     color: blue;
   }
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-  }
 `;
+
 const GuestbookWriteBody = styled.div`
   width: 100%;
   height: 100%;
@@ -231,9 +175,6 @@ const GuestbookMain = styled.div`
   display: flex;
   justify-content: first baseline;
   align-items: center;
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-  }
 `;
 
 const Guestbook = ({}) => {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import theme6 from "../../img/background/theme/6.jpg";
-import theme12 from "../../img/background/theme/12.jpg";
+// import theme12 from "../../img/background/theme/12.jpg";
 import theme8 from "../../img/background/theme/8.jpg";
 import theme3 from "../../img/background/theme/3.jpg";
 import clothesBg from "../../img/background/theme/4.jpg";
@@ -13,46 +13,21 @@ import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
 import visitLcck from "../../img/mainImg/방문자 잠금.gif";
 
 const BookMarkDiv = styled.div`
-  width: 358px;
-  height: 10.493vh;
+  width: 95%;
   display: flex;
   justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 300px;
-    height: 9vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 180px;
-    height: 4vh;
-  }
 `;
 const BookMarks = styled.div`
-  width: 50px;
-  height: 100px;
-  border: 1px solid #000;
-  border-radius: 10px 10px 0 0;
-  font-size: 12.5px;
-  font-weight: 600;
-  writing-mode: vertical-lr;
+  width: 18%;
+  height: 6vh;
+  border: 1px solid #696969;
+  border-radius: 10px;
+  font-size: 0.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: ${({ imageurl }) => `url(${imageurl})`};
-  background-position: center;
-  background-size: cover;
+  background-color: #fff9f2;
   cursor: pointer;
-  border-bottom: none;
-  @media screen and (max-width: 1200px) {
-    width: 40px;
-    height: 80px;
-    font-size: 10px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 25px;
-    height: 50px;
-    font-size: 7px;
-    border-radius: 5px 5px 0 0;
-  }
 `;
 
 const BookMark = () => {
@@ -220,31 +195,31 @@ const BookMark = () => {
     }
   };
 
-  const OpenChatOnClickHandler = async () => {
-    try {
-      const isCouple = await compareCoulpleNameFunction(email);
+  // const OpenChatOnClickHandler = async () => {
+  //   try {
+  //     const isCouple = await compareCoulpleNameFunction(email);
 
-      if (isCouple) {
-        // 커플일 경우
-        if (await isCoupleAxios(email)) {
-          navigator(`/Chat`);
-        } else {
-          // 모달
-          soloModal();
-          console.log("솔로는 웁니다.");
-        }
-      } else {
-        // 커플이 아닌 경우
-        setModalOpen(true);
-        setNotEqualCoupleName(true);
-        setModalContent("방문자는 해당 기능이 잠겨있습니다.");
-        navigator(`/${coupleName}/main-page`);
-      }
-    } catch (error) {
-      // 에러 처리
-      console.error("오류가 발생했습니다:", error);
-    }
-  };
+  //     if (isCouple) {
+  //       // 커플일 경우
+  //       if (await isCoupleAxios(email)) {
+  //         navigator(`/Chat`);
+  //       } else {
+  //         // 모달
+  //         soloModal();
+  //         console.log("솔로는 웁니다.");
+  //       }
+  //     } else {
+  //       // 커플이 아닌 경우
+  //       setModalOpen(true);
+  //       setNotEqualCoupleName(true);
+  //       setModalContent("방문자는 해당 기능이 잠겨있습니다.");
+  //       navigator(`/${coupleName}/main-page`);
+  //     }
+  //   } catch (error) {
+  //     // 에러 처리
+  //     console.error("오류가 발생했습니다:", error);
+  //   }
+  // };
 
   // const OpenChatOnClickHandler = async () => {
   //   compareCoulpleNameFunction(email);
@@ -299,9 +274,6 @@ const BookMark = () => {
       </BookMarks>
       <BookMarks imageurl={boardBg} onClick={OpenBoardOnClickHandler}>
         게시판
-      </BookMarks>
-      <BookMarks imageurl={theme12} onClick={OpenChatOnClickHandler}>
-        채팅
       </BookMarks>
     </BookMarkDiv>
   );

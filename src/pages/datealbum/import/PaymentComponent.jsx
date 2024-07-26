@@ -8,7 +8,7 @@ import AlbumAxiosApi from "../../../axiosapi/AlbumAxiosApi";
 
 const BuyButton = styled.div`
   padding: 0.4rem 0.7rem;
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   margin-bottom: 4%;
   display: flex;
   justify-content: center;

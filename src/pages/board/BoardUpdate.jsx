@@ -2,9 +2,6 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import BoardAxios from "../../axiosapi/BoardAxios";
-import boardBg from "../../img/background/theme/9.jpg";
-import boardBg_1 from "../../img/background/theme/9-1.jpg";
-import CoupleImg from "../../common/couple/CoupleImgMini";
 import AddPhoto from "../../img/board/AddPhoto.png";
 import {
   storage,
@@ -29,235 +26,45 @@ const turnPageLeft = keyframes`
 `;
 
 const BookTheme = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.7vw;
+  width: 99%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${boardBg});
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
-`;
-
-const BookTheme2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.05vw;
-  border: 1px solid #696969;
-  background-image: url(${boardBg_1});
-  background-size: cover;
+  background-color: #fff9f2;
   display: flex;
   justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  border-radius: 5px;
 `;
 
-const BookSign2 = styled.div`
-  width: 100%;
+const BookSign = styled.div`
+  width: 425px;
   height: 100%;
-  background-image: url(${boardBg_1});
-  background-size: cover;
-  transform: perspective(1000px) rotateY(0deg); /* 애니메이션 초기 위치 */
-  transform-origin: left;
   display: flex;
-  align-items: center;
   justify-content: center;
-  ${({ animate }) =>
-    animate &&
-    css`
-      animation: ${turnPageLeft} 1.8s forwards;
-    `}
-`;
-
-const BoardSide = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
+  align-items: center;
   flex-direction: column;
-  align-items: center;
-  position: relative;
 `;
-const BoardTitle = styled.div`
-  margin-top: 2%;
-  width: 100%;
-  height: 6%;
-  font-size: 20px;
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @media screen and (max-width: 1200px) {
-    font-size: 17px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-  }
-`;
-const CoupleDiv = styled.div`
-  width: 100%;
-  height: 18%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const BoardGrayBar = styled.div`
-  margin-top: 1.5vh;
-  margin-left: 1.5vw;
+
+const WriteTop = styled.div`
   width: 90%;
-  height: 0.5%;
-  background-color: #b0b0b0;
+  height: 7%;
   display: flex;
-  justify-content: center;
   align-items: center;
-`;
-// const BoardPost = styled.div`
-//   margin-top: 2vh;
-//   margin-left: 18.5vw;
-//   width: 8vw;
-//   height: 1vh;
-//   font-size: 11px;
-//   font-weight: 600;
-//   color: black;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   cursor: pointer;
-//   &:hover {
-//     color: blue;
-//   }
-// `;
-const BoardTable = styled.table`
-  margin-top: 1vh;
-  width: 87%;
-  table-layout: fixed;
-  border-collapse: collapse;
-`;
-
-const BoardTh = styled.th`
-  height: 3vh;
-  background-color: gray;
-  border: 1px solid black;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  padding: 0;
-  box-sizing: border-box;
-  vertical-align: middle;
-  &:nth-child(1) {
-    width: 15%;
-  }
-  &:nth-child(2) {
-    width: 60%;
-  }
-  &:nth-child(3) {
-    width: 25%;
-  }
-  @media screen and (max-width: 1200px) {
-    height: 25px;
-  }
-  @media screen and (max-width: 768px) {
-    height: 15px;
-  }
-`;
-
-const BoardTd = styled.td`
-  height: 3.2vh;
-  border: 1px solid black;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  padding: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  vertical-align: middle;
-  @media screen and (max-width: 1200px) {
-    height: 25px;
-    font-size: 11px;
-  }
-  @media screen and (max-width: 768px) {
-    height: 15px;
-    font-size: 10px;
-  }
-`;
-
-const NameHover = styled(BoardTd)`
-  cursor: pointer;
-  &:hover {
-    color: blue;
-  }
-`;
-const BoardPaginationContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin-bottom: 3%;
-  margin-left: 1.5vw;
-  width: 87%;
-  height: 3vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const BoardPaginationButton = styled.button`
-  margin: 0 5px;
-  padding: 5px 10px;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  cursor: pointer;
-  &:hover {
-    background-color: #eeeeee;
-  }
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-    margin: 0 3px;
-    padding: 1px 5px;
-  }
+  justify-content: end;
 `;
 
 const WriteSide = styled.div`
   width: 100%;
   height: 100%;
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1.4s;
-    `}
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
 `;
 
 const BackToGuestbook = styled.div`
-  margin-top: 2%;
-  padding-right: 2%;
   width: 100%;
-  height: 1vh;
-  font-size: 15px;
+  height: 3vh;
+  font-size: 12px;
   font-weight: 600;
   color: black;
   display: flex;
@@ -265,61 +72,48 @@ const BackToGuestbook = styled.div`
   align-items: center;
   cursor: pointer;
   &:hover {
-    font-size: 16px;
+    font-size: 14px;
     color: blue;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-    &:hover {
-      font-size: 11px;
-    }
   }
 `;
 
 const WriteTitle = styled.div`
-  margin-left: 1.5vw;
   margin-top: 4vh;
-  width: 100%;
+  width: 90%;
   height: 10%;
   display: flex;
-  @media screen and (max-width: 1200px) {
-    margin-top: 3vh;
-  }
-  @media screen and (max-width: 768px) {
-    margin-top: 1.5vh;
-  }
 `;
+
 const WriteTitleInput = styled.input`
   width: 100%;
   height: 100%;
   border: none;
   outline: none;
   background-color: transparent;
-  font-size: 30px;
-  @media screen and (max-width: 768px) {
-    font-size: 20px;
-  }
+  font-size: 24px;
 `;
+
 const WriteGrayBar = styled.div`
-  margin-left: 1.5vw;
-  width: 440px;
-  height: 0.4vh;
+  width: 90%;
+  height: 0.5%;
   background-color: #b0b0b0;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 370px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 250px;
-  }
 `;
+
+const PhotoDiv = styled.div`
+  width: 90%;
+  height: 10%;
+  padding-left: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+`;
+
 const WriteAddPhoto = styled.button`
-  margin-top: 1.2vh;
-  margin-left: 1.5vw;
-  width: 70px;
-  height: 70px;
+  width: 8vw;
+  height: 7vh;
   background-image: url(${AddPhoto});
   background-size: contain;
   background-repeat: no-repeat;
@@ -330,75 +124,47 @@ const WriteAddPhoto = styled.button`
   &:hover {
     background-color: #aaa;
   }
-  @media screen and (max-width: 1200px) {
-    width: 50px;
-    height: 50px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 30px;
-    height: 30px;
-  }
 `;
+
 const WriteMain = styled.div`
   margin-left: 1.5vw;
   margin-top: 1.2vh;
-  width: 450px;
-  height: 370px;
+  width: 90%;
+  height: 60%;
   display: flex;
   align-items: flex-start;
-  @media screen and (max-width: 1200px) {
-    width: 380px;
-    height: 300px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 260px;
-    height: 190px;
-  }
 `;
+
 const WriteMainInput = styled.textarea`
   width: 100%;
   height: 100%;
   border: none;
   outline: none;
   background-color: transparent;
-  font-size: 20px;
+  font-size: 15px;
   resize: none;
   overflow-y: auto;
 `;
+
 const WritePost = styled.div`
-  margin-top: 15px;
-  margin-left: 370px;
-  width: 160px;
-  height: 20px;
-  font-size: 16px;
+  margin-top: 2%;
+  width: 100%;
+  padding-right: 5%;
+  height: 1vh;
+  font-size: 14px;
   font-weight: 600;
   color: black;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   cursor: pointer;
   &:hover {
-    font-size: 17px;
+    font-size: 15px;
     color: blue;
-  }
-  @media screen and (max-width: 1200px) {
-    margin-left: 300px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-    margin-top: 0px;
-    margin-left: 175px;
-    &:hover {
-      font-size: 13px;
-    }
   }
 `;
 
-const itemsPerPage = 10;
-const maxPageButtons = 5;
-
-const BoardUpdate = ({url, clearUrl}) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const BoardUpdate = ({ url, clearUrl }) => {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [file, setFile] = useState(null);
@@ -454,46 +220,6 @@ const BoardUpdate = ({url, clearUrl}) => {
     }
   };
 
-  const handleNameClick = (id) => {
-    navigate(`/${coupleName}/board-details/${id}`);
-  };
-
-  const handleClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const currentData = boardData.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-  const totalPages = Math.ceil(boardData.length / itemsPerPage);
-
-  const getPaginationButtons = () => {
-    const buttons = [];
-    let startPage = Math.max(currentPage - Math.floor(maxPageButtons / 2), 1);
-    let endPage = startPage + maxPageButtons - 1;
-
-    if (endPage > totalPages) {
-      endPage = totalPages;
-      startPage = Math.max(endPage - maxPageButtons + 1, 1);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      buttons.push(
-        <BoardPaginationButton
-          key={i}
-          onClick={() => handleClick(i)}
-          style={{
-            fontWeight: currentPage === i ? "bold" : "normal",
-          }}
-        >
-          {i}
-        </BoardPaginationButton>
-      );
-    }
-
-    return buttons;
-  };
   const handleFileInputChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -583,89 +309,45 @@ const BoardUpdate = ({url, clearUrl}) => {
   return (
     <>
       <BookTheme>
-        <BoardSide>
-          <BoardTitle>알콩 달콩 커플게시판</BoardTitle>
-          <CoupleDiv>
-            <CoupleImg />
-          </CoupleDiv>
-          <BoardGrayBar />
-          <Link
-            to={`/${coupleName}/board-write`}
-            style={{ textDecoration: "none" }}
-          ></Link>
-          <BoardTable>
-            <thead>
-              <tr>
-                <BoardTh>ID</BoardTh>
-                <BoardTh>Name</BoardTh>
-                <BoardTh>Date</BoardTh>
-              </tr>
-            </thead>
-            <tbody>
-              {currentData.map((item) => (
-                <tr key={item.id}>
-                  <BoardTd>{item.id}</BoardTd>
-                  <NameHover onClick={() => handleNameClick(item.id)}>
-                    {item.title}
-                  </NameHover>
-                  <BoardTd>{item.regDate}</BoardTd>
-                </tr>
-              ))}
-            </tbody>
-          </BoardTable>
-          <BoardPaginationContainer>
-            <BoardPaginationButton
-              onClick={() => handleClick(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              &lt; 이전
-            </BoardPaginationButton>
-            {getPaginationButtons()}
-            <BoardPaginationButton
-              onClick={() => handleClick(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              다음 &gt;
-            </BoardPaginationButton>
-          </BoardPaginationContainer>
-        </BoardSide>
+        <BookSign>
+          <WriteSide>
+            <WriteTop>
+              <Link
+                to={`/${coupleName}/board-guestbook`}
+                style={{ textDecoration: "none" }}
+              >
+                <BackToGuestbook>돌아가기</BackToGuestbook>
+              </Link>
+            </WriteTop>
+            <WriteTitle>
+              <WriteTitleInput
+                type="text"
+                placeholder={placeholderTitle}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </WriteTitle>
+            <WriteGrayBar />
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileInputChange}
+              style={{ display: "none" }}
+            />
+            <PhotoDiv>
+              <WriteAddPhoto onClick={handleAddPhotoClick}></WriteAddPhoto>
+            </PhotoDiv>
+            <WriteMain>
+              <WriteMainInput
+                placeholder={placeholderContents}
+                value={contents}
+                onChange={(e) => setContents(e.target.value)}
+              />
+            </WriteMain>
+            <WritePost onClick={updatehandleSubmit}>수정하기</WritePost>
+          </WriteSide>
+        </BookSign>
       </BookTheme>
-      <BookTheme2>
-        <BookSign2 animate={animate}>
-        <WriteSide animate={animate}>
-          <Link
-            to={`/${coupleName}/board-guestbook`}
-            style={{ textDecoration: "none" }}
-          >
-            <BackToGuestbook>돌아가기</BackToGuestbook>
-          </Link>
-          <WriteTitle>
-            <WriteTitleInput
-              type="text"
-              placeholder={placeholderTitle}
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </WriteTitle>
-          <WriteGrayBar />
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleFileInputChange}
-            style={{ display: "none" }}
-          />
-          <WriteAddPhoto onClick={handleAddPhotoClick}></WriteAddPhoto>
-          <WriteMain>
-            <WriteMainInput
-              placeholder={placeholderContents}
-              value={contents}
-              onChange={(e) => setContents(e.target.value)}
-            />
-          </WriteMain>
-          <WritePost onClick={updatehandleSubmit}>수정하기</WritePost>
-        </WriteSide>
-        </BookSign2>
-      </BookTheme2>
     </>
   );
 };

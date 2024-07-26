@@ -5,8 +5,7 @@ const PlannerContainer = styled.div`
   padding: 10px;
   width: 95%;
   height: 56%;
-  background-color: ${({ isEditing }) =>
-    isEditing ? "rgba(236, 205, 175, 1)" : "rgba(135, 163, 159, 1)"};
+  background-color: ${({ isEditing }) => (isEditing ? "#fef9e8" : "#feeee8")};
   border: 1px solid #e6e6fa;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -26,6 +25,7 @@ const BtnContainer = styled.div`
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 10px;
+  margin: 2% 0;
 `;
 
 const SaveButton = styled.button`

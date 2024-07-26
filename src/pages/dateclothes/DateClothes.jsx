@@ -38,22 +38,6 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-
-const turnPageLeft = keyframes`
-  0% {
-    transform: perspective(1000px) rotateY(0deg);
-    transform-origin: left;
-  }
-  30% {
-    transform: perspective(1600px) rotateY(-25deg);
-    transform-origin: left;
-  } 
-  100% {
-    transform: perspective(1000px) rotateY(-180deg);
-    transform-origin: left;
-  }
-`;
-
 const CoupleimgCon = styled.div`
   margin-left: 103%;
   display: flex;
@@ -62,13 +46,7 @@ const CoupleimgCon = styled.div`
   height: 20%;
   position: relative;
   gap: 500px;
-  z-index: 1;  
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1s;
-    `}
+  z-index: 1;
   @media screen and (max-width: 1200px) {
     width: 610px;
   }
@@ -142,38 +120,26 @@ const Title = styled.div`
   width: 100%;
   height: 4%;
   margin-top: 1%;
-  font-size: 28px;
+  font-size: 24px;
   display: flex;
   align-items: center;
   position: relative;
   padding-left: 3.5%;
-  @media screen and (max-width: 1200px) {
-    font-size: 25px;
-    font-weight: 600;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 19px;
-  }
 `;
 
 const OptionDiv = styled.div`
   width: 100%;
   height: 38px;
+  margin: 0% 2% 2% 0%;
   display: flex;
-  justify-content: end;  
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1.4s;
-    `}
+  justify-content: end;
 `;
 
 const Options = styled.div`
-  width: 100px;
-  height: 100%;
+  width: 75px;
+  height: 68%;
   background-color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -184,16 +150,6 @@ const Options = styled.div`
   cursor: pointer;
   &:hover {
     background-color: rgba(189, 189, 189, 0.9);
-  }
-  @media screen and (max-width: 1200px) {
-    width: 85px;
-    height: 80%;
-    font-size: 12px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 60px;
-    height: 60%;
-    font-size: 9px;
   }
 `;
 
@@ -206,45 +162,27 @@ const OptionsSelectDiv = styled.div`
 `;
 
 const ButtonDiv = styled.div`
-  width: 79px;
-  height: 5vh;
-  margin-right: 5%;
+  width: 70px;
+  height: 4.5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 70px;
-    height: 4.5vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 60px;
-    height: 3vh;
-  }
 `;
 
 const ButtonRightDiv = styled.div`
-  width: 79px;
-  height: 5vh;
-  margin-left: 5%;
+  width: 70px;
+  height: 4.5vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 70px;
-    height: 4.5vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 60px;
-    height: 3vh;
-  }
 `;
 
 const StroeButton = styled.div`
-  width: 79px;
-  height: 3.5vh;
+  width: 55px;
+  height: 2.5vh;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 13px;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -254,16 +192,6 @@ const StroeButton = styled.div`
   &:hover {
     background-color: rgba(0, 0, 0, 0.6);
   }
-  @media screen and (max-width: 1200px) {
-    width: 70px;
-    height: 3vh;
-    font-size: 15px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 50px;
-    height: 2.5vh;
-    font-size: 12px;
-  }
 `;
 
 const ClothesFormContainer = styled.div`
@@ -272,12 +200,6 @@ const ClothesFormContainer = styled.div`
   width: 100%;
   height: 75%;
   align-items: end;
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1.4s;
-    `}
 `;
 
 const ClothesForm = styled.div`
@@ -285,41 +207,28 @@ const ClothesForm = styled.div`
   height: 100%;
   background-color: #fff;
   margin-right: 15%;
+  margin-bottom: 2%;
   border-radius: 0.521vw;
   border: 2px solid pink;
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 230px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 150px;
-  }
 `;
 const ClothesForm2 = styled.div`
   width: 253px;
   height: 100%;
   background-color: #fff;
   margin-left: 15%;
+  margin-bottom: 2%;
   border-radius: 0.521vw;
   border: 2px solid pink;
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    width: 230px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 150px;
-  }
 `;
 
-const DateClothes = ({ url, clearUrl }) => {
+const DateClothes = () => {
   const [isOnePiece, setIsOnePiece] = useState(false);
-
-  const [animate, setAnimate] = useState(false);
-  const navigate = useNavigate();
 
   const settings = {
     dots: true,
@@ -330,79 +239,61 @@ const DateClothes = ({ url, clearUrl }) => {
     swipeToSlide: true,
   };
 
-  const pageMove = useCallback(() => {
-    setAnimate(true);
-    setTimeout(() => {
-      navigate(url);
-      clearUrl();
-    }, 1800);
-  }, [navigate, url, clearUrl]);
-
-  useEffect(() => {
-    if (url) {
-      if (window.location.pathname !== url) {
-        pageMove();
-      } else {
-        clearUrl();
-      }
-    }
-  }, [url, pageMove, clearUrl]);
-
   return (
     <BookContainer>
       <StyledSlider {...settings}>
-      <BookTheme>
-        <BookSign>
-          <Title>데이트 룩 코디</Title>
-          <CoupleimgCon animate={animate}>
-            <CoupleImage clothes={true} />
-          </CoupleimgCon>
-          <ClothesFormContainer>
-            <ButtonDiv>
-              <StroeButton>저장</StroeButton>
-            </ButtonDiv>
-            <ClothesForm>
-              <Swiper clothNum={1} />
-              <Swiper clothNum={2} />
-              <Swiper shoes={true} clothNum={3} />
-            </ClothesForm>
-          </ClothesFormContainer>
-        </BookSign>
-      </BookTheme>
-      <BookTheme2>
-        <div className="clothDiv" />
-        <BookSign2 animate={animate}>
-          <OptionDiv animate={animate}>
-            <OptionsSelectDiv>
-              <Options
-                onClick={() => {
-                  setIsOnePiece(true);
-                }}
-              >
-                원피스
-              </Options>
-              <Options
-                onClick={() => {
-                  setIsOnePiece(false);
-                }}
-              >
-                상＆하의
-              </Options>
-            </OptionsSelectDiv>
-          </OptionDiv>
-          <ClothesFormContainer animate={animate}>
-            <ClothesForm2>
-              <Swiper clothNum={4} OnePiece={isOnePiece} />
-              <Swiper clothNum={5} OnePiece={isOnePiece} />
-              <Swiper clothNum={7} OnePiece={isOnePiece} />
-              <Swiper shoes={true} clothNum={6} />
-            </ClothesForm2>
-            <ButtonRightDiv>
-              <StroeButton>저장</StroeButton>
-            </ButtonRightDiv>
-          </ClothesFormContainer>
-        </BookSign2>
-      </BookTheme2>
+        <BookTheme>
+          <BookSign>
+            <Title>데이트 룩 코디</Title>
+            <CoupleimgCon>
+              <CoupleImage clothes={true} />
+            </CoupleimgCon>
+            <ClothesFormContainer>
+              <ButtonDiv>
+                <StroeButton>저장</StroeButton>
+              </ButtonDiv>
+              <ClothesForm>
+                <Swiper clothNum={1} />
+                <Swiper clothNum={2} />
+                <Swiper shoes={true} clothNum={3} />
+              </ClothesForm>
+            </ClothesFormContainer>
+          </BookSign>
+        </BookTheme>
+        <BookTheme2>
+          <div className="clothDiv" />
+          <BookSign2>
+            <OptionDiv>
+              <OptionsSelectDiv>
+                <Options
+                  onClick={() => {
+                    setIsOnePiece(true);
+                  }}
+                >
+                  원피스
+                </Options>
+                <Options
+                  onClick={() => {
+                    setIsOnePiece(false);
+                  }}
+                >
+                  상＆하의
+                </Options>
+              </OptionsSelectDiv>
+            </OptionDiv>
+            <ClothesFormContainer>
+              <ClothesForm2>
+                <Swiper clothNum={4} OnePiece={isOnePiece} />
+                <Swiper clothNum={5} OnePiece={isOnePiece} />
+                <Swiper clothNum={7} OnePiece={isOnePiece} />
+                <Swiper shoes={true} clothNum={6} />
+              </ClothesForm2>
+              <ButtonRightDiv>
+                <StroeButton>저장</StroeButton>
+              </ButtonRightDiv>
+            </ClothesFormContainer>
+          </BookSign2>
+        </BookTheme2>
       </StyledSlider>
     </BookContainer>
   );

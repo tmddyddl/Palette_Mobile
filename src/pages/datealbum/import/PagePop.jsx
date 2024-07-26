@@ -23,8 +23,8 @@ const Popup = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 650px;
-  height: 325px;
+  width: 95%;
+  height: 200px;
   background: white;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ const PopTitle = styled.div`
 const PageTitleleft = styled.div`
   width: 50%;
   height: 100%;
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -55,7 +55,7 @@ const PageTitleRight = styled.div`
   width: 50%;
   height: 100%;
   padding-right: 1%;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -76,7 +76,7 @@ const PopBoard = styled.div`
 const BuyPage = styled.div`
   width: 50%;
   height: 90%;
-  font-size: 1rem;
+  font-size: 0.8rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,7 +115,7 @@ const PageInfo = styled.div`
 const PageOne = styled.div`
   width: 100%;
   height: 30%;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,6 +123,7 @@ const PageOne = styled.div`
 const PageTwo = styled.div`
   width: 100%;
   height: 20%;
+  font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,6 +131,7 @@ const PageTwo = styled.div`
 const PageThr = styled.div`
   width: 100%;
   height: 30%;
+  font-size: 0.8rem;
   display: flex;
   white-space: nowrap;
   align-items: center;
@@ -153,7 +155,7 @@ const CloseButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.93rem;
+  font-size: 0.7rem;
   margin-top: 2px;
   border: none;
   border-radius: 0.6rem;

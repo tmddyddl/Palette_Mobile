@@ -1,12 +1,43 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
-import boardBg from "../../img/background/theme/9.jpg";
-import boardBg_1 from "../../img/background/theme/9-1.jpg";
 import CoupleImg from "../../common/couple/CoupleImgMini";
 import Guestbook from "./Guestbook";
 import BoardAxios from "../../axiosapi/BoardAxios";
 import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    overflow: hidden;
+  }
+
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slick-dots {
+    bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    button:before {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .slick-active button:before {
+      color: black;
+    }
+  }
+`;
 
 const turnPageLeft = keyframes`
   0% {
@@ -23,76 +54,50 @@ const turnPageLeft = keyframes`
   }
 `;
 
+const BookContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
 const BookTheme = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.7vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${boardBg});
-  background-size: cover;
+  background-color: #fff9f2;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  border-radius: 5px;
 `;
 
 const BookTheme2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.05vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${boardBg_1});
-  background-size: cover;
+  background-color: #fff9f2;
   display: flex;
-  justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 `;
 
 const BookSign2 = styled.div`
-  width: 100%;
+  width: 425px;
   height: 100%;
-  background-image: url(${boardBg_1});
-  background-size: cover;
-  transform: perspective(1000px) rotateY(0deg); /* 애니메이션 초기 위치 */
-  transform-origin: left;
   display: flex;
-  align-items: center;
   justify-content: center;
-  ${({ animate }) =>
-    animate &&
-    css`
-      animation: ${turnPageLeft} 1.8s forwards;
-    `}
+  align-items: center;
+  flex-direction: column;
 `;
 
 const BoardSide = styled.div`
-  width: 100%;
+  width: 425px;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  position: relative;
+  flex-direction: column;
 `;
+
 const BoardTitle = styled.div`
   margin-top: 2%;
   width: 100%;
@@ -102,13 +107,8 @@ const BoardTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    font-size: 17px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-  }
 `;
+
 const CoupleDiv = styled.div`
   width: 100%;
   height: 18%;
@@ -116,6 +116,7 @@ const CoupleDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const BoardGrayBar = styled.div`
   margin-top: 1.5vh;
   width: 90%;
@@ -125,10 +126,11 @@ const BoardGrayBar = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const BoardPost = styled.div`
   margin-top: 2vh;
   width: 230px;
-  margin-left: 80%;
+  margin-left: 65%;
   height: 1vh;
   font-size: 11px;
   font-weight: 600;
@@ -141,14 +143,6 @@ const BoardPost = styled.div`
     font-size: 12px;
     color: rgb(42, 65, 167);
   }
-  @media screen and (max-width: 1200px) {
-    margin-left: 65%;
-  }
-  @media screen and (max-width: 768px) {
-    height: 1px;
-    font-size: 8px;
-    margin-left: 43%;
-  }
 `;
 const BoardTable = styled.table`
   margin-top: 1vh;
@@ -158,7 +152,7 @@ const BoardTable = styled.table`
 `;
 
 const BoardTh = styled.th`
-  height: 3vh;
+  height: 25px;
   background-color: gray;
   border: 1px solid black;
   font-size: 12px;
@@ -176,12 +170,6 @@ const BoardTh = styled.th`
   &:nth-child(3) {
     width: 25%;
   }
-  @media screen and (max-width: 1200px) {
-    height: 25px;
-  }
-  @media screen and (max-width: 768px) {
-    height: 15px;
-  }
 `;
 
 const BoardTd = styled.td`
@@ -196,14 +184,6 @@ const BoardTd = styled.td`
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: middle;
-  @media screen and (max-width: 1200px) {
-    height: 25px;
-    font-size: 11px;
-  }
-  @media screen and (max-width: 768px) {
-    height: 15px;
-    font-size: 10px;
-  }
 `;
 
 const NameHover = styled(BoardTd)`
@@ -212,18 +192,19 @@ const NameHover = styled(BoardTd)`
     color: blue;
   }
 `;
+
 const BoardPaginationContainer = styled.div`
-  position: absolute;
   bottom: 0;
   left: 0;
+  margin-top: 3%;
   margin-bottom: 3%;
-  margin-left: 1.5vw;
   width: 87%;
   height: 3vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+
 const BoardPaginationButton = styled.button`
   margin: 0 5px;
   padding: 5px 10px;
@@ -236,11 +217,6 @@ const BoardPaginationButton = styled.button`
   &:disabled {
     cursor: not-allowed;
     opacity: 0.5;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 10px;
-    margin: 0 3px;
-    padding: 1px 5px;
   }
 `;
 
@@ -258,7 +234,7 @@ const GuestbookSide = styled.div`
 const itemsPerPage = 10;
 const maxPageButtons = 5;
 
-const GuestBoardGuestbook = ({url, clearUrl}) => {
+const GuestBoardGuestbook = ({ url, clearUrl }) => {
   const coupleName = sessionStorage.getItem("coupleName");
   const email = sessionStorage.getItem("email");
   const [currentPage, setCurrentPage] = useState(1);
@@ -267,6 +243,15 @@ const GuestBoardGuestbook = ({url, clearUrl}) => {
   const [isMyHome, setIsMyHome] = useState(true);
   const navigate = useNavigate();
   const [animate, setAnimate] = useState(false);
+
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
 
   const pageMove = useCallback(() => {
     setAnimate(true);
@@ -354,65 +339,67 @@ const GuestBoardGuestbook = ({url, clearUrl}) => {
   };
 
   return (
-    <>
-      <BookTheme>
-        <BoardSide>
-          <BoardTitle>알콩 달콩 커플게시판</BoardTitle>
-          <CoupleDiv>
-            <CoupleImg />
-          </CoupleDiv>
-          <BoardGrayBar />
-          <Link
-            to={`/${coupleName}/board-write`}
-            style={{ textDecoration: "none" }}
-          >
-            {isMyHome && <BoardPost>새 게시물 작성</BoardPost>}
-          </Link>
-          <BoardTable>
-            <thead>
-              <tr>
-                <BoardTh>ID</BoardTh>
-                <BoardTh>Name</BoardTh>
-                <BoardTh>Date</BoardTh>
-              </tr>
-            </thead>
-            <tbody>
-              {currentData.map((item) => (
-                <tr key={item.id}>
-                  <BoardTd>{item.id}</BoardTd>
-                  <NameHover onClick={() => handleNameClick(item.id)}>
-                    {item.title}
-                  </NameHover>
-                  <BoardTd>{item.regDate}</BoardTd>
+    <BookContainer>
+      <StyledSlider {...settings}>
+        <BookTheme>
+          <BoardSide>
+            <BoardTitle>{coupleName}의 커플게시판</BoardTitle>
+            <CoupleDiv>
+              <CoupleImg />
+            </CoupleDiv>
+            <BoardGrayBar />
+            <Link
+              to={`/${coupleName}/board-write`}
+              style={{ textDecoration: "none" }}
+            >
+              {isMyHome && <BoardPost>새 게시물 작성</BoardPost>}
+            </Link>
+            <BoardTable>
+              <thead>
+                <tr>
+                  <BoardTh>ID</BoardTh>
+                  <BoardTh>Name</BoardTh>
+                  <BoardTh>Date</BoardTh>
                 </tr>
-              ))}
-            </tbody>
-          </BoardTable>
-          <BoardPaginationContainer>
-            <BoardPaginationButton
-              onClick={() => handleClick(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              &lt; 이전
-            </BoardPaginationButton>
-            {getPaginationButtons()}
-            <BoardPaginationButton
-              onClick={() => handleClick(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              다음 &gt;
-            </BoardPaginationButton>
-          </BoardPaginationContainer>
-        </BoardSide>
-      </BookTheme>
-      <BookTheme2>
-        <BookSign2 animate={animate}>
-        <GuestbookSide animate={animate}>
-          <Guestbook />
-        </GuestbookSide>
-        </BookSign2>
-      </BookTheme2>
-    </>
+              </thead>
+              <tbody>
+                {currentData.map((item) => (
+                  <tr key={item.id}>
+                    <BoardTd>{item.id}</BoardTd>
+                    <NameHover onClick={() => handleNameClick(item.id)}>
+                      {item.title}
+                    </NameHover>
+                    <BoardTd>{item.regDate}</BoardTd>
+                  </tr>
+                ))}
+              </tbody>
+            </BoardTable>
+            <BoardPaginationContainer>
+              <BoardPaginationButton
+                onClick={() => handleClick(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                &lt; 이전
+              </BoardPaginationButton>
+              {getPaginationButtons()}
+              <BoardPaginationButton
+                onClick={() => handleClick(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                다음 &gt;
+              </BoardPaginationButton>
+            </BoardPaginationContainer>
+          </BoardSide>
+        </BookTheme>
+        <BookTheme2>
+          <BookSign2 animate={animate}>
+            <GuestbookSide animate={animate}>
+              <Guestbook />
+            </GuestbookSide>
+          </BookSign2>
+        </BookTheme2>
+      </StyledSlider>
+    </BookContainer>
   );
 };
 

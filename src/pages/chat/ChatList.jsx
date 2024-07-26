@@ -40,7 +40,6 @@ const StyledSlider = styled(Slider)`
   }
 `;
 
-
 const turnPageLeft = keyframes`
   0% {
     transform: perspective(1000px) rotateY(0deg);
@@ -101,7 +100,7 @@ const ChatListContainer = styled.div`
   padding: 22px;
   border-radius: 5px;
   position: relative;
-  background-color: #dbe5f8;
+  background-color: #fff9f2;
   overflow: auto;
 `;
 
@@ -178,7 +177,7 @@ const HeaderName = styled.div`
   color: #333;
   display: flex;
   align-items: flex-end;
-  justify-content: flex-start;
+  justify-content: center;
   @media screen and (max-width: 1200px) {
     font-size: 12px;
   }
@@ -196,10 +195,10 @@ const ChatName = styled.p`
 const CircleFixedButton = styled.button`
   position: fixed;
   bottom: 24px;
-  right: 30px;
+  right: 450px;
   z-index: 10;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -300,7 +299,7 @@ function ChatList({ url, clearUrl }) {
   const [coupleNickName, setCoupleNickName] = useState(["", ""]);
 
   const [animate, setAnimate] = useState(false);
-  
+
   const settings = {
     dots: true,
     infinite: false,
@@ -381,7 +380,7 @@ function ChatList({ url, clearUrl }) {
       messages = messages.reverse();
       setPreviewMessages(
         messages.length > 0
-          ? messages.slice(0, 5)
+          ? messages.slice(0, 1)
           : [{ sender: "", message: "내용이 없습니다" }]
       );
     } catch (error) {
@@ -402,57 +401,57 @@ function ChatList({ url, clearUrl }) {
   return (
     <BookWrapper>
       <StyledSlider {...settings}>
-      <BookTheme>
-        <ChatListContainer>
-          <Header>채팅방 목록</Header>
-          <ChatUl>
-            {chatRooms.map((room) => (
-              <ChatRoom
-                key={room.roomId}
-                onClick={() => selectChatRoom(room.roomId)}
-              >
-                <ChatName>{room.name}</ChatName>
-              </ChatRoom>
-            ))}
-          </ChatUl>
-          <CircleFixedButton onClick={createChatRoom}></CircleFixedButton>
-        </ChatListContainer>
-      </BookTheme>
-      <BookTheme2>
-        <BookSign2 animate={animate}>
-          {selectedRoom && (
-            <>
-              <PreviewContainer animate={animate}>
-                <HeaderDiv>
-                  <HeaderView>미리보기</HeaderView>
-                  <HeaderName>
-                    {" "}
-                    (채팅방 :{" "}
-                    {chatRooms
-                      .find((room) => room.roomId === selectedRoom)
-                      ?.name.slice(0, 5)}
-                    )
-                  </HeaderName>
-                </HeaderDiv>
-                {previewMessages.map((message, index) => (
-                  <PreviewMessage key={index} isMe={message.sender === email}>
-                    {message.sender
-                      ? `${getNickNameByEmail(message.sender)} : ${
-                          message.message
-                        }`
-                      : message.message}
-                  </PreviewMessage>
-                ))}
-              </PreviewContainer>
-              <BtnBox animate={animate}>
-                <EnterBtn onClick={() => enterChatRoom(selectedRoom)}>
-                  입장하기
-                </EnterBtn>
-              </BtnBox>
-            </>
-          )}
-        </BookSign2>
-      </BookTheme2>
+        <BookTheme>
+          <ChatListContainer>
+            <Header>채팅방 목록</Header>
+            <ChatUl>
+              {chatRooms.map((room) => (
+                <ChatRoom
+                  key={room.roomId}
+                  onClick={() => enterChatRoom(selectedRoom)}
+                >
+                  <ChatName>{room.name}</ChatName>
+                  {previewMessages.map((message, index) => (
+                    <PreviewMessage key={index} isMe={message.sender === email}>
+                      {message.sender
+                        ? `${getNickNameByEmail(message.sender)} : ${
+                            message.message
+                          }`
+                        : message.message}
+                    </PreviewMessage>
+                  ))}
+                </ChatRoom>
+              ))}
+            </ChatUl>
+            <CircleFixedButton onClick={createChatRoom}></CircleFixedButton>
+          </ChatListContainer>
+        </BookTheme>
+        <BookTheme2>
+          <BookSign2 animate={animate}>
+            {selectedRoom && (
+              <>
+                <PreviewContainer animate={animate}>
+                  <HeaderDiv>
+                    <HeaderView>미리보기</HeaderView>
+                    <HeaderName>
+                      {" "}
+                      (채팅방 :{" "}
+                      {chatRooms
+                        .find((room) => room.roomId === selectedRoom)
+                        ?.name.slice(0, 5)}
+                      )
+                    </HeaderName>
+                  </HeaderDiv>
+                </PreviewContainer>
+                <BtnBox animate={animate}>
+                  <EnterBtn onClick={() => enterChatRoom(selectedRoom)}>
+                    입장하기
+                  </EnterBtn>
+                </BtnBox>
+              </>
+            )}
+          </BookSign2>
+        </BookTheme2>
       </StyledSlider>
       <ChatModal isOpen={createModal} onClose={closeModal}></ChatModal>
     </BookWrapper>

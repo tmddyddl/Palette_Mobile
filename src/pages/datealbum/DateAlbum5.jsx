@@ -13,6 +13,39 @@ import { storage } from "../../firebase/firebaseAlbum";
 import deleteImageFromFirebase from "../../firebase/firebaseAlbumDel";
 import MainAxios from "../../axiosapi/MainAxios";
 
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const StyledSlider = styled(Slider)`
+  .slick-list {
+    overflow: hidden;
+  }
+
+  .slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slick-dots {
+    bottom: 10px;
+
+    li {
+      margin: 0 5px;
+    }
+
+    button:before {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .slick-active button:before {
+      color: black;
+    }
+  }
+`;
+
 const turnPageRight = keyframes`
   0% {
     transform: perspective(1000px) rotateY(0deg);
@@ -28,119 +61,78 @@ const turnPageRight = keyframes`
   }
 `;
 
+const BookContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
 const BookTheme = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.7vw;
+  width: 100%;
+  height: 75vh;
   border: 1px solid #696969;
-  background-image: url(${theme8});
-  background-size: cover;
+  background-color: #fff9f2;
+  /* background-image: url(${theme8});
+  background-size: cover; */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  justify-content: space-between;
+  border-radius: 5px;
 `;
 
 const BookTheme2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  margin-top: 5vh;
-  margin-left: 0.05vw;
-  background-image: url(${theme8_1});
-  background-size: cover;
+  width: 100%;
+  height: 75vh;
+  border: 1px solid #696969;
+  background-color: #fff9f2;
+  /* background-image: url(${theme8_1});
+  background-size: cover; */
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-    margin-top: 4.2vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-    margin-top: 2.8vh;
-  }
+  border-radius: 5px;
 `;
 
 const BookSign = styled.div`
-  width: 497px;
-  height: 67vh;
-  border: 1px solid #696969;
-  background-image: url(${theme8});
-  background-size: cover;
-  transform: perspective(1000px) rotateY(0deg);
-  transform-origin: left;
-  position: absolute;
-  z-index: ${({ animate }) => (animate ? 2 : 0)};
-  ${({ animate }) =>
-    animate &&
-    css`
-      animation: ${turnPageRight} 1.8s forwards;
-    `}
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-  }
+  width: 425px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const BookSign2 = styled.div`
-  width: 497px;
-  height: 67vh;
-  border: 1px solid #696969;
-  background-image: url(${theme8_1});
-  background-size: cover;
-  transform: perspective(1000px) rotateY(0deg);
-  transform-origin: left;
-  position: absolute;
-  border-left: 0.5px solid black;
-  display: flex;
-  @media screen and (max-width: 1200px) {
-    width: 420px;
-    height: 56vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 280px;
-    height: 35vh;
-  }
-`;
-const ContentWrapper = styled.div`
-  width: 100%;
+  width: 425px;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  ${({ animate }) =>
-    animate &&
-    css`
-      opacity: 0;
-      transition: opacity 1.4s;
-    `}
-`;
-const ContentWrapper2 = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
   flex-direction: column;
-  align-items: center;
 `;
+
+// const ContentWrapper = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   ${({ animate }) =>
+//     animate &&
+//     css`
+//       opacity: 0;
+//       transition: opacity 1.4s;
+//     `}
+// `;
+// const ContentWrapper2 = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// `;
+
 const ImgWrapper2 = styled.div`
   width: 90%;
-  height: 82%;
+  height: 79%;
   background-color: ${(props) => props.bgColor};
   padding-left: 0.4%;
   margin-top: 6%;
@@ -149,8 +141,8 @@ const ImgWrapper2 = styled.div`
 `;
 
 const ImgBox2 = styled.div`
-  width: 141px;
-  height: 15.4vh;
+  width: 120px;
+  height: 17vh;
   background-color: gray;
   display: flex;
   align-items: center;
@@ -176,44 +168,30 @@ const ImgBox2 = styled.div`
         color: white;
         padding: 2px 5px;
         border-radius: 3px;
-        font-size: 0.78vw;
+        font-size: 10px;
       }
     `}
-  }
-  @media screen and (max-width: 1200px) {
-    width: 120px;
-    height: 13vh;
-  }
-  @media screen and (max-width: 768px) {
-    width: 80px;
-    height: 8vh;
   }
 `;
 
 const Dday = styled.div`
   width: 90%;
   height: 11%;
-  font-size: 22px;
+  font-size: 15px;
   margin-left: 5%;
   display: flex;
   justify-content: left;
   align-items: center;
-  @media screen and (max-width: 1200px) {
-    font-size: 18px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 13px;
-  }
 `;
+
 const DdayCoupleName = styled.div`
   width: 90%;
   height: 11%;
-  font-size: 22px;
+  font-size: 15px;
   margin-left: 5%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-size: 1.5rem;
 `;
 
 const BackButton = styled.div`
@@ -237,6 +215,7 @@ const InputDetailDiv = styled.div`
   height: 20px;
   margin-top: 30%;
 `;
+
 const InputDetailDiv2 = styled.div`
   width: 20px;
   height: 20px;
@@ -270,12 +249,6 @@ const TitleLine = styled.div`
     font-size: 14px;
     color: rgb(42, 65, 167);
   }
-  @media screen and (max-width: 768px) {
-    font-size: 9px;
-    &:hover {
-      font-size: 10px;
-    }
-  }
 `;
 
 const AddTema = styled.div`
@@ -285,12 +258,6 @@ const AddTema = styled.div`
   cursor: pointer;
   &:hover {
     font-size: 14px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 9px;
-    &:hover {
-      font-size: 10px;
-    }
   }
 `;
 const AddAlbum = styled.div`
@@ -302,13 +269,8 @@ const AddAlbum = styled.div`
   &:hover {
     font-size: 14px;
   }
-  @media screen and (max-width: 768px) {
-    font-size: 9px;
-    &:hover {
-      font-size: 10px;
-    }
-  }
 `;
+
 const Img = styled.img`
   width: 100%;
   height: 100%;
@@ -316,25 +278,15 @@ const Img = styled.img`
 `;
 
 const PlusButton = styled.button`
-  width: 50px;
-  height: 5vh;
-  font-size: 30px;
+  width: 40px;
+  height: 4vh;
+  font-size: 25px;
   border-radius: 50px;
   background-color: #ccc;
   border: none;
   cursor: pointer;
   &:hover {
     background-color: #aaa;
-  }
-  @media screen and (max-width: 1200px) {
-    width: 40px;
-    height: 4vh;
-    font-size: 25px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 25px;
-    height: 2.5vh;
-    font-size: 15px;
   }
 `;
 
@@ -359,7 +311,7 @@ const DateAlbum5 = ({ url, clearUrl }) => {
   const [isDday, setIsDday] = useState();
   //디데이 값 저장
   const [saveDday, setSaveDday] = useState("");
-      
+
   const pageMove = useCallback(() => {
     setAnimate(true);
     setTimeout(() => {
@@ -600,14 +552,20 @@ const DateAlbum5 = ({ url, clearUrl }) => {
       ));
   };
 
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+  };
+
   return (
-    <>
-      <InputDetailDiv>
-        <BackButton onClick={handleBack}>◀◀</BackButton>
-      </InputDetailDiv>
-      <BookTheme>
-        <BookSign animate={animate}>
-          <ContentWrapper animate={animate}>
+    <BookContainer>
+      <StyledSlider {...settings}>
+        <BookTheme>
+          <BookSign animate={animate}>
             <AddButton>
               <TitleLine onClick={handleTemaChange}>테마 변경</TitleLine>
             </AddButton>
@@ -619,12 +577,10 @@ const DateAlbum5 = ({ url, clearUrl }) => {
               )}
               {renderImageBoxes(0, 9)}
             </ImgWrapper2>
-          </ContentWrapper>
-        </BookSign>
-      </BookTheme>
-      <BookTheme2>
-        <BookSign2>
-          <ContentWrapper2>
+          </BookSign>
+        </BookTheme>
+        <BookTheme2>
+          <BookSign2>
             <AddButton>
               <AddTema onClick={handleTemaPopup}>테마 추가</AddTema>
               <AddAlbum onClick={handlePagePopup}>앨범 추가</AddAlbum>
@@ -633,10 +589,9 @@ const DateAlbum5 = ({ url, clearUrl }) => {
               <DdayCoupleName>♥ {coupleName} ♥</DdayCoupleName>
               {renderImageBoxes(9, 18)}
             </ImgWrapper2>
-          </ContentWrapper2>
-        </BookSign2>
-      </BookTheme2>
-      <InputDetailDiv2 />
+          </BookSign2>
+        </BookTheme2>
+      </StyledSlider>
       <TemaChange
         open={temaChange}
         close={closeModal}
@@ -644,7 +599,7 @@ const DateAlbum5 = ({ url, clearUrl }) => {
       />
       <TemaPop open={temaOpen} close={closeModal} />
       <PagePop open={pageOpen} close={closeModal} />
-    </>
+    </BookContainer>
   );
 };
 

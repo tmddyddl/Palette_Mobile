@@ -21,8 +21,8 @@ const Popup = styled.div`
   top: 15%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 650px;
-  height: 250px;
+  width: 95%;
+  height: 200px;
   background: white;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@ const TitleLeft = styled.div`
   width: 50%;
   height: 100%;
   padding-left: 1%;
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -60,10 +60,10 @@ const TitleRight = styled.div`
   justify-content: flex-end;
 `;
 const TitleRightBtn = styled.div`
-  width: 18%;
+  width: 22%;
   height: 80%;
   background-color: #eccdaf;
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,7 +148,7 @@ const TemaInfo = styled.div`
 const TemaOne = styled.div`
   width: 100%;
   height: 60%;
-  font-size: 1.3rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -167,7 +167,7 @@ const CloseButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.93rem;
+  font-size: 0.7rem;
   margin-top: 2px;
   border: none;
   border-radius: 0.6rem;
@@ -180,7 +180,7 @@ const CloseButton = styled.div`
 
 const BuyButton = styled.div`
   padding: 0.4rem 0.7rem;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-bottom: 4%;
   display: flex;
   justify-content: center;
@@ -209,7 +209,7 @@ const TemaChange = ({ open, close, setBgColor }) => {
       console.error("Error fetching purchased themes:", error);
     }
   }, [userEmail]);
-  
+
   useEffect(() => {
     if (open) {
       fetchPurchasedThemes(); // 팝업이 열릴 때 구매한 테마 로드

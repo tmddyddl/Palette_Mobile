@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import styled, { css, keyframes } from "styled-components";
+import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
 import MapContainer from "./MapContainer";
 import PlannerForm from "./PlannerForm";
 import SavedCoursesList from "./SavedCourseList";
@@ -10,7 +10,7 @@ import MapModal from "./MapModal";
 import DatePlannerAxios from "../../axiosapi/DatePlannerAxios";
 import useAddress from "../../hooks/useLocation";
 // import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
 
 import Slider from "react-slick";
@@ -43,22 +43,6 @@ const StyledSlider = styled(Slider)`
     .slick-active button:before {
       color: black;
     }
-  }
-`;
-
-
-const turnPageLeft = keyframes`
-  0% {
-    transform: perspective(1000px) rotateY(0deg);
-    transform-origin: left;
-  }
-  30% {
-    transform: perspective(1600px) rotateY(-25deg);
-    transform-origin: left;
-  } 
-  100% {
-    transform: perspective(1000px) rotateY(-180deg);
-    transform-origin: left;
   }
 `;
 
@@ -143,9 +127,6 @@ const DatePlanner = ({ url, clearUrl }) => {
   const currentOverlayRef = useRef(null); // CustomOverlay 상태를 useRef로 관리
   console.log("coupleName : ", coupleName);
 
-  const [animate, setAnimate] = useState(false);
-  const navigate = useNavigate();
-  
   const settings = {
     dots: true,
     infinite: false,
@@ -154,25 +135,6 @@ const DatePlanner = ({ url, clearUrl }) => {
     slidesToScroll: 1,
     swipeToSlide: true,
   };
-
-  const pageMove = useCallback(() => {
-    setAnimate(true);
-    setTimeout(() => {
-      navigate(url);
-      clearUrl();
-    }, 1800);
-  }, [navigate, url, clearUrl]);
-
-  useEffect(() => {
-    if (url) {
-      const encodedUrl = encodeURI(url); //공백을 문자로 인코딩
-      if (window.location.pathname !== encodedUrl) {
-        pageMove();
-      } else {
-        clearUrl();
-      }
-    }
-  }, [url, pageMove, clearUrl]);
 
   // 모든 코스 조회 및 저장된 코스 목록 업데이트
   useEffect(() => {
@@ -418,53 +380,53 @@ const DatePlanner = ({ url, clearUrl }) => {
   return (
     <BookWrapper>
       <StyledSlider {...settings}>
-      <LBookContainer>
-      <BookSign>
-        <PlannerForm
-          title={title}
-          selectedPlaces={selectedPlaces}
-          handleSaveCourse={handleSaveCourse}
-          setSelectedPlaces={setSelectedPlaces}
-          isEditing={isEditing}
-          handleDeletePlace={handleDeletePlace}
-          handleClearPlaces={handleClearPlaces}
-        />
-
-        <SavedCoursesList
-          savedCourses={savedCourses}
-          setSelectedCourse={(course) => setSelectedPlaces(course.places)}
-          handleEditCourse={handleEditCourse}
-          handleDeleteCourse={handleDeleteCourse}
-          openModal={(index) => openModal(index)}
-        />
-        </BookSign>
-      </LBookContainer>
-      <BookTheme2>
-        <BookSign2 animate={animate}>
-          <RBookContainer animate={animate}>
-            <MapContainer
-              clearOverlay={clearOverlay}
-              mapContainer={mapContainer}
-              displayPlaceInfo={displayPlaceInfo}
-              placeOverlay={placeOverlay}
-              map={map}
-              setMap={setMap}
-              currCategory={currCategory}
-              setCurrCategory={setCurrCategory}
-              places={places}
-              setPlaces={setPlaces}
-              location={location}
-            />
-            <PlaceCardList
-              places={places}
-              onClickPlaceBtn={handlePlaceCardClick}
-              onClickPlaceCard={onClickPlaceCard}
+        <LBookContainer>
+          <BookSign>
+            <PlannerForm
+              title={title}
               selectedPlaces={selectedPlaces}
-              currCategory={currCategory}
+              handleSaveCourse={handleSaveCourse}
+              setSelectedPlaces={setSelectedPlaces}
+              isEditing={isEditing}
+              handleDeletePlace={handleDeletePlace}
+              handleClearPlaces={handleClearPlaces}
             />
-          </RBookContainer>
-        </BookSign2>
-      </BookTheme2>
+
+            <SavedCoursesList
+              savedCourses={savedCourses}
+              setSelectedCourse={(course) => setSelectedPlaces(course.places)}
+              handleEditCourse={handleEditCourse}
+              handleDeleteCourse={handleDeleteCourse}
+              openModal={(index) => openModal(index)}
+            />
+          </BookSign>
+        </LBookContainer>
+        <BookTheme2>
+          <BookSign2>
+            <RBookContainer>
+              <MapContainer
+                clearOverlay={clearOverlay}
+                mapContainer={mapContainer}
+                displayPlaceInfo={displayPlaceInfo}
+                placeOverlay={placeOverlay}
+                map={map}
+                setMap={setMap}
+                currCategory={currCategory}
+                setCurrCategory={setCurrCategory}
+                places={places}
+                setPlaces={setPlaces}
+                location={location}
+              />
+              <PlaceCardList
+                places={places}
+                onClickPlaceBtn={handlePlaceCardClick}
+                onClickPlaceCard={onClickPlaceCard}
+                selectedPlaces={selectedPlaces}
+                currCategory={currCategory}
+              />
+            </RBookContainer>
+          </BookSign2>
+        </BookTheme2>
       </StyledSlider>
       <MapModal
         isOpen={isModalOpen}

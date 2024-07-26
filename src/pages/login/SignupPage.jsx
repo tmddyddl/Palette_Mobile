@@ -24,20 +24,15 @@ const TitleDiv = styled.div`
   align-items: center;
   font-size: 18px;
   font-weight: 900;
-  /* background-color: aqua; */
   color: #b44a4a;
 `;
 const InputDiv = styled.div`
   width: 100%;
-  height: 50%;
-  /* background-color: aqua; */
+  height: 70%;
   display: flex;
-  margin-top: 10%;
   flex-direction: column;
   justify-content: space-evenly;
-  /* gap: 10px; */
   align-items: center;
-  /* background-color: black; */
 `;
 const JuminDiv = styled.div`
   width: 100%;
@@ -46,7 +41,6 @@ const InputDetailDiv = styled.div`
   width: 100%;
   height: 32px;
   display: flex;
-  /* gap: 2px; */
 
   & > label {
     display: flex;
@@ -63,7 +57,7 @@ const InputDetailDiv = styled.div`
   & > .InputEmail,
   & > .InputCoupleName,
   & > .InputCode {
-    width: 53%;
+    width: 50%;
     height: 100%;
     border-radius: 0.521vw;
     border: none;
@@ -80,6 +74,7 @@ const Empty = styled.div`
 `;
 const EmailAthouized = styled.div`
   width: 12%;
+  height: 25px;
   border-radius: 10px;
   border: none;
   background-color: ${({ isActive }) =>
@@ -96,6 +91,30 @@ const EmailAthouized = styled.div`
   &:hover {
     background-color: ${({ isActive }) =>
       isActive ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.2)"};
+  }
+`;
+const CoupleEmailAthouized = styled.div`
+  width: 20%;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  background-color: ${({ isActive }) =>
+    isActive ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.2)"};
+  outline: none;
+  box-shadow: 0 6px 9px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#ccc")};
+  font-weight: 600;
+  cursor: ${({ isActive }) => (isActive ? "pointer" : "not-allowed")};
+  &:hover {
+    background-color: ${({ isActive }) =>
+      isActive ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.2)"};
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
   }
 `;
 const RegisterationInput1 = styled.input`
@@ -141,7 +160,7 @@ const CoupleText = styled.div`
 `;
 const ButtonDiv = styled.div`
   width: 100%;
-  height: 5%;
+  height: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,7 +173,7 @@ const SignupButton = styled.div`
   border-radius: 16px;
   font-weight: 600;
   font-size: 15px;
-  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#b44a4a")};
+  color: #b44a4a;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,13 +186,13 @@ const SignupButton = styled.div`
 `;
 const InputDetailDiv2 = styled.div`
   width: 100%;
-  height: 10%;
+  height: 5%;
   display: flex;
   justify-content: center;
 `;
 const Message = styled.div`
   width: 100%;
-  font-size: 12px;
+  font-size: 10px;
   display: flex;
   justify-content: center;
   color: ${({ isCorrect }) => (isCorrect ? "green" : "red")};
@@ -908,18 +927,18 @@ const SignupPage = () => {
               </p>
             </div>
             <div className="YesOrNo">
-              <EmailAthouized
+              <CoupleEmailAthouized
                 isActive={true}
                 onClick={isMyCoupleEmailYesHandler}
               >
                 Yes
-              </EmailAthouized>
-              <EmailAthouized
+              </CoupleEmailAthouized>
+              <CoupleEmailAthouized
                 isActive={true}
                 onClick={isMyCoupleEmailNoHandler}
               >
                 No
-              </EmailAthouized>
+              </CoupleEmailAthouized>
             </div>
           </IsMyCoupleEmailForm>
         </IsMyCoupleEmailImg>

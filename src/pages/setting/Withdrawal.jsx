@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import LoginAxios from "../../axiosapi/LoginAxios";
 import emailjs from "emailjs-com";
 import Modal from "../../common/utils/Modal";
 import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
@@ -21,27 +20,19 @@ const TitleDiv = styled.div`
   font-size: 18px;
   font-weight: 900;
   color: #b44a4a;
-  @media screen and (max-width: 654px) {
-    font-size: 3vw;
-  }
 `;
 const InputDiv = styled.div`
   width: 100%;
-  height: 80%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  
 `;
 const InputDetailDiv = styled.div`
   width: 100%;
   height: 32px;
   display: flex;
-  gap: 2px;
-  @media screen and (max-width: 654px) {
-    height: 5vw;
-  }
   & > label {
     display: flex;
     justify-content: center;
@@ -52,13 +43,10 @@ const InputDetailDiv = styled.div`
     color: #b44a4a;
     text-align: center;
     font-weight: bolder;
-    @media screen and (max-width: 654px) {
-      font-size: 2vw;
-    }
   }
   & > .InputCode,
   & > .InputEmail {
-    width: 53%;
+    width: 50%;
     height: 100%;
     border-radius: 0.521vw;
     border: none;
@@ -68,9 +56,6 @@ const InputDetailDiv = styled.div`
     padding-left: 0.521vw;
     font-size: 14px;
     font-weight: 600;
-    @media screen and (max-width: 654px) {
-      font-size: 2vw;
-    }
   }
 `;
 const Empty = styled.div`
@@ -78,7 +63,7 @@ const Empty = styled.div`
 `;
 const EmailAthouized = styled.div`
   width: 12%;
-  border-radius: 10px;;
+  border-radius: 10px;
   border: none;
   background-color: ${({ isActive }) =>
     isActive ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.2)"};
@@ -88,16 +73,13 @@ const EmailAthouized = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.729vw;
+  font-size: 12px;
   color: ${({ isActive }) => (isActive ? "#b44a4a" : "#ccc")};
   font-weight: 700;
   cursor: ${({ isActive }) => (isActive ? "pointer" : "not-allowed")};
   &:hover {
     background-color: ${({ isActive }) =>
       isActive ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.2)"};
-  }
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
   }
 `;
 
@@ -109,21 +91,21 @@ const ButtonDiv = styled.div`
   align-items: center;
   & > a {
     width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
-const SignupButton = styled.div`
-    width: 30%;
-    height: 80%;
+const WithdrawButton = styled.div`
+  width: 35%;
+  aspect-ratio: 3/1;
   background-color: ${({ isActive }) =>
     isActive ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)"};
   border-radius: 1.042vw;
   font-weight: 600;
-  font-size: 1.094vw;
-  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#ccc")};
+  font-size: 15px;
+  color: ${({ isActive }) => (isActive ? "#ccc" : "#b44a4a")};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,25 +115,19 @@ const SignupButton = styled.div`
     background-color: ${({ isActive }) =>
       isActive ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)"};
   }
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 
 const Message = styled.div`
   width: 100%;
-  font-size: 12px;
+  font-size: 10px;
   display: flex;
   justify-content: center;
   color: ${({ isCorrect }) => (isCorrect ? "green" : "red")};
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 const Contexts = styled.div`
   width: 100%;
-  height: 100%;
-  font-size: 2.5vw;
+  height: 50%;
+  font-size: 10vw;
   font-weight: 700;
   display: flex;
   justify-content: center;
@@ -308,15 +284,18 @@ const Withdrawal = () => {
             </EmailAthouized>
           </InputDetailDiv>
         )}
-        <Contexts>정말 탈퇴하실 건가요?<br/> ㅠ.ㅠ</Contexts>
+        <Contexts>
+          정말 탈퇴하실 건가요?
+          <br /> ㅠ.ㅠ
+        </Contexts>
       </InputDiv>
       <ButtonDiv>
-        <SignupButton
+        <WithdrawButton
           isActive={isEmail && isCode}
           onClick={signuOutBtnOnclickHandler}
         >
           탈퇴하기
-        </SignupButton>
+        </WithdrawButton>
       </ButtonDiv>
     </Contain>
   );

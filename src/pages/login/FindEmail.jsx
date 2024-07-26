@@ -8,11 +8,14 @@ import findIdImg from "../../img/loginImg/아이디찾기.gif";
 const Contain = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const IconDiv = styled.div`
   width: 100%;
-  height: 20%;
-  margin-top:40% ;
+  height: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,7 +23,7 @@ const IconDiv = styled.div`
 
 const InputDiv = styled.div`
   width: 100%;
-  height: 20%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -50,7 +53,6 @@ const FindButton = styled.div`
   &:hover {
     background-color: rgba(0, 0, 0, 0.6);
   }
-
 `;
 const InputDetailDiv = styled.div`
   width: 100%;
@@ -68,7 +70,6 @@ const InputDetailDiv = styled.div`
     color: #b44a4a;
     text-align: center;
     font-weight: bolder;
-
   }
 
   & > .InputClass {
@@ -82,7 +83,6 @@ const InputDetailDiv = styled.div`
     padding-left: 0.521vw;
     font-size: 14px;
     font-weight: 600;
-    
   }
 `;
 
@@ -97,7 +97,6 @@ const RegisterationInput1 = styled.input`
   padding-left: 0.521vw;
   font-size: 14px;
   font-weight: 600;
-
 `;
 const Text = styled.div`
   width: 3%;
@@ -108,7 +107,6 @@ const Text = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
 const RegisterationInput2 = styled.input`
   width: 7%;
@@ -121,14 +119,11 @@ const RegisterationInput2 = styled.input`
   padding-left: 0.208vw;
   font-size: 14px;
   font-weight: 600;
-
 `;
 const FaMagnifyingGlassStyle = styled(FaMagnifyingGlass)`
   width: calc(110px - 1vw);
   height: calc(110px - 1vh);
   color: rgba(0, 0, 0, 0.7);
-
-
 `;
 const Message = styled.div`
   width: 100%;
@@ -136,7 +131,6 @@ const Message = styled.div`
   display: flex;
   justify-content: center;
   color: ${({ isCorrect }) => (isCorrect ? "green" : "red")};
-
 `;
 const FindEmail = () => {
   //주민등록번호 표현 상태 변수

@@ -378,8 +378,8 @@ const VisitContainer = styled.div`
   align-items: center;
 `;
 const BackMyHome = styled.div`
-  width: 20%;
-  height: 30%;
+  width: 25%;
+  aspect-ratio: 3.5/1;
   font-size: 10px;
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.4);

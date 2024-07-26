@@ -1,10 +1,8 @@
 import styled, { keyframes } from "styled-components";
-import closebook from "../../img/background/mobile/편지봉투4-removebg-preview.png";
+import letter from "../../img/background/mobile/편지봉투4.png";
 import background from "../../img/background/mobile/background-6517956_1920.jpg";
 import logo from "../../img/background/logo.png";
 import { Outlet, Link } from "react-router-dom";
-import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
-import { useEffect, useState } from "react";
 const zoomInDown = keyframes`
   from {
     opacity: 0;
@@ -38,7 +36,7 @@ const Background = styled.div`
 const Book = styled.div`
   width: 100%;
   height: 100%;
-  background-image: url(${closebook});
+  background-image: url(${letter});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -46,7 +44,6 @@ const Book = styled.div`
   align-items: center;
   justify-content: center;
   animation: ${zoomInDown} 2s ease-out;
-  box-sizing: border-box;
 `;
 
 const BookTheme = styled.div`
@@ -56,32 +53,27 @@ const BookTheme = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
 `;
 
 const LogoDiv = styled.div`
-  width: 430px;
+  width: 100%;
+  height: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aliceblue;
-  margin-top: 50px;
-  margin-right: 50px;
 `;
 
 const Logo = styled.div`
-  width: 150px;
-  height: 150px;
+  width: 30vw;
+  aspect-ratio: 1/1;
   background-image: url(${logo});
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
   border-radius: 50%;
-  z-index: 10;
-  transform: translateX(-50%);
-  position: absolute;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   &:hover {
-    transform: translateX(-50%) scale(0.95);
+    transform: scale(0.95);
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.4);
   }
 `;
@@ -93,39 +85,19 @@ const Contents = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* background-color: aqua; */
   font-size: 16px;
-  box-sizing: border-box;
 `;
 
-const CloseBook = ({ modify }) => {
-  const [coupleName, setCoupleName] = useState();
-  const email = sessionStorage.getItem("email");
-  useEffect(() => {
-    if (modify) {
-      coupleNameAxios();
-    }
-  }, []);
-  const coupleNameAxios = async () => {
-    const res = await MemberAxiosApi.renderCoupleNameSearch(email);
-    setCoupleName(res.data);
-  };
+const NotePaper = ({ notlogin }) => {
   return (
     <Background>
       <Book>
         <BookTheme>
-          {/* <LogoDiv> */}
-          {!modify && (
+          <LogoDiv notlogin={notlogin}>
             <Link to="/">
               <Logo />
             </Link>
-          )}
-          {modify && (
-            <Link to={`/${coupleName}/main-page`}>
-              <Logo />
-            </Link>
-          )}
-          {/* </LogoDiv> */}
+          </LogoDiv>
           <Contents>
             <Outlet />
           </Contents>
@@ -135,4 +107,4 @@ const CloseBook = ({ modify }) => {
   );
 };
 
-export default CloseBook;
+export default NotePaper;

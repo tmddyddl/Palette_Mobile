@@ -1,7 +1,6 @@
 import "./App.css";
 import PaletteStyle from "./PaletteStyle";
-import OpenBook from "./common/background/OpenBook";
-import CloseBook from "./common/background/CloseBook";
+import NotePaper from "./common/background/NotePaper";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import AfterMain from "./pages/main/MainPage";
 import NotLogin from "./pages/main/NotLogin";
@@ -32,14 +31,11 @@ import PaletteNoticeDetails from "./pages/palette/PaletteNoticeDetails";
 import PaletteInquiry from "./pages/palette/PaletteInquiry";
 import PaletteAd from "./pages/palette/PaletteAd";
 import PaletteCustomer from "./pages/palette/PaletteCustomer";
-import ErrorPage from "./error/ErrorPage";
-import KakaoRedirect from "./pages/login/redirect/KakaoRedirect";
 import ChatList from "./pages/chat/ChatList";
 import ChatRoomCreate from "./pages/chat/ChatRoomCreate";
 import BoardUpdate from "./pages/board/BoardUpdate";
 import MainPage from "./pages/main/BeforeMainPage";
-import { useState } from "react";
-import MobileBook from "./common/background/MobileBook";
+import LoginLetter from "./common/background/LoginLetter";
 
 function App() {
   return (
@@ -50,8 +46,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<PalettePage />} />
-          <Route path="/kakaoLogin" element={<KakaoRedirect />} />
-          <Route path="/error" element={<ErrorPage />} />
           <Route path="/customer" element={<PaletteCustomer />} />
           <Route path="/customer/help" element={<PaletteHelp />} />
           <Route path="/customer/inquiry" element={<PaletteInquiry />} />
@@ -61,16 +55,16 @@ function App() {
             path="/customer/notice/:id"
             element={<PaletteNoticeDetails />}
           />
-          <Route element={<CloseBook />}>
+          <Route element={<NotePaper notlogin={true} />}>
             <Route path="/not-login" element={<NotLogin />} />
           </Route>
-          <Route element={<MobileBook />}>
+          <Route element={<LoginLetter />}>
             <Route path="/login-page" element={<LoginPage />} />
             <Route path="/signup-page" element={<SignupPage />} />
             <Route path="/find-email" element={<FindEmail />} />
             <Route path="/find-password" element={<FindPassword />} />
           </Route>
-          <Route element={<OpenBook />}>
+          <Route element={<LoginLetter />}>
             <Route path="/main-page" element={<MainPage />} />
             <Route path="/:coupleName/main-page" element={<AfterMain />} />
             <Route path="/date-clothes" element={<DateClothes />} />
@@ -104,7 +98,7 @@ function App() {
             />
           </Route>
 
-          <Route element={<CloseBook modify={true} />}>
+          <Route element={<LoginLetter modify={true} />}>
             <Route path="/modify" element={<Modify />} />
             <Route path="/withdrawal" element={<Withdrawal />} />
           </Route>

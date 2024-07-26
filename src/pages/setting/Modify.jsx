@@ -7,6 +7,7 @@ const Contain = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 const TitleDiv = styled.div`
@@ -18,18 +19,14 @@ const TitleDiv = styled.div`
   font-size: 18px;
   font-weight: 900;
   color: #b44a4a;
-  @media screen and (max-width: 654px) {
-    font-size: 3vw;
-  }
 `;
 const InputDiv = styled.div`
   width: 100%;
-  height: 80%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  
 `;
 
 const EmailDiv = styled.div`
@@ -39,10 +36,6 @@ const InputDetailDiv = styled.div`
   width: 100%;
   height: 32px;
   display: flex;
-  gap: 2px;
-  @media screen and (max-width: 654px) {
-    height: 5vw;
-  }
 
   & > label {
     display: flex;
@@ -54,13 +47,10 @@ const InputDetailDiv = styled.div`
     color: #b44a4a;
     text-align: center;
     font-weight: bolder;
-    @media screen and (max-width: 654px) {
-      font-size: 2vw;
-    }
   }
   & > .InputEmail,
   & > .InputClass {
-    width: 53%;
+    width: 50%;
     height: 100%;
     border-radius: 0.521vw;
     border: none;
@@ -70,9 +60,6 @@ const InputDetailDiv = styled.div`
     padding-left: 0.521vw;
     font-size: 14px;
     font-weight: 600;
-    @media screen and (max-width: 654px) {
-      font-size: 2vw;
-    }
   }
 `;
 const ButtonDiv = styled.div`
@@ -83,20 +70,20 @@ const ButtonDiv = styled.div`
   align-items: center;
   & > a {
     width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
-const SignupButton = styled.div`
+const ModifyButton = styled.div`
   width: 30%;
-  height: 80%;
+  height: 36px;
   background-color: ${({ isActive }) =>
     isActive ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)"};
   border-radius: 1.042vw;
   font-weight: 600;
-  font-size: 1.094vw;
+  font-size: 15px;
   color: ${({ isActive }) => (isActive ? "#b44a4a" : "#ccc")};
   display: flex;
   justify-content: center;
@@ -107,19 +94,13 @@ const SignupButton = styled.div`
     background-color: ${({ isActive }) =>
       isActive ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.2)"};
   }
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 const Message = styled.div`
   width: 100%;
-  font-size: 12px;
+  font-size: 10px;
   display: flex;
   justify-content: center;
   color: ${({ isCorrect }) => (isCorrect ? "green" : "red")};
-  @media screen and (max-width: 654px) {
-    font-size: 2vw;
-  }
 `;
 
 const Modify = () => {
@@ -273,14 +254,14 @@ const Modify = () => {
       </InputDiv>
       <ButtonDiv>
         <Link to="/main-page" style={{ textDecoration: "none" }}>
-          <SignupButton
+          <ModifyButton
             isActive={
               inputEmail || inputName || inputNickName || inputcoupleName
             }
             onClick={modifyOnClickHandler}
           >
             수정하기
-          </SignupButton>
+          </ModifyButton>
         </Link>
       </ButtonDiv>
     </Contain>

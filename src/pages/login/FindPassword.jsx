@@ -12,15 +12,14 @@ const Contain = styled.div`
 `;
 const IconDiv = styled.div`
   width: 100%;
-  height: 20%;
-  margin-top: 40%;
+  height: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const InputDiv = styled.div`
   width: 100%;
-  height: 20%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

@@ -61,7 +61,8 @@ const BookTheme = styled.div`
   border: 1px solid #696969;
   background-color: #fff9f2;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
 `;
 
@@ -77,7 +78,7 @@ const BookTheme2 = styled.div`
 `;
 
 const BookSign = styled.div`
-  width: 100%;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -86,7 +87,7 @@ const BookSign = styled.div`
 `;
 
 const BookSign2 = styled.div`
-  width: 100%;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: center;

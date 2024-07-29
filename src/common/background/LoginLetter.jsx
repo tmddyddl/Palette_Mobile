@@ -19,7 +19,10 @@ const Contain = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
+const LetterBefore = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 const LetterOpen = styled.div`
   height: 85vh;
   display: flex;
@@ -32,6 +35,14 @@ const LetterBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+const LogoBefore = styled.div`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const LogoDiv = styled.div`
@@ -54,6 +65,14 @@ const Logo = styled.img`
     transform: scale(0.95);
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.4);
   }
+`;
+
+const Logo2 = styled.div`
+  width: 30vw;
+  aspect-ratio: 1/1;
+  background-image: url(${logo});
+  background-size: contain;
+  background-repeat: no-repeat;
 `;
 
 const ChatLogo = styled.img`
@@ -96,35 +115,51 @@ const LoginLetter = ({ notLoginState }) => {
   };
   return (
     <Contain>
-      <LogoDiv>
-        {!notLoginState && (
+      {!notLoginState && (
+        <LogoBefore>
           <Link to="/">
+            <Logo2 />
+          </Link>
+        </LogoBefore>
+      )}
+      {notLoginState && (
+        <LogoDiv>
+          <Link to={`/Chat`}>
+            <ChatLogo alt="logo" src={chatLogo} />
+          </Link>
+          <Link to={`/${coupleName}/main-page`}>
             <Logo src={logo} />
           </Link>
-        )}
+          <Link to={`/Chat`}>
+            <ChatLogo alt="logo" src={chatLogo} />
+          </Link>
+        </LogoDiv>
+      )}
+      {!notLoginState && (
+        <>
+          <LetterBefore>
+            <Outlet />
+          </LetterBefore>
+        </>
+      )}
+      {notLoginState && (
+        <>
+          <LetterOpen>
+            <LetterBox>
+              <Outlet />
+            </LetterBox>
+          </LetterOpen>
+        </>
+      )}
+      <BookMarkDiv>
+        {!notLoginState && <></>}
         {notLoginState && (
           <>
-            <Link to={`/Chat`}>
-              <ChatLogo alt="logo" src={chatLogo} />
-            </Link>
-            <Link to={`/${coupleName}/main-page`}>
-              <Logo src={logo} />
-            </Link>
-            <Link to={`/Chat`}>
-              <ChatLogo alt="logo" src={chatLogo} />
-            </Link>
+            <BookMarkBox>
+              <BookMark />
+            </BookMarkBox>
           </>
         )}
-      </LogoDiv>
-      <LetterOpen>
-        <LetterBox>
-          <Outlet />
-        </LetterBox>
-      </LetterOpen>
-      <BookMarkDiv>
-        <BookMarkBox>
-          <BookMark />
-        </BookMarkBox>
       </BookMarkDiv>
     </Contain>
   );

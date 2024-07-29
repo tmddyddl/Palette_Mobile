@@ -10,10 +10,12 @@ import BookMark from "../bookmark/BookMark";
 const Contain = styled.div`
   width: 100vw;
   height: 100vh;
-  background-image: url(${LetterOpenImg});
+  /* background-image: url(${LetterOpenImg});
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,10 +52,11 @@ const LogoDiv = styled.div`
   height: 10vh;
   padding: 5%;
   border-bottom: 1px solid #696969;
+  background-color: #feeee8;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 999;
+  /* z-index: 999; */
   & > .temp {
     width: 40px;
     height: 40px;
@@ -90,9 +93,11 @@ const ChatLogo = styled.img`
 `;
 const BookMarkDiv = styled.div`
   width: 100%;
+  background-color: #feeee8;
   display: flex;
   justify-content: center;
   align-items: end;
+  z-index: 999;
   flex-grow: 1; /* 이 부분을 추가하여 남은 공간을 차지하게 합니다 */
 `;
 

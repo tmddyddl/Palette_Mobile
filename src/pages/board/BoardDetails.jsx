@@ -20,7 +20,7 @@ const turnPageLeft = keyframes`
 `;
 
 const BookTheme = styled.div`
-  width: 99%;
+  width: 92vw;
   height: 75vh;
   border: 1px solid #696969;
   background-color: #fff9f2;
@@ -30,7 +30,7 @@ const BookTheme = styled.div`
 `;
 
 const BookSign = styled.div`
-  width: 425px;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;

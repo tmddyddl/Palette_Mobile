@@ -15,8 +15,8 @@ moment.locale("ko");
 
 // Styled components
 const StyledCalendarWrapper = styled.div`
-  width: 90%;
-  height: 95%;
+  width: 92vw;
+  height: 97%;
   display: flex;
   justify-content: center;
   position: relative;
@@ -216,8 +216,8 @@ const BookTheme2 = styled.div`
 `;
 
 const BoardWrapper = styled.div`
-  width: 90%;
-  height: 95%;
+  width: 92vw;
+  height: 97%;
   background-color: #fff9f2;
   border-radius: 0.5rem;
   display: flex;

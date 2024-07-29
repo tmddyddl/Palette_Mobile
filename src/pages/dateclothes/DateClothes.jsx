@@ -86,7 +86,7 @@ const BookTheme2 = styled.div`
 `;
 
 const BookSign = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -95,7 +95,7 @@ const BookSign = styled.div`
 `;
 
 const BookSign2 = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -241,9 +241,7 @@ const DateClothes = () => {
 
   return (
     <BookContainer>
-      <StyledSlider
-        {...settings}
-      >
+      <StyledSlider {...settings}>
         <BookTheme>
           <BookSign>
             <Title>데이트 룩 코디</Title>

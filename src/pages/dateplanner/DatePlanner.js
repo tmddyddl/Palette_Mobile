@@ -49,10 +49,13 @@ const StyledSlider = styled(Slider)`
 const BookWrapper = styled.div`
   width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const LBookContainer = styled.div`
-  width: 100%;
+  width: 92vw;
   height: 75vh;
   border: 1px solid #696969;
   background-color: #fff9f2;
@@ -64,7 +67,7 @@ const LBookContainer = styled.div`
 `;
 
 const BookTheme2 = styled.div`
-  width: 100%;
+  width: 92vw;
   height: 75vh;
   background-color: #fff9f2;
   border: 1px solid #696969;
@@ -77,7 +80,7 @@ const BookTheme2 = styled.div`
 `;
 
 const BookSign = styled.div`
-  width: 425px;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -86,7 +89,7 @@ const BookSign = styled.div`
 `;
 
 const BookSign2 = styled.div`
-  width: 425px;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;

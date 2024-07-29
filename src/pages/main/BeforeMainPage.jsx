@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
-import theme3_1 from "../../img/background/theme/new-1.jpg";
+import theme3_1 from "../../img/background/theme/new.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // 책 넘기는 애니메이션을 위한 keyframes
@@ -26,6 +26,7 @@ const BookTheme = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* background-color: #fff9f2; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,13 +40,20 @@ const PaletteText = styled.div`
 const BookSign = styled.div`
   width: 100%;
   height: 100%;
-  border: 1px solid #696969;
+  border-radius: 5px;
+  border-bottom: 1px solid #696969;
+  border-left: 1px solid #696969;
+  border-right: 1px solid #696969;
   background-image: url(${theme3_1});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* background-color: #fff9f2; */
   overflow: hidden;
-  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
   ${({ animate }) =>
     animate &&
     css`

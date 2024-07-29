@@ -81,7 +81,7 @@ const BookTheme2 = styled.div`
 `;
 
 const BookSign2 = styled.div`
-  width: 95vw;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -90,7 +90,7 @@ const BookSign2 = styled.div`
 `;
 
 const BoardSide = styled.div`
-  width: 95vw;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: center;

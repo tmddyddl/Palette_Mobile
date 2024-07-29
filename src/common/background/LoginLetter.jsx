@@ -3,17 +3,16 @@ import LetterOpenImg from "../../img/background/mobile/편지지2.jpg";
 import { Outlet, Link } from "react-router-dom";
 import logo from "../../img/background/logo.png";
 import chatLogo from "../../img/background/chatLogo.png";
-import { useState, useEffect } from "react";
-import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
 import BookMark from "../bookmark/BookMark";
 
 const Contain = styled.div`
   width: 100vw;
   height: 100vh;
-  /* background-image: url(${LetterOpenImg});
+  background-image: ${({ notLoginState }) =>
+    `url(${notLoginState ? "" : LetterOpenImg})`};
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat;
 
   background-color: #fff;
   display: flex;
@@ -112,7 +111,7 @@ const BookMarkBox = styled.div`
 
 const LoginLetter = ({ notLoginState }) => {
   return (
-    <Contain>
+    <Contain notLoginState={notLoginState}>
       {!notLoginState && (
         <LogoBefore>
           <Link to="/">

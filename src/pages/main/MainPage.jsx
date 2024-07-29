@@ -152,6 +152,10 @@ const Dday = styled.div`
   width: 95%;
   height: 80%;
   border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const RecentTitle = styled.div`
   width: 100%;
@@ -356,6 +360,7 @@ const BtnDiv = styled.div`
 const XbtnDiv = styled.div`
   width: 230px;
   height: 8vh;
+  margin-top: 2vh;
   padding-right: 20px;
   display: flex;
   justify-content: end;

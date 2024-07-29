@@ -1,9 +1,8 @@
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 import CoupleImage from "../../common/couple/CoupleImg";
 import Swiper from "./Swiper";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import clothesBg1 from "../../img/background/theme/clothes_background.jpg";
-import { useNavigate } from "react-router-dom";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -39,20 +38,14 @@ const StyledSlider = styled(Slider)`
 `;
 
 const CoupleimgCon = styled.div`
-  margin-left: 103%;
+  margin-left: 103vw;
   display: flex;
   justify-content: center;
-  width: 745px;
+  width: 184vw;
   height: 20%;
   position: relative;
   gap: 500px;
   z-index: 1;
-  @media screen and (max-width: 1200px) {
-    width: 610px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 380px;
-  }
 `;
 
 const BookContainer = styled.div`
@@ -136,8 +129,8 @@ const OptionDiv = styled.div`
 `;
 
 const Options = styled.div`
-  width: 75px;
-  height: 68%;
+  width: 85px;
+  height: 74%;
   background-color: #fff;
   font-size: 12px;
   font-weight: 600;
@@ -197,16 +190,15 @@ const StroeButton = styled.div`
 const ClothesFormContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 225px;
   height: 75%;
   align-items: end;
 `;
 
 const ClothesForm = styled.div`
-  width: 253px;
+  width: 100%;
   height: 100%;
   background-color: #fff;
-  margin-right: 15%;
   margin-bottom: 2%;
   border-radius: 0.521vw;
   border: 2px solid pink;
@@ -215,10 +207,9 @@ const ClothesForm = styled.div`
   align-items: center;
 `;
 const ClothesForm2 = styled.div`
-  width: 253px;
+  width: 100%;
   height: 100%;
   background-color: #fff;
-  margin-left: 15%;
   margin-bottom: 2%;
   border-radius: 0.521vw;
   border: 2px solid pink;
@@ -249,9 +240,6 @@ const DateClothes = () => {
               <CoupleImage clothes={true} />
             </CoupleimgCon>
             <ClothesFormContainer>
-              <ButtonDiv>
-                <StroeButton>저장</StroeButton>
-              </ButtonDiv>
               <ClothesForm>
                 <Swiper clothNum={1} />
                 <Swiper clothNum={2} />
@@ -288,9 +276,6 @@ const DateClothes = () => {
                 <Swiper clothNum={7} OnePiece={isOnePiece} />
                 <Swiper shoes={true} clothNum={6} />
               </ClothesForm2>
-              <ButtonRightDiv>
-                <StroeButton>저장</StroeButton>
-              </ButtonRightDiv>
             </ClothesFormContainer>
           </BookSign2>
         </BookTheme2>

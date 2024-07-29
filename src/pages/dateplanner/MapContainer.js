@@ -51,7 +51,7 @@ const ToggleButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 2vw;
+  font-size: 12px;
   display: none;
   @media screen and (max-width: 768px) {
     display: block;
@@ -274,7 +274,6 @@ const MapContainer = ({
     setMarkers(newMarkers);
     map.setBounds(bounds);
   };
-
 
   return (
     <>

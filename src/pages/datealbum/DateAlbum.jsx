@@ -144,7 +144,7 @@ const ImgWrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding-right: 1%;
-  margin-top: 20%;
+  margin-top: 5%;
   display: flex;
   flex-wrap: wrap;
 `;

@@ -37,23 +37,23 @@ const ProfileImgDiv = styled.div`
   /* background-color: ${({ clothes }) => (clothes ? "lightblue" : "none")}; */
 `;
 const HeartDiv = styled.div`
-  width: 4vw;
+  width: 8vw;
   height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 const Heart = styled.div`
-  width: ${({ clothes }) => (clothes ? "40px" : "3.646vw")};
-  height: ${({ clothes }) => (clothes ? "40px" : "7.345vh")};
+  width: 200px;
+  height: 200px;
   background-image: url(${heart});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 `;
 const Profile = styled.div`
-  width: ${({ clothes }) => (clothes ? "70px" : "80px")};
-  height: ${({ clothes }) => (clothes ? "70px" : "80px")};
+  width: 80px;
+  height: 80px;
   background-image: ${({ imageurl }) =>
     `url(${imageurl ? imageurl : manprofile})`};
   background-size: cover;
@@ -63,8 +63,8 @@ const Profile = styled.div`
 `;
 
 const Text = styled.div`
-  width: ${({ clothes }) => (clothes ? "30%" : "8vw")};
-  height: ${({ clothes }) => (clothes ? "3vh" : "7.345vh")};
+  width: ${({ clothes }) => (clothes ? "20%" : "8vw")};
+  height: ${({ clothes }) => (clothes ? "7vh" : "7.345vh")};
   background-color: ${({ clothes }) => (clothes ? "white" : "none")};
   border-radius: ${({ clothes }) => (clothes ? "8px" : "none")};
   border: ${({ clothes }) => (clothes ? "1px solid gray" : "none")};
@@ -80,13 +80,13 @@ const Text = styled.div`
   }
   @media screen and (max-width: 768px) {
     height: ${({ clothes }) => (clothes ? "2vh" : "7.345vh")};
-    font-size: 10px;
+    font-size: 12px;
   }
 `;
 
 const ProfileCover = styled.div`
-  width: 6.771vw;
-  height: 13.641vh;
+  width: 80px;
+  height: 80px;
   background-color: transparent;
   border-radius: 50%;
   position: relative;
@@ -101,15 +101,15 @@ const ProfileCover = styled.div`
 
 const Label = styled.label`
   cursor: pointer;
-  width: 5vw;
-  height: 40px;
+  width: 18vw;
+  height: 25px;
   display: none;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
-
+  font-size: 10px;
   ${ProfileCover}:hover & {
     display: flex;
   }
@@ -245,10 +245,7 @@ const CoupleImg = ({ clothes = false, isMyHome }) => {
     <Contain clothes={clothes}>
       <ProfileDiv clothes={clothes}>
         <ProfileImgDiv clothes={clothes}>
-          <Profile
-            imageurl={IsExistImg[0] ? imgUrl : manprofile}
-            clothes={clothes}
-          >
+          <Profile imageurl={IsExistImg[0] ? imgUrl : manprofile}>
             {isMyHome && (
               <ProfileCover clothes={clothes}>
                 <Label htmlFor="fileInput">Choose File</Label>
@@ -265,14 +262,11 @@ const CoupleImg = ({ clothes = false, isMyHome }) => {
         <Text clothes={clothes}>{coupleNickName[0] || "알콩"}</Text>
       </ProfileDiv>
       <HeartDiv>
-        <Heart clothes={clothes} />
+        <Heart />
       </HeartDiv>
       <ProfileDiv clothes={clothes} direction={true}>
         <ProfileImgDiv clothes={clothes}>
-          <Profile
-            imageurl={IsExistImg[1] ? myDarling : womanprofile}
-            clothes={clothes}
-          />
+          <Profile imageurl={IsExistImg[1] ? myDarling : womanprofile} />
         </ProfileImgDiv>
         <Text clothes={clothes}>{coupleNickName[1] || "달콩"}</Text>
       </ProfileDiv>

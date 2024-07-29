@@ -87,7 +87,12 @@ const ChatRoomCreate = ({ onClose }) => {
   const handleCancel = () => {
     onClose(); // 모달 닫기
   };
-
+  const onEnterKey = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // 기본 엔터키 동작 방지
+      okOnClickHandler(); // 확인 버튼 클릭 핸들러 호출
+    }
+  };
   return (
     <Container>
       <Title>채팅방 생성</Title>
@@ -95,6 +100,7 @@ const ChatRoomCreate = ({ onClose }) => {
         type="text"
         value={chatRoomTitle}
         onChange={(e) => setChatRoomTitle(e.target.value)}
+        onKeyUp={onEnterKey}
       />
       <ButtonContainer>
         <Button onClick={okOnClickHandler}>확인</Button>

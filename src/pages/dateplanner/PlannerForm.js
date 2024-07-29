@@ -4,7 +4,7 @@ import styled from "styled-components";
 const PlannerContainer = styled.div`
   padding: 10px;
   width: 95%;
-  height: 56%;
+  height: 54%;
   background-color: ${({ isEditing }) => (isEditing ? "#fef9e8" : "#feeee8")};
   border: 1px solid #e6e6fa;
   border-radius: 8px;

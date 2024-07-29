@@ -109,7 +109,7 @@ const BookTheme2 = styled.div`
 `;
 
 const BookSign = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -118,7 +118,7 @@ const BookSign = styled.div`
 `;
 
 const BookSign2 = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -160,12 +160,13 @@ const ImgWrapper2 = styled.div`
   padding-left: 0.4%;
   margin-top: 6%;
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 `;
 
 const ImgBox2 = styled.div`
-  width: 120px;
-  height: 17vh;
+  width: 26vw;
+  height: 12vh;
   background-color: gray;
   display: flex;
   align-items: center;

@@ -241,7 +241,9 @@ const DateClothes = () => {
 
   return (
     <BookContainer>
-      <StyledSlider {...settings}>
+      <StyledSlider
+        {...settings}
+      >
         <BookTheme>
           <BookSign>
             <Title>데이트 룩 코디</Title>

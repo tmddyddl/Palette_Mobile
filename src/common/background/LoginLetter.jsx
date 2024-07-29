@@ -54,6 +54,10 @@ const LogoDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   z-index: 999;
+  & > .temp {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const Logo = styled.img`
@@ -102,17 +106,6 @@ const BookMarkBox = styled.div`
 `;
 
 const LoginLetter = ({ notLoginState }) => {
-  const [coupleName, setCoupleName] = useState();
-  const email = sessionStorage.getItem("email");
-  useEffect(() => {
-    if (notLoginState) {
-      coupleNameAxios();
-    }
-  }, []);
-  const coupleNameAxios = async () => {
-    const res = await MemberAxiosApi.renderCoupleNameSearch(email);
-    setCoupleName(res.data);
-  };
   return (
     <Contain>
       {!notLoginState && (
@@ -124,10 +117,8 @@ const LoginLetter = ({ notLoginState }) => {
       )}
       {notLoginState && (
         <LogoDiv>
-          <Link to={`/Chat`}>
-            <ChatLogo alt="logo" src={chatLogo} />
-          </Link>
-          <Link to={`/${coupleName}/main-page`}>
+          <div className="temp"></div>
+          <Link to={`/main-page`}>
             <Logo src={logo} />
           </Link>
           <Link to={`/Chat`}>

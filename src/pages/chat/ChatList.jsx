@@ -193,7 +193,7 @@ const ChatName = styled.p`
 
 const CircleFixedButton = styled.button`
   position: fixed;
-  bottom: 24px;
+  bottom: 13%;
   right: 20px;
   z-index: 10;
   width: 50px;
@@ -331,7 +331,6 @@ function ChatList({ url, clearUrl }) {
     setCreateModal(false);
   };
 
-
   // useEffect(() => {
   //   const fetchChatRooms = async () => {
   //     try {
@@ -344,7 +343,6 @@ function ChatList({ url, clearUrl }) {
   //   };
   //   fetchChatRooms(); // 최초 한 번 호출
   //   selectChatRoom(chatRooms.roomId);
-
 
   const coupleNickNameAxois = useCallback(
     async (couple) => {
@@ -367,13 +365,13 @@ function ChatList({ url, clearUrl }) {
     }
   };
 
-const filterChatRooms = (rooms, email) => {
-  return rooms.filter(
-    (room) =>
-      (room.firstEmail === email || room.secondEmail === email) &&
-      !room.deleted
-  );
-};
+  const filterChatRooms = (rooms, email) => {
+    return rooms.filter(
+      (room) =>
+        (room.firstEmail === email || room.secondEmail === email) &&
+        !room.deleted
+    );
+  };
 
   useEffect(() => {
     const fetchChatRooms = async () => {
@@ -397,9 +395,6 @@ const filterChatRooms = (rooms, email) => {
     // 컴포넌트 언마운트 시 인터벌 해제
     return () => clearInterval(intervalId);
   }, [email]);
-
-
-
 
   const enterChatRoom = (roomId) => {
     navigate(`/chat/${roomId}`);
@@ -431,32 +426,35 @@ const filterChatRooms = (rooms, email) => {
   const createChatRoom = () => {
     setCreateModal(true);
   };
-
+  const truncateRoomName = (name) => {
+    return name.length > 10 ? name.slice(0, 10) + "..." : name;
+  };
   return (
     <BookWrapper>
       {/* <StyledSlider {...settings}> */}
-        <BookTheme>
-          <ChatListContainer>
-            <Header>채팅방 목록</Header>
-            <ChatUl>
-              {chatRooms.map((room) => (
-                <ChatRoom
-                  key={room.roomId}
-                  onClick={() => enterChatRoom(room.roomId)}
-                >
-                 <ChatName>{room.name}</ChatName>
-  <PreviewMessage isMe={room.lastMessage.sender === email}>
-    {room.lastMessage.sender
-      ? `${getNickNameByEmail(room.lastMessage.sender)}  ${room.lastMessage.message}`
-      : room.lastMessage.message}
-  </PreviewMessage>
-
-                </ChatRoom>
-              ))}
-            </ChatUl>
-            <CircleFixedButton onClick={createChatRoom}></CircleFixedButton>
-          </ChatListContainer>
-        </BookTheme>
+      <BookTheme>
+        <ChatListContainer>
+          <Header>채팅방 목록</Header>
+          <ChatUl>
+            {chatRooms.map((room) => (
+              <ChatRoom
+                key={room.roomId}
+                onClick={() => enterChatRoom(room.roomId)}
+              >
+                <ChatName>{truncateRoomName(room.name)}</ChatName>
+                <PreviewMessage isMe={room.lastMessage.sender === email}>
+                  {room.lastMessage.sender
+                    ? `${getNickNameByEmail(
+                        room.lastMessage.sender
+                      )}  ${truncateRoomName(room.lastMessage.message)}`
+                    : room.lastMessage.message}
+                </PreviewMessage>
+              </ChatRoom>
+            ))}
+          </ChatUl>
+          <CircleFixedButton onClick={createChatRoom}></CircleFixedButton>
+        </ChatListContainer>
+      </BookTheme>
 
       {/* </StyledSlider> */}
       <ChatModal isOpen={createModal} onClose={closeModal}></ChatModal>

@@ -96,11 +96,26 @@ const BookSign2 = styled.div`
 
 const RBookContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 95%;
   display: flex;
   justify-content: start;
   align-items: center;
   flex-direction: column;
+`;
+const NextBtn = styled.div`
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const DatePlanner = ({ url, clearUrl }) => {
@@ -126,7 +141,8 @@ const DatePlanner = ({ url, clearUrl }) => {
   const { coupleName } = useParams(); // useParams를 통해 coupleName 파라미터 추출
   const currentOverlayRef = useRef(null); // CustomOverlay 상태를 useRef로 관리
   console.log("coupleName : ", coupleName);
-
+  // 버튼 상태 변수
+  const [nextBtn, setNextBtn] = useState(false);
   const settings = {
     dots: true,
     infinite: false,
@@ -376,31 +392,9 @@ const DatePlanner = ({ url, clearUrl }) => {
     currentOverlayRef.current = newOverlay; // Ref를 사용하여 업데이트
     console.log("setCurrentOverlay", newOverlay);
   };
-
   return (
     <BookWrapper>
-      <StyledSlider {...settings}>
-        <LBookContainer>
-          <BookSign>
-            <PlannerForm
-              title={title}
-              selectedPlaces={selectedPlaces}
-              handleSaveCourse={handleSaveCourse}
-              setSelectedPlaces={setSelectedPlaces}
-              isEditing={isEditing}
-              handleDeletePlace={handleDeletePlace}
-              handleClearPlaces={handleClearPlaces}
-            />
-
-            <SavedCoursesList
-              savedCourses={savedCourses}
-              setSelectedCourse={(course) => setSelectedPlaces(course.places)}
-              handleEditCourse={handleEditCourse}
-              handleDeleteCourse={handleDeleteCourse}
-              openModal={(index) => openModal(index)}
-            />
-          </BookSign>
-        </LBookContainer>
+      {!nextBtn && (
         <BookTheme2>
           <BookSign2>
             <RBookContainer>
@@ -425,9 +419,47 @@ const DatePlanner = ({ url, clearUrl }) => {
                 currCategory={currCategory}
               />
             </RBookContainer>
+            <NextBtn
+              onClick={() => {
+                setNextBtn(true);
+              }}
+            >
+              다음
+            </NextBtn>
           </BookSign2>
         </BookTheme2>
-      </StyledSlider>
+      )}
+      {nextBtn && (
+        <LBookContainer>
+          <BookSign>
+            <PlannerForm
+              title={title}
+              selectedPlaces={selectedPlaces}
+              handleSaveCourse={handleSaveCourse}
+              setSelectedPlaces={setSelectedPlaces}
+              isEditing={isEditing}
+              handleDeletePlace={handleDeletePlace}
+              handleClearPlaces={handleClearPlaces}
+            />
+
+            <SavedCoursesList
+              savedCourses={savedCourses}
+              setSelectedCourse={(course) => setSelectedPlaces(course.places)}
+              handleEditCourse={handleEditCourse}
+              handleDeleteCourse={handleDeleteCourse}
+              openModal={(index) => openModal(index)}
+            />
+            <NextBtn
+              onClick={() => {
+                setNextBtn(false);
+              }}
+            >
+              이전
+            </NextBtn>
+          </BookSign>
+        </LBookContainer>
+      )}
+
       <MapModal
         isOpen={isModalOpen}
         onClose={closeModal}

@@ -288,7 +288,7 @@ const BoardWrite = ({ url, clearUrl }) => {
       const response = await BoardAxios.createBoard(boardReqDto, coupleName);
 
       console.log("서버 응답 데이터:", response);
-      navigate(`/${coupleName}/board-guestbook`); // 리다이렉트
+      navigate(`/board-guestbook`); // 리다이렉트
     } catch (error) {
       console.error(
         "게시글 생성 실패:",
@@ -307,10 +307,7 @@ const BoardWrite = ({ url, clearUrl }) => {
         <BookSign>
           <WriteSide>
             <WriteTop>
-              <Link
-                to={`/${coupleName}/board-guestbook`}
-                style={{ textDecoration: "none" }}
-              >
+              <Link to={`/board-guestbook`} style={{ textDecoration: "none" }}>
                 <BackToGuestbook>돌아가기</BackToGuestbook>
               </Link>
             </WriteTop>

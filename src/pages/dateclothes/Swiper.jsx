@@ -38,54 +38,27 @@ const MenuItem = styled.div`
 `;
 
 const Swiper = ({ shoes, clothNum, OnePiece }) => {
-  const manPath = process.env.PUBLIC_URL + "/clothes/man/";
-  const manTops = [
-    manPath + "top/1.png",
-    manPath + "top/2.png",
-    manPath + "top/3.png",
-  ];
-  const manPants = [
-    manPath + "pants/1.jpg",
-    manPath + "pants/2.jpg",
-    manPath + "pants/3.jpg",
-  ];
-  const manShoes = [
-    manPath + "shoes/1.jpg",
-    manPath + "shoes/2.jpg",
-    manPath + "shoes/3.jpg",
-  ];
-  const womanPath = process.env.PUBLIC_URL + "/clothes/woman/";
-  const womanTops = [
-    womanPath + "top/1.jpg",
-    womanPath + "top/2.jpg",
-    womanPath + "top/3.jpg",
-    // womanPath + "top/4.jpg",
-    // womanPath + "top/5.jpg",
-    // womanPath + "top/6.jpg",
-  ];
-  const womanPants = [
-    womanPath + "pants/1.jpg",
-    womanPath + "pants/2.jpg",
-    womanPath + "pants/3.jpg",
-    // womanPath + "pants/4.jpg",
-    // womanPath + "pants/5.jpg",
-    // womanPath + "pants/6.jpg",
-  ];
-  const womanShoes = [
-    womanPath + "shoes/1.jpg",
-    womanPath + "shoes/2.jpg",
-    womanPath + "shoes/3.jpg",
-    // womanPath + "shoes/4.jpg",
-    // womanPath + "shoes/5.jpg",
-    // womanPath + "shoes/6.jpg",
-  ];
-  const womanOnepiece = [
-    womanPath + "onepiece/1.jpg",
-    womanPath + "onepiece/2.jpg",
-    womanPath + "onepiece/3.jpg",
-    // womanPath + "onepiece/4.jpg",
-    // womanPath + "onepiece/5.jpg",
-  ];
+  // 기본 경로 설정
+  const basePath = process.env.PUBLIC_URL + "/clothes/";
+
+  // 이미지 경로를 생성하는 함수
+  const generatePaths = (category, type, count) => {
+    return Array.from(
+      { length: count },
+      (_, i) => `${basePath}${category}/${type}/${i + 1}.jpg`
+    );
+  };
+
+  // 남성 의류 경로 배열 생성
+  const manTops = generatePaths("man", "top", 16);
+  const manPants = generatePaths("man", "pants", 7);
+  const manShoes = generatePaths("man", "shoes", 12);
+
+  // 여성 의류 경로 배열 생성
+  const womanTops = generatePaths("woman", "top", 17);
+  const womanPants = generatePaths("woman", "pants", 18);
+  const womanShoes = generatePaths("woman", "shoes", 13);
+  const womanOnepiece = generatePaths("woman", "onepiece", 12);
   const [clothesData, setClothesData] = useState({
     manTopClothes: manTops,
     manPantsClothes: manPants,
@@ -111,7 +84,7 @@ const Swiper = ({ shoes, clothNum, OnePiece }) => {
 
   //옷 데이터 저장
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
 
   // 파이썬에서 데이터를 가져오는 비동기 함수
@@ -137,21 +110,12 @@ const Swiper = ({ shoes, clothNum, OnePiece }) => {
         womanOnepiece: responses.data.womanOnepiece.map((data) => data.img_src),
       });
     } catch (error) {
-      setClothesData({
-        manTops,
-        manPants,
-        manShoes,
-        womanTops,
-        womanPants,
-        womanShoes,
-        womanOnepiece,
-      });
       console.error("Error fetching data:", error);
     }
   };
   const handleSwipe = (direction) => {
     const items = clothGroups[clothNum];
-    const itemsLength = items.length > 1 ? items.length - 1 : 0; // 마지막 아이템의 인덱스
+    const itemsLength = items.length;
 
     if (direction === "left") {
       setCurrentIndex((prevIndex) =>
@@ -167,17 +131,19 @@ const Swiper = ({ shoes, clothNum, OnePiece }) => {
     ({ down, movement: [mx], direction: [dx], cancel, last }) => {
       setDragging(down);
       if (last) {
-        if (Math.abs(mx) > 50) {
+        if (Math.abs(mx) > 16) {
           // threshold 값을 적절히 조정
           handleSwipe(dx > 0 ? "left" : "right"); // 방향을 반대로 처리
         }
         cancel();
       }
     },
-    { threshold: 50 } // 드래그 민감도를 적절히 조정
+    { threshold: 20 } // 드래그 민감도를 적절히 조정
   );
   const items = clothGroups[clothNum];
-
+  const handleTouchMove = (event) => {
+    event.stopPropagation();
+  };
   // 무한 루프를 위해 아이템 길이가 1보다 큰 경우에만 마지막 아이템을 맨 앞에 추가하여 순환
   const infiniteItems = items.length > 1 ? [...items, items[0]] : items;
 
@@ -185,8 +151,9 @@ const Swiper = ({ shoes, clothNum, OnePiece }) => {
     <MenuContainer shoes={shoes} clothNum={clothNum} OnePiece={OnePiece}>
       <MenuWrapper
         {...bind()}
+        onTouchMove={handleTouchMove}
         style={{
-          transform: `translateX(${-100 * currentIndex}%)`,
+          transform: `translateX(${-50 * currentIndex}%)`,
           transition: dragging ? "none" : "transform 0.5s ease-in-out",
           cursor: dragging ? "grabbing" : "grab",
         }}

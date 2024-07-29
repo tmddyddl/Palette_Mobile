@@ -25,7 +25,7 @@ const GuestbookTitle = styled.div`
 `;
 const GuestbookGrayBar = styled.div`
   margin-top: 1.5vh;
-  width: 90%;
+  width: 92%;
   height: 0.5%;
   background-color: #b0b0b0;
   display: flex;
@@ -34,7 +34,7 @@ const GuestbookGrayBar = styled.div`
 `;
 const GuestbookWriteArea = styled.div`
   margin-top: 2vh;
-  width: 400px;
+  width: 87vw;
   height: 9vh;
   border: 1px solid black;
   background-color: #eccdb0;
@@ -75,7 +75,7 @@ const GuestbookWriteButton = styled.div`
   }
 `;
 const GuestbookList = styled.div`
-  width: 420px;
+  width: 92vw;
   margin-right: 13px;
   height: 55%;
   overflow-y: auto; /* 세로 스크롤 추가 */
@@ -85,7 +85,7 @@ const GuestbookArea = styled.div`
   margin-top: 2vh;
   margin-left: 16px;
   background-color: #eccdb0;
-  width: 400px;
+  width: 85vw;
   height: 10vh;
   border: 1px solid black;
 `;
@@ -129,7 +129,7 @@ const GuestbookDate = styled.div`
 const GuestbookDelete = styled.div`
   width: 15%;
   height: 100%;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   display: flex;
   justify-content: center;

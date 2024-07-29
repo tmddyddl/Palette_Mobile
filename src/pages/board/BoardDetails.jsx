@@ -211,12 +211,12 @@ const BoardDetails = ({ url, clearUrl }) => {
 
   // 게시글 수정하기
   const updateBoardContentsAxios = async (idValue) => {
-    navigate(`/${coupleName}/board-update`, { state: idValue });
+    navigate(`/board-update`, { state: idValue });
   };
   // 게시글 삭제하기
   const deleteBoardContentsAxios = async (idValue) => {
     const res = await BoardAxios.deleteBoard(idValue);
-    navigate(`/${coupleName}/board-guestbook`);
+    navigate(`/board-guestbook`);
 
     console.log(res);
   };
@@ -245,7 +245,7 @@ const BoardDetails = ({ url, clearUrl }) => {
                   </>
                 )}
                 <Link
-                  to={`/${coupleName}/board-guestbook`}
+                  to={`/board-guestbook`}
                   style={{ textDecoration: "none" }}
                 >
                   <BackToGuestbook>돌아가기</BackToGuestbook>

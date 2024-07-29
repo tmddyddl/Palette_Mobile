@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const SavedCoursesContainer = styled.div`
-    display: flex;
-    width: 95%;
-    flex-direction: column;
-    /* max-width: 100%; */
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 43%;
+  display: flex;
+  width: 95%;
+  flex-direction: column;
+  /* max-width: 100%; */
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 43%;
 
   h3 {
     margin: 10px;

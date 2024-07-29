@@ -81,7 +81,7 @@ const BookTheme2 = styled.div`
 `;
 
 const BookSign2 = styled.div`
-  width: 425px;
+  width: 95vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -90,7 +90,7 @@ const BookSign2 = styled.div`
 `;
 
 const BoardSide = styled.div`
-  width: 425px;
+  width: 95vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -297,7 +297,7 @@ const GuestBoardGuestbook = ({ url, clearUrl }) => {
   };
 
   const handleNameClick = (id) => {
-    navigate(`/${coupleName}/board-details/${id}`);
+    navigate(`/board-details/${id}`);
   };
 
   const handleClick = (pageNumber) => {
@@ -348,10 +348,7 @@ const GuestBoardGuestbook = ({ url, clearUrl }) => {
               <CoupleImg />
             </CoupleDiv>
             <BoardGrayBar />
-            <Link
-              to={`/${coupleName}/board-write`}
-              style={{ textDecoration: "none" }}
-            >
+            <Link to={`/board-write`} style={{ textDecoration: "none" }}>
               {isMyHome && <BoardPost>새 게시물 작성</BoardPost>}
             </Link>
             <BoardTable>

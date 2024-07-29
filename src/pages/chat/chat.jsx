@@ -52,7 +52,7 @@ const BookWrapper = styled.div`
 `;
 
 const Chatpage = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 75vh;
   border: 1px solid #696969;
   border-radius: 5px;
@@ -118,7 +118,7 @@ const TopText = styled.div`
 `;
 
 const TopName = styled.div`
-  width: 30%;
+  width: 40%;
   height: 95%;
   padding-right: 2%;
   display: flex;
@@ -274,7 +274,7 @@ const InputText = styled.div`
   }
 `;
 
-const ChatMain = ({url, clearUrl}) => {
+const ChatMain = ({ url, clearUrl }) => {
   const [isPlusMenuVisible, setPlusMenuVisible] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(chatBack7);
   const [isTemaMenuVisible, setTemaMenuVisible] = useState(false);
@@ -542,7 +542,12 @@ const ChatMain = ({url, clearUrl}) => {
     const coupleName = sessionStorage.getItem("coupleName");
     coupleNickNameAxois(coupleName);
   }, []);
-
+  const clickTopBtn = () => {
+    navigate(-1);
+  };
+  const truncateRoomName = (name) => {
+    return name.length > 10 ? name.slice(0, 10) + "..." : name;
+  };
   return (
     <GlobalStyle>
       <Modal
@@ -556,30 +561,30 @@ const ChatMain = ({url, clearUrl}) => {
         {modalContent}
       </Modal>
       <BookWrapper>
-      <Chatpage backgroundImage={backgroundImage}>
-        <TopDiv>
-          <TopText>{coupleNickName[1]} 의 채팅</TopText>
-          <TopName>채팅방 : {roomName}</TopName>
-          {/* <TopBtn onClick={clickTopBtn}>나가기</TopBtn> */}
-        </TopDiv>
-        <Textarea
-          ref={chatContainerRef}
-          isPlusMenuVisible={
-            isPlusMenuVisible || isTemaMenuVisible || isEmojiMenuVisible
-          }
-        >
-          {/* <MessageBox> */}
-          {chatList.map((chat, index) => (
-            <Message key={index} isSender={chat.sender === sender}>
-              {chat.chatData}
-              {chat.message}
-            </Message>
-          ))}
-          {/* </MessageBox> */}
-        </Textarea>
-        <PlusMenu isVisible={isPlusMenuVisible}>
-          <PlusMenuBtn>
-            {/* <label htmlFor="imageInput">
+        <Chatpage backgroundImage={backgroundImage}>
+          <TopDiv>
+            <TopText>{coupleNickName[1]} 의 채팅</TopText>
+            <TopName>채팅방 : {truncateRoomName(roomName)}</TopName>
+            {/* <TopBtn onClick={clickTopBtn}>나가기</TopBtn> */}
+          </TopDiv>
+          <Textarea
+            ref={chatContainerRef}
+            isPlusMenuVisible={
+              isPlusMenuVisible || isTemaMenuVisible || isEmojiMenuVisible
+            }
+          >
+            {/* <MessageBox> */}
+            {chatList.map((chat, index) => (
+              <Message key={index} isSender={chat.sender === sender}>
+                {chat.chatData}
+                {chat.message}
+              </Message>
+            ))}
+            {/* </MessageBox> */}
+          </Textarea>
+          <PlusMenu isVisible={isPlusMenuVisible}>
+            <PlusMenuBtn>
+              {/* <label htmlFor="imageInput">
               <FaRegImage className="icon 이미지사진" />
             </label>
             <input
@@ -589,95 +594,98 @@ const ChatMain = ({url, clearUrl}) => {
               style={{ display: "none" }}
               onChange={handleImageUpload}
             /> */}
-            <TbWallpaper className="icon 톱니" onClick={toggleTemaMenu} />
-            <MdEmojiEmotions className="icon 임티" onClick={toggleEmojiMenu} />
-            <MdDelete className="방삭제" onClick={handleRoomDeleteClick} />
-          </PlusMenuBtn>
-        </PlusMenu>
-        <TemaMenu isVisible={isTemaMenuVisible}>
-          <img
-            src={chatBack1}
-            alt="테마1"
-            onClick={() => handleTemaClick(chatBack1)}
-          />
-          <img
-            src={chatBack2}
-            alt="테마2"
-            onClick={() => handleTemaClick(chatBack2)}
-          />
-          <img
-            src={chatBack3}
-            alt="테마3"
-            onClick={() => handleTemaClick(chatBack3)}
-          />
-          <img
-            src={chatBack4}
-            alt="테마3"
-            onClick={() => handleTemaClick(chatBack4)}
-          />
-          <img
-            src={chatBack5}
-            alt="테마4"
-            onClick={() => handleTemaClick(chatBack5)}
-          />
-          <img
-            src={chatBack6}
-            alt="테마3"
-            onClick={() => handleTemaClick(chatBack6)}
-          />
-          <img
-            src={chatBack7}
-            alt="테마3"
-            onClick={() => handleTemaClick(chatBack7)}
-          />
-          <img
-            src={chatBack8}
-            alt="테마3"
-            onClick={() => handleTemaClick(chatBack8)}
-          />
-          <img
-            src={chatBack9}
-            alt="테마9"
-            onClick={() => handleTemaClick(chatBack9)}
-          />
-        </TemaMenu>
-        <EmojiMenu isVisible={isEmojiMenuVisible}>
-          <EmojiIcon>
-            <BsEmojiHeartEyes />
-          </EmojiIcon>
-          <EmojiIcon>
-            <BsEmojiAngry></BsEmojiAngry>
-          </EmojiIcon>
-          <EmojiIcon>
-            <BsEmojiAstonished />
-          </EmojiIcon>
-          <EmojiIcon>
-            <BsEmojiFrown />
-          </EmojiIcon>
-          <EmojiIcon>
-            <BsEmojiDizzy />
-          </EmojiIcon>
-          <EmojiIcon>
-            <BsEmojiExpressionless />
-          </EmojiIcon>
-          <EmojiIcon>
-            <BsEmojiGrin />
-          </EmojiIcon>
-        </EmojiMenu>
-        <InputText>
-          <button className="plus" onClick={togglePlusMenu}></button>
-          <input
-            type="text"
-            value={inputMsg}
-            onChange={onChangMsg}
-            placeholder="메시지를 입력하세요"
-            onKeyUp={onEnterKey}
-          />
-          <button className="send" onClick={onClickMsgSend}>
-            <FaHeart className="heart" />
-          </button>
-        </InputText>
-      </Chatpage>
+              <TbWallpaper className="icon 톱니" onClick={toggleTemaMenu} />
+              <MdEmojiEmotions
+                className="icon 임티"
+                onClick={toggleEmojiMenu}
+              />
+              <MdDelete className="방삭제" onClick={handleRoomDeleteClick} />
+            </PlusMenuBtn>
+          </PlusMenu>
+          <TemaMenu isVisible={isTemaMenuVisible}>
+            <img
+              src={chatBack1}
+              alt="테마1"
+              onClick={() => handleTemaClick(chatBack1)}
+            />
+            <img
+              src={chatBack2}
+              alt="테마2"
+              onClick={() => handleTemaClick(chatBack2)}
+            />
+            <img
+              src={chatBack3}
+              alt="테마3"
+              onClick={() => handleTemaClick(chatBack3)}
+            />
+            <img
+              src={chatBack4}
+              alt="테마3"
+              onClick={() => handleTemaClick(chatBack4)}
+            />
+            <img
+              src={chatBack5}
+              alt="테마4"
+              onClick={() => handleTemaClick(chatBack5)}
+            />
+            <img
+              src={chatBack6}
+              alt="테마3"
+              onClick={() => handleTemaClick(chatBack6)}
+            />
+            <img
+              src={chatBack7}
+              alt="테마3"
+              onClick={() => handleTemaClick(chatBack7)}
+            />
+            <img
+              src={chatBack8}
+              alt="테마3"
+              onClick={() => handleTemaClick(chatBack8)}
+            />
+            <img
+              src={chatBack9}
+              alt="테마9"
+              onClick={() => handleTemaClick(chatBack9)}
+            />
+          </TemaMenu>
+          <EmojiMenu isVisible={isEmojiMenuVisible}>
+            <EmojiIcon>
+              <BsEmojiHeartEyes />
+            </EmojiIcon>
+            <EmojiIcon>
+              <BsEmojiAngry></BsEmojiAngry>
+            </EmojiIcon>
+            <EmojiIcon>
+              <BsEmojiAstonished />
+            </EmojiIcon>
+            <EmojiIcon>
+              <BsEmojiFrown />
+            </EmojiIcon>
+            <EmojiIcon>
+              <BsEmojiDizzy />
+            </EmojiIcon>
+            <EmojiIcon>
+              <BsEmojiExpressionless />
+            </EmojiIcon>
+            <EmojiIcon>
+              <BsEmojiGrin />
+            </EmojiIcon>
+          </EmojiMenu>
+          <InputText>
+            <button className="plus" onClick={togglePlusMenu}></button>
+            <input
+              type="text"
+              value={inputMsg}
+              onChange={onChangMsg}
+              placeholder="메시지를 입력하세요"
+              onKeyUp={onEnterKey}
+            />
+            <button className="send" onClick={onClickMsgSend}>
+              <FaHeart className="heart" />
+            </button>
+          </InputText>
+        </Chatpage>
       </BookWrapper>
     </GlobalStyle>
   );

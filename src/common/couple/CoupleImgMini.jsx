@@ -7,7 +7,7 @@ import MainAxios from "../../axiosapi/MainAxios";
 import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
 
 const Contain = styled.div`
-  width: 300px; // 150px / 1920 * 100
+  width: 60vw; // 150px / 1920 * 100
   height: 15vh; // 150px / 953 * 100
   display: flex;
   justify-content: center;

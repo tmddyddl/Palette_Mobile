@@ -166,7 +166,7 @@ const BookMark = () => {
       if (isCouple) {
         // 커플일 경우
         if (await isCoupleAxios(email)) {
-          navigator(`/${coupleName}/dateplanner`);
+          navigator(`/dateplanner`);
         } else {
           // 모달
           soloModal();
@@ -187,7 +187,7 @@ const BookMark = () => {
 
   const OpenBoardOnClickHandler = async () => {
     if ((await isCoupleAxios(email)) === true) {
-      navigator(`/${coupleName}/board-guestbook`);
+      navigator(`/board-guestbook`);
     } else {
       // 모달
       soloModal();

@@ -287,7 +287,7 @@ const BoardUpdate = ({ url, clearUrl }) => {
       const response = await BoardAxios.updateBoard(idValue, boardReqDto);
 
       console.log("서버 응답 데이터:", response);
-      navigate(`/${coupleName}/board-guestbook`); // 리다이렉트
+      navigate(`/board-guestbook`); // 리다이렉트
     } catch (error) {
       console.error(
         "게시글 생성 실패:",
@@ -313,7 +313,7 @@ const BoardUpdate = ({ url, clearUrl }) => {
           <WriteSide>
             <WriteTop>
               <Link
-                to={`/${coupleName}/board-guestbook`}
+                to={`/board-guestbook`}
                 style={{ textDecoration: "none" }}
               >
                 <BackToGuestbook>돌아가기</BackToGuestbook>

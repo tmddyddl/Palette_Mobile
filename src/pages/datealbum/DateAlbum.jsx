@@ -97,9 +97,8 @@ const BookTheme2 = styled.div`
   border-radius: 5px;
 `;
 
-
 const BookSign = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -108,7 +107,7 @@ const BookSign = styled.div`
 `;
 
 const BookSign2 = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -143,7 +142,7 @@ const ImgWrapper = styled.div`
   height: 50%;
   background-color: ${(props) => props.bgColor};
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   padding-right: 1%;
   margin-top: 20%;
   display: flex;
@@ -157,6 +156,7 @@ const ImgWrapper2 = styled.div`
   padding-left: 0.4%;
   margin-top: 6%;
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 `;
 const Img = styled.img`
@@ -166,8 +166,8 @@ const Img = styled.img`
 `;
 
 const ImgBox = styled.div`
-  width: 120px;
-  height: 17vh;
+  width: 26vw;
+  height: 12vh;
   background-color: gray;
   display: flex;
   align-items: center;
@@ -353,7 +353,6 @@ const DateAlbum = ({ url, clearUrl }) => {
     slidesToScroll: 1,
     swipeToSlide: true,
   };
-
 
   const pageMove = useCallback(() => {
     setAnimate(true);
@@ -644,18 +643,18 @@ const DateAlbum = ({ url, clearUrl }) => {
   return (
     <BookContainer>
       <StyledSlider {...settings}>
-      <BookTheme>
-        <BookSign>
-          <CoupleDiv>
-            <CoupleImg />
-          </CoupleDiv>
-          <AlbumTitle>♥ {coupleName} 의 앨범 ♥</AlbumTitle>
-          <TitleLine onClick={handleTemaChange}>테마 변경</TitleLine>
-          <ImgWrapper bgColor={bgColor}>{renderImageBoxes(0, 6)}</ImgWrapper>
-        </BookSign>
-      </BookTheme>
-      <BookTheme2>
-        <BookSign2>
+        <BookTheme>
+          <BookSign>
+            <CoupleDiv>
+              <CoupleImg />
+            </CoupleDiv>
+            <AlbumTitle>♥ {coupleName} 의 앨범 ♥</AlbumTitle>
+            <TitleLine onClick={handleTemaChange}>테마 변경</TitleLine>
+            <ImgWrapper bgColor={bgColor}>{renderImageBoxes(0, 6)}</ImgWrapper>
+          </BookSign>
+        </BookTheme>
+        <BookTheme2>
+          <BookSign2>
             <AddButton>
               <AddTema onClick={handleTemaPopup}>테마 추가</AddTema>
               <AddAlbum onClick={handlePagePopup}>앨범 추가</AddAlbum>
@@ -668,9 +667,9 @@ const DateAlbum = ({ url, clearUrl }) => {
               )}
               {renderImageBoxes(6, 15)}
             </ImgWrapper2>
-        </BookSign2>
-      </BookTheme2>
-      </StyledSlider>      
+          </BookSign2>
+        </BookTheme2>
+      </StyledSlider>
       {/* <InputDetailDiv>
         <NextButton onClick={handleNext}>▶▶</NextButton>
       </InputDetailDiv> */}

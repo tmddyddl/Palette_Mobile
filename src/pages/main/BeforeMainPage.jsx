@@ -1,10 +1,24 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import theme3_1 from "../../img/background/theme/new-1.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+// 책 넘기는 애니메이션을 위한 keyframes
+const turnPageUp = keyframes`
+  0% {
+    transform: perspective(1000px) rotateX(0deg);
+    transform-origin: top;
+  }
+  30% {
+    transform: perspective(2200px) rotateX(30deg);
+    transform-origin: top;
+  } 
+  100% {
+    transform: perspective(1000px) rotateX(270deg);
+    transform-origin: top;
+  }
+`;
 const BookTheme = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 75vh;
   border-radius: 5px;
   border: 1px solid #696969;
@@ -25,6 +39,7 @@ const PaletteText = styled.div`
 const BookSign = styled.div`
   width: 100%;
   height: 100%;
+  border: 1px solid #696969;
   background-image: url(${theme3_1});
   background-size: cover;
   background-position: center;
@@ -34,9 +49,7 @@ const BookSign = styled.div`
   ${({ animate }) =>
     animate &&
     css`
-      opacity: 0;
-      transition: opacity 0.9s;
-      transition-delay: 0.6s;
+      animation: ${turnPageUp} 1.8s forwards;
     `}
 `;
 

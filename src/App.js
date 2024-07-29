@@ -58,13 +58,13 @@ function App() {
           <Route element={<NotePaper notlogin={true} />}>
             <Route path="/not-login" element={<NotLogin />} />
           </Route>
-          <Route element={<LoginLetter notLoginState={false}/>}>
+          <Route element={<LoginLetter />}>
             <Route path="/login-page" element={<LoginPage />} />
             <Route path="/signup-page" element={<SignupPage />} />
             <Route path="/find-email" element={<FindEmail />} />
             <Route path="/find-password" element={<FindPassword />} />
           </Route>
-          <Route element={<LoginLetter notLoginState={true}/>}>
+          <Route element={<LoginLetter />}>
             <Route path="/main-page" element={<MainPage />} />
             <Route path="/:coupleName/main-page" element={<AfterMain />} />
             <Route path="/date-clothes" element={<DateClothes />} />
@@ -98,7 +98,7 @@ function App() {
             />
           </Route>
 
-          <Route element={<LoginLetter notLoginState={true} />}>
+          <Route element={<LoginLetter modify={true} />}>
             <Route path="/modify" element={<Modify />} />
             <Route path="/withdrawal" element={<Withdrawal />} />
           </Route>

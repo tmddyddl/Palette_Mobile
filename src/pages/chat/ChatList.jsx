@@ -57,10 +57,13 @@ const turnPageLeft = keyframes`
 const BookWrapper = styled.div`
   width: 100%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const BookTheme = styled.div`
-  width: 100%;
+  width: 92vw;
   height: 75vh;
   border: 1px solid #696969;
   background-color: #fff9f2;
@@ -85,7 +88,7 @@ const BookTheme2 = styled.div`
 `;
 
 const BookSign2 = styled.div`
-  width: 425px;
+  width: 92vw;
   height: 100%;
   display: flex;
   justify-content: end;
@@ -94,7 +97,7 @@ const BookSign2 = styled.div`
 `;
 
 const ChatListContainer = styled.div`
-  width: 425px;
+  width: 100%;
   height: 100%;
   padding: 22px;
   border-radius: 5px;

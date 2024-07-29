@@ -130,7 +130,7 @@ const BoardGrayBar = styled.div`
 const BoardPost = styled.div`
   margin-top: 2vh;
   width: 230px;
-  margin-left: 65%;
+  margin-left: 65vw;
   height: 1vh;
   font-size: 11px;
   font-weight: 600;

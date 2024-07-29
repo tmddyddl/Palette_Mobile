@@ -270,7 +270,7 @@ const BookMark = () => {
         데이트룩
       </BookMarks>
       <BookMarks imageurl={theme6} onClick={OpenDateplannerOnClickHandler}>
-        데이트코스
+        데이트 코스
       </BookMarks>
       <BookMarks imageurl={boardBg} onClick={OpenBoardOnClickHandler}>
         게시판

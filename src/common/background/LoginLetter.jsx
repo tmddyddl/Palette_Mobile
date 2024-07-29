@@ -41,11 +41,11 @@ const LogoDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const LoginLetter = ({ modify }) => {
+const LoginLetter = ({notLoginState }) => {
   const [coupleName, setCoupleName] = useState();
   const email = sessionStorage.getItem("email");
   useEffect(() => {
-    if (modify) {
+    if (notLoginState) {
       coupleNameAxios();
     }
   }, []);
@@ -56,12 +56,12 @@ const LoginLetter = ({ modify }) => {
   return (
     <Contain>
       <LogoDiv>
-        {!modify && (
+        {!notLoginState && (
           <Link to="/">
             <Logo />
           </Link>
         )}
-        {modify && (
+        {notLoginState && (
           <Link to={`/${coupleName}/main-page`}>
             <Logo />
           </Link>

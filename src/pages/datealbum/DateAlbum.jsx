@@ -175,6 +175,7 @@ const ImgBox = styled.div`
   margin-left: 1%;
   position: relative;
   overflow: hidden;
+
   &:hover {
     cursor: ${({ hasImage }) => (hasImage ? "pointer" : "default")};
     ${({ hasImage }) =>
@@ -185,8 +186,10 @@ const ImgBox = styled.div`
       }
       &::after {
         content: "삭제하기";
+        width:40px;
         position: absolute;
         bottom: 5px;
+  text-align: center;
         left: 50%;
         transform: translateX(-50%);
         background: rgba(0, 0, 0, 0.6);

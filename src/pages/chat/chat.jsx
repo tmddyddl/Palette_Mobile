@@ -76,11 +76,6 @@ const Textarea = styled.div`
       : "calc(68vh - 4.5vh); border-bottom: 1px solid gray;"}; // 기본 화면 크기
 `;
 
-// const MessageBox = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-// `;
 
 const Message = styled.div`
   max-width: 60%;
@@ -160,14 +155,14 @@ const PlusMenu = styled.div`
 `;
 
 const TemaMenu = styled.div`
-  width: 90%;
+  width: 100%;
   height: 30%;
   background-color: #a5a5a5b7;
   display: ${(props) => (props.isVisible ? "flex" : "none")};
   position: absolute;
   bottom: 10%;
   img {
-    width: 6vw;
+    width: 11%;
     height: auto;
     max-height: 100%;
     cursor: pointer;
@@ -439,14 +434,7 @@ const ChatMain = ({ url, clearUrl }) => {
       console.log("테스트" + data.message);
       setChatList((prevItems) => [...prevItems, data]);
     };
-    // 컴포넌트 언마운트 시 웹소켓 연결 닫기
-    // return () => {
-    //   if (ws.current) {
-    //     ws.current.close();
-    //     ws.current = null;
-    //     setSocketConnected(false);
-    //   }
-    // };
+  
   }, [socketConnected, roomId, sender, receiver]);
 
   // 화면 하단으로 자동 스크롤

@@ -24,7 +24,7 @@ const Popup = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 95%;
-  height: 200px;
+  height: 300px;
   background: white;
   display: flex;
   flex-direction: column;
@@ -61,7 +61,7 @@ const PopBoard = styled.div`
 `;
 
 const BuyTema = styled.div`
-  width: 33%;
+  width: 50%;
   height: 90%;
   font-size: 1rem;
   margin-bottom: 0.5rem;

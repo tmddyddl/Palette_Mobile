@@ -198,12 +198,13 @@ const Message = styled.div`
   color: ${({ isCorrect }) => (isCorrect ? "green" : "red")};
 `;
 const TermsForm = styled.div`
-  width: 400px;
-  height: 56%;
+  width: 43%;
+  height: 50%;
   border-radius: 10px;
   padding: 20px;
   position: absolute;
   overflow-y: auto;
+
 `;
 // focus-in-expand 애니메이션 정의
 const focusInExpand = keyframes`
@@ -217,7 +218,7 @@ const focusInExpand = keyframes`
 }
 `;
 const TermImgDiv = styled.div`
-  width: 1200px;
+  width: 800px;
   height: 100%;
   display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
   justify-content: center;
@@ -285,14 +286,14 @@ const TermsScrollableContent = styled.div`
   overflow-y: auto;
 `;
 const IsMyCoupleEmailImg = styled.div`
-  width: 350px;
-  height: 350px;
+  width: 400px;
+  height: 400px;
   display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
   justify-content: center;
   align-items: center;
   position: absolute;
   background-image: url(${coupleMatching});
-  background-size: contain;
+  background-size:100%;
   background-repeat: no-repeat;
   background-position: center;
   animation: ${focusInExpand} 0.5s ease-in-out; /* 애니메이션 적용 */

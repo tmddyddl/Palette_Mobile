@@ -79,7 +79,7 @@ const BookTheme2 = styled.div`
 `;
 
 const BookSign = styled.div`
-  width: 92vw;
+  width: 93vw;
   height: 100%;
   display: flex;
   justify-content: end;

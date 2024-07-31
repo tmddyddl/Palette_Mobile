@@ -42,7 +42,7 @@ const TitleDiv = styled.div`
 `;
 
 const TitleLeft = styled.div`
-  width: 50%;
+  width: 60%;
   height: 100%;
   padding-left: 1%;
   font-size: 1.1rem;
@@ -60,7 +60,7 @@ const TitleRight = styled.div`
   justify-content: flex-end;
 `;
 const TitleRightBtn = styled.div`
-  width: 22%;
+  width: 28%;
   height: 80%;
   background-color: #eccdaf;
   font-size: 0.7rem;

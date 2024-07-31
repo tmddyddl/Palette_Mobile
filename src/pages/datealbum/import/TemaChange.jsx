@@ -144,6 +144,7 @@ const TemaInfo = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  
 `;
 const TemaOne = styled.div`
   width: 100%;
@@ -152,6 +153,7 @@ const TemaOne = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 `;
 
 const CloseDiv = styled.div`

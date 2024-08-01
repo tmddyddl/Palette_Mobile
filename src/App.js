@@ -22,14 +22,7 @@ import BoardDetails from "./pages/board/BoardDetails";
 import BoardWrite from "./pages/board/BoardWrite";
 import Modify from "./pages/setting/Modify";
 import Withdrawal from "./pages/setting/Withdrawal";
-import PalettePage from "./pages/palette/PalettePage";
 import GuestBoardGuestbook from "./pages/board/GuestBoardGuestbook";
-import PaletteHelp from "./pages/palette/PaletteHelp";
-import PaletteNotice from "./pages/palette/PaletteNotice";
-import PaletteNoticeDetails from "./pages/palette/PaletteNoticeDetails";
-import PaletteInquiry from "./pages/palette/PaletteInquiry";
-import PaletteAd from "./pages/palette/PaletteAd";
-import PaletteCustomer from "./pages/palette/PaletteCustomer";
 import ChatList from "./pages/chat/ChatList";
 import ChatRoomCreate from "./pages/chat/ChatRoomCreate";
 import BoardUpdate from "./pages/board/BoardUpdate";
@@ -44,18 +37,8 @@ function App() {
       <PaletteStyle />
       <Router>
         <Routes>
-          <Route path="/" element={<PalettePage />} />
-          <Route path="/customer" element={<PaletteCustomer />} />
-          <Route path="/customer/help" element={<PaletteHelp />} />
-          <Route path="/customer/inquiry" element={<PaletteInquiry />} />
-          <Route path="/customer/ad" element={<PaletteAd />} />
-          <Route path="/customer/notice" element={<PaletteNotice />} />
-          <Route
-            path="/customer/notice/:id"
-            element={<PaletteNoticeDetails />}
-          />
           <Route element={<NotePaper notlogin={true} />}>
-            <Route path="/not-login" element={<NotLogin />} />
+            <Route path="/" element={<NotLogin />} />
           </Route>
           <Route element={<LoginLetter notLoginState={false} />}>
             <Route path="/login-page" element={<LoginPage />} />
@@ -87,7 +70,7 @@ function App() {
             />
           </Route>
 
-          <Route element={<LoginLetter notLoginState={false} />}>
+          <Route element={<LoginLetter notLoginState={true} />}>
             <Route path="/modify" element={<Modify />} />
             <Route path="/withdrawal" element={<Withdrawal />} />
           </Route>

@@ -93,9 +93,9 @@ const BoardSide = styled.div`
   width: 92vw;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: first baseline;
+  align-items: center;
 `;
 
 const BoardTitle = styled.div`
@@ -111,7 +111,7 @@ const BoardTitle = styled.div`
 
 const CoupleDiv = styled.div`
   width: 100%;
-  height: 18%;
+  height: 23%;
   display: flex;
   justify-content: center;
   align-items: center;

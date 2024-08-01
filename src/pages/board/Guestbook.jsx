@@ -255,6 +255,9 @@ const Guestbook = ({}) => {
       setIsMyHome(true);
     }
   };
+  const truncateContents = (name) => {
+    return name.length > 20 ? name.slice(0, 20) + "..." : name;
+  };
   return (
     <GuestbookSide>
       <GuestbookTitle>방명록</GuestbookTitle>
@@ -298,7 +301,7 @@ const Guestbook = ({}) => {
               <GuestWriteImg
                 style={{ backgroundImage: `url(${entry.imgUrl})` }}
               />
-              <GuestbookMain>{entry.contents}</GuestbookMain>
+              <GuestbookMain>{truncateContents(entry.contents)}</GuestbookMain>
             </GuestbookBody>
           </GuestbookArea>
         ))}

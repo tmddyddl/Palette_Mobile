@@ -155,7 +155,8 @@ const BookSign2 = styled.div`
 
 const ImgWrapper2 = styled.div`
   width: 90%;
-  height: 79%;
+  height: 70%;
+
   background-color: ${(props) => props.bgColor};
   padding-left: 0.4%;
   margin-top: 6%;
@@ -313,9 +314,9 @@ const Img = styled.img`
 `;
 
 const PlusButton = styled.button`
-  width: 40px;
-  height: 4vh;
-  font-size: 25px;
+  width: 25px;
+  height: 25px;
+  font-size: 15px;
   border-radius: 50px;
   background-color: #ccc;
   border: none;

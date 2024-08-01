@@ -15,7 +15,7 @@ const Contain = styled.div`
 `;
 const IconDiv = styled.div`
   width: 100%;
-  height: 25%;
+  height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,13 +74,13 @@ const InputDetailDiv = styled.div`
 
   & > .InputClass {
     width: 53%;
-    height: auto;
+    height: 70%;
     border-radius: 0.521vw;
     border: none;
     background-color: rgba(0, 0, 0, 0.3);
     outline: none;
     box-shadow: 0 6px 9px rgba(0, 0, 0, 0.3);
-    padding-left: 0.521vw;
+    padding-left: 5px;
     font-size: 14px;
     font-weight: 600;
   }
@@ -88,19 +88,19 @@ const InputDetailDiv = styled.div`
 
 const RegisterationInput1 = styled.input`
   width: 22%;
-  height: auto;
+  height: 70%;
   border-radius: 0.521vw;
   border: none;
   background-color: rgba(0, 0, 0, 0.3);
   outline: none;
   box-shadow: 0 6px 9px rgba(0, 0, 0, 0.3);
-  padding-left: 0.521vw;
+  padding-left: 5px;
   font-size: 14px;
   font-weight: 600;
 `;
 const Text = styled.div`
   width: 3%;
-  height: auto;
+  height: 70%;
   font-weight: bolder;
   font-size: 15px;
   color: #b44a4a;
@@ -110,13 +110,13 @@ const Text = styled.div`
 `;
 const RegisterationInput2 = styled.input`
   width: 7%;
-  height: auto;
+  height: 70%;
   border-radius: 0.521vw;
   border: none;
   background-color: rgba(0, 0, 0, 0.3);
   outline: none;
   box-shadow: 0 6px 9px rgba(0, 0, 0, 0.3);
-  padding-left: 0.208vw;
+  padding-left: 5px;
   font-size: 14px;
   font-weight: 600;
 `;

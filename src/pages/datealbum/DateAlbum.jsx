@@ -1,6 +1,4 @@
 import styled, { keyframes, css } from "styled-components";
-import theme8 from "../../img/background/theme/8.jpg";
-import theme8_1 from "../../img/background/theme/8-1.jpg";
 import CoupleImg from "../../common/couple/CoupleImgMini";
 import AlbumAxiosApi from "../../axiosapi/AlbumAxiosApi";
 import PagePop from "./import/PagePop";
@@ -77,8 +75,7 @@ const BookTheme = styled.div`
   height: 75vh;
   border: 1px solid #696969;
   background-color: #fff9f2;
-  /* background-image: url(${theme8});
-  background-size: cover; */
+
   display: flex;
   justify-content: space-between;
   border-radius: 5px;
@@ -89,8 +86,6 @@ const BookTheme2 = styled.div`
   height: 75vh;
   border: 1px solid #696969;
   background-color: #fff9f2;
-  /* background-image: url(${theme8_1});
-  background-size: cover; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,9 +96,9 @@ const BookSign = styled.div`
   width: 92vw;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: first baseline;
+  align-items: center;
 `;
 
 const BookSign2 = styled.div`
@@ -151,7 +146,7 @@ const ImgWrapper = styled.div`
 
 const ImgWrapper2 = styled.div`
   width: 90%;
-  height: 79%;
+  height: 70%;
   background-color: ${(props) => props.bgColor};
   padding-left: 0.4%;
   margin-top: 6%;
@@ -296,32 +291,21 @@ const TitleLine = styled.div`
 
 const CoupleDiv = styled.div`
   width: 90%;
-  height: 22%;
-  padding-right: 12%;
+  height: 28%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 `;
 const PlusButton = styled.button`
-  width: 50px;
-  height: 5vh;
-  font-size: 30px;
+  width: 25px;
+  height: 25px;
+  font-size: 15px;
   border-radius: 50px;
   background-color: #ccc;
   border: none;
   cursor: pointer;
   &:hover {
     background-color: #aaa;
-  }
-  @media screen and (max-width: 1200px) {
-    width: 40px;
-    height: 4vh;
-    font-size: 25px;
-  }
-  @media screen and (max-width: 768px) {
-    width: 25px;
-    height: 2.5vh;
-    font-size: 15px;
   }
 `;
 

@@ -112,8 +112,10 @@ const BookSign2 = styled.div`
 const Title = styled.div`
   width: 100%;
   height: 4%;
-  margin-top: 1%;
-  font-size: 24px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 500;
+  margin-top: 2%;
+  font-size: 22px;
   display: flex;
   align-items: center;
   position: relative;
@@ -126,11 +128,12 @@ const OptionDiv = styled.div`
   margin: 0% 2% 2% 0%;
   display: flex;
   justify-content: end;
+  align-items: end;
 `;
 
 const Options = styled.div`
   width: 85px;
-  height: 74%;
+  height: 80%;
   background-color: #fff;
   font-size: 12px;
   font-weight: 600;
@@ -190,7 +193,7 @@ const StroeButton = styled.div`
 const ClothesFormContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 225px;
+  width: 200px;
   height: 75%;
   align-items: end;
 `;

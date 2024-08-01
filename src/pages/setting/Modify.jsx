@@ -57,7 +57,7 @@ const InputDetailDiv = styled.div`
     background-color: rgba(0, 0, 0, 0.3);
     outline: none;
     box-shadow: 0 6px 9px rgba(0, 0, 0, 0.3);
-    padding-left: 0.521vw;
+    padding-left: 5px;    
     font-size: 14px;
     font-weight: 600;
   }

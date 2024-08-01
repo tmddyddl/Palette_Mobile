@@ -16,8 +16,8 @@ moment.locale("ko");
 // Styled components
 const StyledCalendarWrapper = styled.div`
   width: 92vw;
-  height: 97%;
-  display: flex;
+  height: 100%;
+  display: ${({ pageMoveState }) => (pageMoveState ? "none" : "flex")};
   justify-content: center;
   position: relative;
 
@@ -114,7 +114,7 @@ const StyledCalendarWrapper = styled.div`
   /* 일 날짜 간격 */
   .react-calendar__tile {
     top: 6px;
-    padding: 11px 0vw 11px;
+    padding: 3vh 0vw 3vh;
     position: relative;
   }
 
@@ -160,8 +160,8 @@ const StyledBorder = styled.div`
 
 const StyledDate = styled.div`
   position: absolute;
+  top: 2.5%;
   right: 7%;
-  top: 4%;
   background-color: #fff9f2;
   color: black;
   width: 10%;
@@ -201,15 +201,7 @@ const BookContainer = styled.div`
 
 const BookTheme = styled.div`
   width: 100%;
-  height: 37.5vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const BookTheme2 = styled.div`
-  width: 100%;
-  height: 37.5vh;
+  height: 65vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -217,10 +209,10 @@ const BookTheme2 = styled.div`
 
 const BoardWrapper = styled.div`
   width: 92vw;
-  height: 97%;
+  height: 100%;
   background-color: #fff9f2;
   border-radius: 0.5rem;
-  display: flex;
+  display: ${({ pageMoveState }) => (pageMoveState ? "flex" : "none")};
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -439,7 +431,23 @@ const RemoveButton = styled.button`
     background-color: #fff9f2;
   }
 `;
-
+const PageBack = styled.div`
+  width: 20%;
+  height: 90%;
+  font-size: 12px;
+  font-weight: 600;
+  padding-top: 1%;
+  display: flex;
+  margin-right: 3%;
+  align-items: flex-end;
+  justify-content: flex-end;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+  &:hover {
+    color: #000;
+    font-size: 13px;
+  }
+`;
 const DateDiary = () => {
   const today = new Date();
   //디데이 상태저장
@@ -456,7 +464,8 @@ const DateDiary = () => {
   const [isEditMode, setIsEditMode] = useState(false); // 읽기/쓰기 모드 상태
   const [anniversaries, setAnniversaries] = useState({}); // 기념일 상태
   const [memos, setMemos] = useState({});
-
+  // 화면 전환
+  const [pageMoveState, setPageMoveState] = useState(false);
   const attendDay = [""];
   const anniversaryDate = moment(today).subtract(saveDday, "days"); // 31일 전의 날짜를 anniversaryDate로 설정
   const SdaysTogether = moment(selectedDate).diff(anniversaryDate, "days") + 1;
@@ -570,6 +579,8 @@ const DateDiary = () => {
     setCurrentMemo(memoData.memo || "");
     setEvents(memoData.events || [{ isEvent: false, eventText: "" }]);
     setAnniversaryText(anniversaries[moment(date).format("YYYY-MM-DD")] || "");
+    //화면전환
+    setPageMoveState(true);
   };
 
   const handleMemoChange = (e) => {
@@ -705,7 +716,7 @@ const DateDiary = () => {
   return (
     <BookContainer>
       <BookTheme>
-        <StyledCalendarWrapper>
+        <StyledCalendarWrapper pageMoveState={pageMoveState}>
           <StyledCalendar
             value={date}
             onChange={handleDateChange}
@@ -759,14 +770,19 @@ const DateDiary = () => {
           />
           <StyledDate onClick={handleTodayClick}>오늘</StyledDate>
         </StyledCalendarWrapper>
-      </BookTheme>
-      <BookTheme2>
-        <BoardWrapper>
+        <BoardWrapper pageMoveState={pageMoveState}>
           <DiaryBoard>
             <LineUp>
               <PicDate>
                 {selectedDate ? moment(selectedDate).format("YYYY.MM.DD") : ""}
               </PicDate>
+              <PageBack
+                onClick={() => {
+                  setPageMoveState(false);
+                }}
+              >
+                돌아가기
+              </PageBack>
               {moment(selectedDate).isSame(anniversaryDate, "day") ? (
                 <DdayWe>우리 처음 만난 날</DdayWe>
               ) : moment(selectedDate).isBefore(anniversaryDate) ? (
@@ -854,7 +870,7 @@ const DateDiary = () => {
             </LineDown>
           </DiaryBoard>
         </BoardWrapper>
-      </BookTheme2>
+      </BookTheme>
     </BookContainer>
   );
 };

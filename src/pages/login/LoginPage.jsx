@@ -164,7 +164,7 @@ const ButtonDiv = styled.div`
 
 const LoginButton = styled.div`
   width: 180px;
-  height: 50px;
+  height: calc(10px + 5vh);
   background-color: ${({ isActive }) =>
     isActive ? "rgba(0, 0, 0, 0.4)" : "rgba(0, 0, 0, 0.1)"};
   border-radius: 25px;
@@ -227,6 +227,9 @@ const NaverIcon = styled.div`
   cursor: pointer;
 `;
 
+const HiddenKakaoLogin = styled(KakaoLogin)`
+  display: none;
+`;
 const KakaoIcon = styled.div`
   width: 100%;
   height: 100%;
@@ -341,66 +344,10 @@ const LoginPage = () => {
     }
   };
   //카카오 간편 로그인 이벤트 함수
-  const kakaoLoginOnClick = () => {
-    // window.Kakao.Auth.login({
-    //   success: function (obj) {
-    //     console.log(obj);
-    //     getInfo(obj.access_token);
-    //   },
-    //   fail: function (err) {
-    //     console.error(err);
-    //   },
-    // });
-    // const getInfo = async (token) => {
-    //   try {
-    //     //토큰으로 정보 받아오는 부분
-    //     const tokendata = await SimpleLoginAxios.tokenInfo(token);
-    //     console.log("token정보 :" + tokendata.data);
-    //     const propsToPass = {
-    //       kakaoProp: true,
-    //       kakaoEmail: tokendata.data.kakao_account.email,
-    //       kakaopwd: tokendata.data.id,
-    //       kakaoName: tokendata.data.properties.nickname,
-    //       kakaoImgUrl: tokendata.data.properties.profile_image,
-    //     };
-    //     //이메일 존재하는지 확인하는 부분
-    //     const emailExist = await LoginAxios.emailIsExist(
-    //       tokendata.data.kakao_account.email
-    //     );
-    //     //이메일 존재하면 화면이동
-    //     if (emailExist.data) {
-    //       //엑세스 토큰 작업
-    //       const email = tokendata.data.kakao_account.email;
-    //       const pwd = tokendata.data.id;
-    //       const ImgUrl = tokendata.data.properties.profile_image;
-    //       const response = await LoginAxios.login(email, pwd);
-    //       console.log("accessToken : ", response.data.accessToken);
-    //       console.log("refreshToken : ", response.data.refreshToken);
-    //       Common.setAccessToken(response.data.accessToken);
-    //       Common.setRefreshToken(response.data.refreshToken);
-    //       sessionStorage.setItem("email", email);
-    //       sessionStorage.setItem("kakaoImgUrl", ImgUrl);
-    //       //이메일로 커플이름 찾는 비동기 함수
-    //       const coupleNameSearchAxios = async (email) => {
-    //         console.log(email);
-    //         const resCoupleName = await LoginAxios.emailToCoupleNameSearch(
-    //           email
-    //         );
-    //         console.log(resCoupleName.data);
-    //         // `coupleName`을 `sessionStorage`에 저장합니다.
-    //         sessionStorage.setItem("coupleName", resCoupleName.data);
-    //         navigate(`/main-page`);
-    //       };
-    //       coupleNameSearchAxios(email);
-    //     }
-    //     //아니면 여기로 이동
-    //     else {
-    //       navigate("/signup-page", { state: propsToPass });
-    //     }
-    //   } catch (error) {
-    //     console.error("Error during Kakao login:", error);
-    //   }
-    // };
+  const kakaoLoginOnClick = (onClick) => {
+    return () => {
+      if (onClick) onClick();
+    };
   };
   const codeModalOkBtnHandler = () => {
     closeModal();
@@ -440,7 +387,7 @@ const LoginPage = () => {
       console.log("kakaoImgUrl:" + propsToPass.kakaoImgUrl);
       //이메일 존재하는지 확인하는 부분
       const emailExist = await LoginAxios.emailIsExist(propsToPass.kakaoEmail);
-      console.log("kakaoImgUrl:" + propsToPass.kakaoEmail);
+      console.log("emailExist:" + emailExist.data);
 
       //이메일 존재하면 화면이동
       if (emailExist.data) {
@@ -468,7 +415,9 @@ const LoginPage = () => {
       }
       //아니면 여기로 이동
       else {
-        navigate("/signup-page", { state: propsToPass });
+        console.log("else문까지는 와요!");
+        console.log("Navigating to sign-up page with props:", propsToPass);
+        navigate(`/signup-page`, { state: propsToPass });
       }
     } catch (error) {
       console.error("Error during Kakao login:", error);
@@ -557,13 +506,15 @@ const LoginPage = () => {
             <NaverIcon onClick={() => modalClickHandler()} />
           </CircleSide>
           <CircleSide>
-            {/* <KakaoIcon onClick={kakaoLoginOnClick} /> */}
-            <KakaoLogin
+            <HiddenKakaoLogin
               token={kakaoKey}
               onSuccess={responseKakao}
               onFail={onFail}
               throughTalk={false} // 추가된 옵션: 브라우저를 통해 로그인을 시도
               getProfile={true}
+              render={({ onClick }) => (
+                <KakaoIcon onClick={kakaoLoginOnClick(onClick)} />
+              )}
             />
           </CircleSide>
         </div>

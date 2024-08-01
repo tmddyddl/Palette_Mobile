@@ -49,11 +49,10 @@ const DetailsSide = styled.div`
 
 const EditBackContainer = styled.div`
   width: 100%;
-  margin-top: 2vh;
-  margin-left: 50%;
-  height: 1vh;
+  height: 8%;
   display: flex;
-  justify-content: ${(isMyHome) => isMyHome && "center"};
+  justify-content: end;
+  align-items: center;
 `;
 
 const EditPost = styled.div`

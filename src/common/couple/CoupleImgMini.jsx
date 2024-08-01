@@ -15,13 +15,15 @@ const Contain = styled.div`
 `;
 
 const ProfileDiv = styled.div`
+  width: 100%;
+  height: 100%;
   width: flex;
   height: flex;
 `;
 
 const ProfileImgDiv = styled.div`
-  width: 110px;
-  height: 8vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,8 +47,8 @@ const Heart = styled.div`
 `;
 
 const Profile = styled.div`
-  width: 60px;
-  height: 6vh;
+  width: 50%;
+  height: 50%;
   background-image: ${({ imageurl }) => `url(${imageurl})`};
   background-size: cover;
   background-position: center;

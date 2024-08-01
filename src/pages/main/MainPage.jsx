@@ -97,7 +97,15 @@ const BookSign2 = styled.div`
 
 const CoupleDiv = styled.div`
   width: 100%;
-  height: 30%;
+  height: 24%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+const PaletteDiv = styled.div`
+  width: 100%;
+  height: 27%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -187,7 +195,7 @@ const Recents = styled.div`
 `;
 const Ddays = styled.div`
   width: 80px;
-  height: 1.9vh;
+  height: 2.5vh;
   font-size: 9px;
   display: flex;
   align-items: center;
@@ -213,7 +221,7 @@ const PictureDiv = styled.div`
 `;
 const VisitDiv = styled.div`
   width: 64%;
-  height: 2.5vh;
+  height: 100%;
   border-radius: 10px;
   border: 1px solid #fff;
   & > .visitDiv {
@@ -221,8 +229,8 @@ const VisitDiv = styled.div`
   }
   & > div > input {
     width: 89%;
-    aspect-ratio: 150/20;
-    padding-left: 1.083vw;
+    height: 25px;
+    padding-left: 5px;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     outline: none;
@@ -232,8 +240,8 @@ const VisitDiv = styled.div`
   }
 `;
 const VisitList = styled.div`
-  width: 100%;
-  height: 2.4vh;
+  width: 65%;
+  height: calc(40px + 1vh);
   font-size: 12px;
   border-radius: 10px;
   margin-top: 1%;
@@ -254,13 +262,13 @@ const VisitList = styled.div`
 `;
 const VisitSearchBtn = styled(GiArchiveResearch)`
   width: 11%;
-  height: auto;
+  height: 25px;
   color: green;
   cursor: pointer;
 `;
 const SettingDiv = styled.div`
   width: 100%;
-  height: 10%;
+  height: 3%;
   padding: 0% 4%;
   display: flex;
   justify-content: end;
@@ -377,15 +385,16 @@ const CloseBtn = styled(IoMdCloseCircleOutline)`
 `;
 const VisitContainer = styled.div`
   width: 90%;
-  height: 7vh;
+  height: 80vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: end;
   align-items: center;
 `;
 const BackMyHome = styled.div`
   width: 100px;
-  aspect-ratio: 3.5/1;
-  font-size: 12px;
+  aspect-ratio: 4.5/1;
+  font-size: 11px;
   font-weight: 700;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 10px;
@@ -469,7 +478,7 @@ const MainPage = () => {
         " coupleName",
         coupleName
       );
-      navigate(`/${coupleName}/main-page`);
+      navigate(`/main-page`);
       setIsMyHome(false);
       setSearchTerm(""); // 필요시 네비게이션 후 검색어 초기화
     }
@@ -547,11 +556,11 @@ const MainPage = () => {
       emailValue
     );
     sessionStorage.setItem("coupleName", myCoupleNameData.data);
-    navigate(`/${myCoupleNameData.data}/main-page`);
+    navigate(`/main-page`);
   };
   //게시물 보기로 이동
   const boardOnClickHandler = (id) => {
-    navigate(`/${coupleName}/board-details/${id}`);
+    navigate(`/board-details/${id}`);
   };
 
   // 방문자 검색 글자수
@@ -567,15 +576,21 @@ const MainPage = () => {
       <StyledSlider {...settings}>
         <BookTheme>
           <BookSign>
-            <CoupleDiv>
+            <PaletteDiv>
               <PaletteBanner />
-            </CoupleDiv>
+            </PaletteDiv>
             <CoupleDiv>
               <CoupleImg isMyHome={isMyHome} />
             </CoupleDiv>
             <CoupleDiv>
               <CoupleDday isMyHome={isMyHome} />
               <VisitContainer>
+                {/* 여기 검색단어 맵으로 뿌려줄 예정 */}
+                {searchCoupleList.map((couple, index) => (
+                  <VisitList key={index} onClick={() => handleSearch(index)}>
+                    {truncateText(couple, 15)}
+                  </VisitList>
+                ))}
                 <VisitDiv>
                   <div className="visitDiv">
                     <input
@@ -587,12 +602,6 @@ const MainPage = () => {
                     />
                     <VisitSearchBtn />
                   </div>
-                  {/* 여기 검색단어 맵으로 뿌려줄 예정 */}
-                  {searchCoupleList.map((couple, index) => (
-                    <VisitList key={index} onClick={() => handleSearch(index)}>
-                      {truncateText(couple, 15)}
-                    </VisitList>
-                  ))}
                 </VisitDiv>
               </VisitContainer>
             </CoupleDiv>

@@ -64,24 +64,16 @@ const Profile = styled.div`
 
 const Text = styled.div`
   width: ${({ clothes }) => (clothes ? "20%" : "8vw")};
-  height: ${({ clothes }) => (clothes ? "7vh" : "7.345vh")};
-  background-color: ${({ clothes }) => (clothes ? "white" : "none")};
+  height: ${({ clothes }) => (clothes ? "5vh" : "7.345vh")};
+  background-color: ${({ clothes }) => (clothes ? "#feeee8" : "none")};
   border-radius: ${({ clothes }) => (clothes ? "8px" : "none")};
-  border: ${({ clothes }) => (clothes ? "1px solid gray" : "none")};
+  border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: ${({ clothes }) => (clothes ? "#000" : "#fff")};
-  @media screen and (max-width: 1200px) {
-    height: ${({ clothes }) => (clothes ? "2.5vh" : "7.345vh")};
-    font-size: 14px;
-  }
-  @media screen and (max-width: 768px) {
-    height: ${({ clothes }) => (clothes ? "2vh" : "7.345vh")};
-    font-size: 12px;
-  }
 `;
 
 const ProfileCover = styled.div`

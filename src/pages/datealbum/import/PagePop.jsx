@@ -44,7 +44,7 @@ const PopTitle = styled.div`
   justify-content: center;
 `;
 const PageTitleleft = styled.div`
-  width: 50%;
+  width: 40%;
   height: 100%;
   font-size: 1.1rem;
   display: flex;
@@ -52,7 +52,7 @@ const PageTitleleft = styled.div`
   justify-content: flex-start;
 `;
 const PageTitleRight = styled.div`
-  width: 50%;
+  width: 60%;
   height: 100%;
   padding-right: 1%;
   font-size: 0.8rem;

@@ -37,7 +37,7 @@ const InputDetailDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 29%;
+    width: 23%;
     height: auto;
     font-size: 14px;
     color: #b44a4a;
@@ -46,14 +46,14 @@ const InputDetailDiv = styled.div`
   }
   & > .InputCode,
   & > .InputEmail {
-    width: 50%;
+    width: 55%;
     height: 100%;
     border-radius: 0.521vw;
     border: none;
     background-color: rgba(0, 0, 0, 0.3);
     outline: none;
     box-shadow: 0 6px 9px rgba(0, 0, 0, 0.3);
-    padding-left: 0.521vw;
+    padding-left: 5px;
     font-size: 14px;
     font-weight: 600;
   }
@@ -62,19 +62,19 @@ const Empty = styled.div`
   width: 2%;
 `;
 const EmailAthouized = styled.div`
-  width: 12%;
+  width: 15%;
   border-radius: 10px;
   border: none;
   background-color: ${({ isActive }) =>
     isActive ? "rgba(0, 0, 0, 0.3)" : "rgba(0, 0, 0, 0.2)"};
   outline: none;
   box-shadow: 0 6px 9px rgba(0, 0, 0, 0.3);
-  padding-left: 0.208vw;
+  padding-left: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#ccc")};
+  color: ${({ isActive }) => (isActive ? "#b44a4a" : "#fe7a7a")};
   font-weight: 700;
   cursor: ${({ isActive }) => (isActive ? "pointer" : "not-allowed")};
   &:hover {

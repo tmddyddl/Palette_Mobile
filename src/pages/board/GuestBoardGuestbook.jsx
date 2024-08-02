@@ -376,14 +376,14 @@ const GuestBoardGuestbook = ({ url, clearUrl }) => {
                 onClick={() => handleClick(currentPage - 1)}
                 disabled={currentPage === 1}
               >
-                &lt; 이전
+                &lt;
               </BoardPaginationButton>
               {getPaginationButtons()}
               <BoardPaginationButton
                 onClick={() => handleClick(currentPage + 1)}
                 disabled={currentPage === totalPages}
               >
-                다음 &gt;
+                &gt;
               </BoardPaginationButton>
             </BoardPaginationContainer>
           </BoardSide>

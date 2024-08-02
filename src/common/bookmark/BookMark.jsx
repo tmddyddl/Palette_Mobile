@@ -11,25 +11,57 @@ import Modal from "../../pages/datediary/Modal";
 import soleModalImg from "../../img/mainImg/솔로잠금.gif";
 import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
 import visitLcck from "../../img/mainImg/방문자 잠금.gif";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { GrGallery } from "react-icons/gr";
+import { FaMapLocationDot } from "react-icons/fa6";
+import { IoShirtSharp } from "react-icons/io5";
+import { GiNotebook } from "react-icons/gi";
 
 const BookMarkDiv = styled.div`
   width: 95%;
   display: flex;
   justify-content: space-between;
 `;
-const BookMarks = styled.div`
+const Calender = styled(FaRegCalendarAlt)`
   width: 18%;
   height: 6vh;
-  border: 1px solid #696969;
-  border-radius: 10px;
-  font-size: 0.8rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff9f2;
   cursor: pointer;
+  &:hover {
+    background-color: #e9d2ca;
+  }
 `;
-
+const Gallery = styled(GrGallery)`
+  width: 18%;
+  height: 6vh;
+  cursor: pointer;
+  &:hover {
+    background-color: #e9d2ca;
+  }
+`;
+const DateClothes = styled(IoShirtSharp)`
+  width: 18%;
+  height: 6vh;
+  cursor: pointer;
+  &:hover {
+    background-color: #e9d2ca;
+  }
+`;
+const DatePlanner = styled(FaMapLocationDot)`
+  width: 18%;
+  height: 6vh;
+  cursor: pointer;
+  &:hover {
+    background-color: #e9d2ca;
+  }
+`;
+const Board = styled(GiNotebook)`
+  width: 18%;
+  height: 6vh;
+  cursor: pointer;
+  &:hover {
+    background-color: #e9d2ca;
+  }
+`;
 const BookMark = () => {
   const coupleName = sessionStorage.getItem("coupleName");
   const navigator = useNavigate();
@@ -260,21 +292,13 @@ const BookMark = () => {
           {modalContent}
         </Modal>
       )}
-      <BookMarks imageurl={theme3} onClick={OpenDiaryOnClickHandler}>
-        다이어리
-      </BookMarks>
-      <BookMarks imageurl={theme8} onClick={OpenAlbumOnClickHandler}>
-        갤러리
-      </BookMarks>
-      <BookMarks imageurl={clothesBg} onClick={OpenClothesOnClickHandler}>
-        데이트룩
-      </BookMarks>
-      <BookMarks imageurl={theme6} onClick={OpenDateplannerOnClickHandler}>
+      <Calender onClick={OpenDiaryOnClickHandler}>다이어리</Calender>
+      <Gallery onClick={OpenAlbumOnClickHandler}>갤러리</Gallery>
+      <DateClothes onClick={OpenClothesOnClickHandler}>데이트룩</DateClothes>
+      <DatePlanner onClick={OpenDateplannerOnClickHandler}>
         데이트 코스
-      </BookMarks>
-      <BookMarks imageurl={boardBg} onClick={OpenBoardOnClickHandler}>
-        게시판
-      </BookMarks>
+      </DatePlanner>
+      <Board onClick={OpenBoardOnClickHandler}>게시판</Board>
     </BookMarkDiv>
   );
 };

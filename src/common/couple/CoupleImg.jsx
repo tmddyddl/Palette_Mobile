@@ -23,18 +23,17 @@ const Contain = styled.div`
 `;
 const ProfileDiv = styled.div`
   width: ${({ clothes }) => (clothes ? "100%" : "211px")};
-  height: ${({ clothes }) => (clothes ? "100%" : "23vh")};
+  height: ${({ clothes }) => (clothes ? "100%" : "20vh")};
   display: ${({ clothes }) => (clothes ? "flex" : "block")};
   flex-direction: ${({ direction }) => (direction ? "row-reverse" : "row")};
   justify-content: space-evenly;
 `;
 const ProfileImgDiv = styled.div`
   width: 100%;
-  height: 100%;
+  height: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  /* background-color: ${({ clothes }) => (clothes ? "lightblue" : "none")}; */
 `;
 const HeartDiv = styled.div`
   width: 8vw;
@@ -61,19 +60,28 @@ const Profile = styled.div`
   border-radius: 50%;
   position: absolute;
 `;
-
+const TextDiv = styled.div`
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const Text = styled.div`
-  width: ${({ clothes }) => (clothes ? "20%" : "8vw")};
-  height: ${({ clothes }) => (clothes ? "5vh" : "7.345vh")};
+  width: ${({ clothes }) => (clothes ? "20%" : "100%")};
+  height: ${({ clothes }) => (clothes ? "5vh" : "6.345vh")};
   background-color: ${({ clothes }) => (clothes ? "#feeee8" : "none")};
   border-radius: ${({ clothes }) => (clothes ? "8px" : "none")};
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
-  color: ${({ clothes }) => (clothes ? "#000" : "#fff")};
+  color: #000;
+  @media screen and (max-height: 575px) {
+    display: none;
+  }
 `;
 
 const ProfileCover = styled.div`
@@ -251,7 +259,9 @@ const CoupleImg = ({ clothes = false, isMyHome }) => {
             )}
           </Profile>
         </ProfileImgDiv>
-        <Text clothes={clothes}>{coupleNickName[0] || "알콩"}</Text>
+        <TextDiv>
+          <Text clothes={clothes}>{coupleNickName[0] || "알콩"}</Text>
+        </TextDiv>
       </ProfileDiv>
       <HeartDiv>
         <Heart />
@@ -260,7 +270,9 @@ const CoupleImg = ({ clothes = false, isMyHome }) => {
         <ProfileImgDiv clothes={clothes}>
           <Profile imageurl={IsExistImg[1] ? myDarling : womanprofile} />
         </ProfileImgDiv>
-        <Text clothes={clothes}>{coupleNickName[1] || "달콩"}</Text>
+        <TextDiv>
+          <Text clothes={clothes}>{coupleNickName[1] || "달콩"}</Text>
+        </TextDiv>
       </ProfileDiv>
     </Contain>
   );

@@ -20,29 +20,18 @@ const Dday = styled.div`
 `;
 
 const DdayWhen = styled.div`
-  width: 25%;
-  font-size: 19px;
-  @media screen and (max-width: 1200px) {
-    font-size: 15px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-  }
+  width: 30%;
+  font-size: 15px;
+  display: flex;
+  justify-content: end;
+  margin-right: 2px;
 `;
 
 const DdayInputForm = styled.input`
   width: 50%;
-  height: 3vh;
+  height: 25px;
   background-color: rgba(0, 0, 0, 0.4);
   color: #fff;
-  @media screen and (max-width: 1200px) {
-    font-size: 15px;
-    height: 2.5vh;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 12px;
-    height: 1.8vh;
-  }
 `;
 
 const DdayInputDiv = styled.div`
@@ -79,12 +68,6 @@ const DDayInputBtn = styled.div`
   &:hover {
     background-color: rgba(0, 0, 0, 0.6);
   }
-  @media screen and (max-width: 1200px) {
-    height: 2.5vh;
-  }
-  @media screen and (max-width: 768px) {
-    height: 1.8vh;
-  }
 `;
 
 const ButtonDiv = styled.div`
@@ -100,6 +83,7 @@ const CoupleDday = ({ isMyHome }) => {
   const [isDday, setIsDday] = useState();
   const [saveCoupleName, setSaveCoupleName] = useState("");
   const [saveDday, setSaveDday] = useState("");
+  const [isCoupleName, setIsCoupleName] = useState(false);
   const email = sessionStorage.getItem("email");
 
   useEffect(() => {
@@ -110,15 +94,13 @@ const CoupleDday = ({ isMyHome }) => {
   const dDayAxois = async () => {
     // 이메일로 커플 이름 search
     const loginCoupleName = await MemberAxiosApi.renderCoupleNameSearch(email);
-    console.log("5. 이메일로 커플 이름 서치", loginCoupleName);
+    console.log("5. 이메일로 커플 이름 서치", loginCoupleName.data);
     setSaveCoupleName(loginCoupleName.data);
     console.log("6. 커플 이름 저장", loginCoupleName.data);
-
     // Dday 값 가져오기
     console.log("이거이거" + coupleName);
     const resDday = await MainAxios.searchDday(coupleName);
     console.log("7. 디데이 가져오기", resDday.data);
-
     if (resDday.data !== "") {
       setIsDday(true);
       setSaveDday(resDday.data);
@@ -128,7 +110,6 @@ const CoupleDday = ({ isMyHome }) => {
       console.log("else 실행");
     }
   };
-
   // 디데이 입력
   const dDayInputOnchangeHandler = (e) => {
     const selectedDate = new Date(e.target.value);

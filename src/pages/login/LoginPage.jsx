@@ -123,7 +123,7 @@ const SigninDiv = styled.div`
 const Signin = styled.div`
   width: 70px;
   height: 100%;
-  font-size: 4vw;
+  font-size: 15px;
   color: #b44a4a;
   font-weight: bolder;
   display: flex;
@@ -138,7 +138,7 @@ const ForgotId = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4vw;
+  font-size: 15px;
   color: #b44a4a;
   cursor: pointer;
 `;
@@ -149,7 +149,7 @@ const ForgotPassword = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4vw;
+  font-size: 15px;
   color: #b44a4a;
   cursor: pointer;
 `;

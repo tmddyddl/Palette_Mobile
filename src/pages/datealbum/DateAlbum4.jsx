@@ -1,8 +1,8 @@
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 import theme8 from "../../img/background/theme/8.jpg";
 import theme8_1 from "../../img/background/theme/8-1.jpg";
 import { useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import PagePop from "./import/PagePop";
 import TemaPop from "./import/TemaPop";
@@ -45,36 +45,6 @@ const StyledSlider = styled(Slider)`
     .slick-active button:before {
       color: black;
     }
-  }
-`;
-
-const turnPageRight = keyframes`
-  0% {
-    transform: perspective(1000px) rotateY(0deg);
-    transform-origin: right;
-  }
-  30% {
-    transform: perspective(1600px) rotateY(25deg);
-    transform-origin: right;
-  } 
-  100% {
-    transform: perspective(1000px) rotateY(180deg);
-    transform-origin: right;
-  }
-`;
-
-const turnPageLeft = keyframes`
-  0% {
-    transform: perspective(1000px) rotateY(0deg);
-    transform-origin: left;
-  }
-  30% {
-    transform: perspective(1600px) rotateY(-25deg);
-    transform-origin: left;
-  } 
-  100% {
-    transform: perspective(1000px) rotateY(-180deg);
-    transform-origin: left;
   }
 `;
 
@@ -125,33 +95,6 @@ const BookSign2 = styled.div`
   align-items: center;
   flex-direction: column;
 `;
-
-// const ContentWrapper = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   ${({ animate }) =>
-//     animate &&
-//     css`
-//       opacity: 0;
-//       transition: opacity 1.4s;
-//     `}
-// `;
-// const ContentWrapper2 = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   ${({ animate2 }) =>
-//     animate2 &&
-//     css`
-//       opacity: 0;
-//       transition: opacity 1.4s;
-//     `}
-// `;
 
 const ImgWrapper2 = styled.div`
   width: 90%;
@@ -218,24 +161,16 @@ const DdayCoupleName = styled.div`
 `;
 
 const NextButton = styled.div`
-  width: 20px;
+  width: 40px;
   height: 20px;
-  font-weight: 600;
-  font-size: 22px;
-  margin-left: 20px;
-  color: white;
-  cursor: pointer;
-  &:hover {
-    color: #ff6750;
-  }
-`;
-const BackButton = styled.div`
-  width: 20px;
-  height: 20px;
-  font-weight: 600;
-  font-size: 22px;
-  margin-right: 30px;
-  color: white;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 0.6rem;
+  background-color: darkgray;
+  color: #272727;
   cursor: pointer;
   &:hover {
     color: #ff6750;
@@ -243,20 +178,12 @@ const BackButton = styled.div`
 `;
 
 const InputDetailDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 20px;
-  height: 20px;
-  margin-top: 30%;
-`;
-const InputDetailDiv2 = styled.div`
-  width: 20px;
+  width: 90%;
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30%;
+  margin-top: 2%;
 `;
 
 const AddButton = styled.div`
@@ -323,10 +250,7 @@ const PlusButton = styled.button`
   }
 `;
 
-const DateAlbum4 = ({ url, clearUrl }) => {
-  const [animate, setAnimate] = useState(false);
-  const [animate2, setAnimate2] = useState(false);
-
+const DateAlbum4 = () => {
   const [images, setImages] = useState(Array(18).fill(null));
   const [bgColor, setBgColor] = useState("#eccdaf");
   const navigate = useNavigate();
@@ -347,24 +271,6 @@ const DateAlbum4 = ({ url, clearUrl }) => {
   const [isDday, setIsDday] = useState();
   //디데이 값 저장
   const [saveDday, setSaveDday] = useState("");
-
-  const pageMove = useCallback(() => {
-    setAnimate2(true);
-    setTimeout(() => {
-      navigate(url);
-      clearUrl();
-    }, 1800);
-  }, [navigate, url, clearUrl]);
-
-  useEffect(() => {
-    if (url) {
-      if (window.location.pathname !== url) {
-        pageMove();
-      } else {
-        clearUrl();
-      }
-    }
-  }, [url, pageMove, clearUrl]);
 
   //코드 모달 확인
   const codeModalOkBtnHandler = () => {
@@ -397,10 +303,7 @@ const DateAlbum4 = ({ url, clearUrl }) => {
     try {
       const amount = await isAmountAxios(); // async 호출의 결과를 변수에 저장
       if (amount !== null && amount / 1000 >= 4) {
-        setAnimate2(true);
-        setTimeout(() => {
-          navigate("/date-album5");
-        }, 1800);
+        navigate("/date-album5");
       } else {
         // 모달
         nextModal();
@@ -431,10 +334,7 @@ const DateAlbum4 = ({ url, clearUrl }) => {
   };
 
   const handleBack = () => {
-    setAnimate(true);
-    setTimeout(() => {
-      navigate("/date-album3");
-    }, 1800);
+    navigate("/date-album3");
   };
 
   // DDay 바꾸는 함수
@@ -649,7 +549,7 @@ const DateAlbum4 = ({ url, clearUrl }) => {
     <BookContainer>
       <StyledSlider {...settings}>
         <BookTheme>
-          <BookSign animate={animate}>
+          <BookSign>
             <AddButton>
               <TitleLine onClick={handleTemaChange}>테마 변경</TitleLine>
             </AddButton>
@@ -661,10 +561,13 @@ const DateAlbum4 = ({ url, clearUrl }) => {
               )}
               {renderImageBoxes(0, 9)}
             </ImgWrapper2>
+            <InputDetailDiv>
+              <NextButton onClick={handleBack}>이전</NextButton>
+            </InputDetailDiv>
           </BookSign>
         </BookTheme>
         <BookTheme2>
-          <BookSign2 animate2={animate2}>
+          <BookSign2>
             <AddButton>
               <AddTema onClick={handleTemaPopup}>테마 추가</AddTema>
               <AddAlbum onClick={handlePagePopup}>앨범 추가</AddAlbum>
@@ -673,6 +576,9 @@ const DateAlbum4 = ({ url, clearUrl }) => {
               <DdayCoupleName>♥ {coupleName} ♥</DdayCoupleName>
               {renderImageBoxes(9, 18)}
             </ImgWrapper2>
+            <InputDetailDiv>
+              <NextButton onClick={handleNext}>다음</NextButton>
+            </InputDetailDiv>
           </BookSign2>
         </BookTheme2>
       </StyledSlider>

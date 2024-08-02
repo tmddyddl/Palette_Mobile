@@ -1,10 +1,10 @@
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 import CoupleImg from "../../common/couple/CoupleImgMini";
 import AlbumAxiosApi from "../../axiosapi/AlbumAxiosApi";
 import PagePop from "./import/PagePop";
 import TemaPop from "./import/TemaPop";
 import { useNavigate } from "react-router-dom";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import deleteImageFromFirebase from "../../firebase/firebaseAlbumDel";
 import Modal from "../../pages/datediary/Modal";
 import modalImg from "../../img/commonImg/전구 아이콘.gif";
@@ -47,21 +47,6 @@ const StyledSlider = styled(Slider)`
     .slick-active button:before {
       color: black;
     }
-  }
-`;
-
-const turnPageLeft = keyframes`
-  0% {
-    transform: perspective(1000px) rotateY(0deg);
-    transform-origin: left;
-  }
-  30% {
-    transform: perspective(1600px) rotateY(-25deg);
-    transform-origin: left;
-  } 
-  100% {
-    transform: perspective(1000px) rotateY(-180deg);
-    transform-origin: left;
   }
 `;
 
@@ -111,12 +96,16 @@ const BookSign2 = styled.div`
 `;
 
 const NextButton = styled.div`
-  width: 20px;
+  width: 40px;
   height: 20px;
-  font-weight: 600;
-  font-size: 22px;
-  margin-left: 20px;
-  color: #ffffff;
+  font-size: 0.7rem;
+  border: none;
+  border-radius: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: darkgray;
+  color: #272727;
   cursor: pointer;
   &:hover {
     color: #ff6750;
@@ -124,12 +113,12 @@ const NextButton = styled.div`
 `;
 
 const InputDetailDiv = styled.div`
-  width: 20px;
+  width: 90%;
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30%;
+  margin-top: 2%;
 `;
 
 const ImgWrapper = styled.div`
@@ -309,8 +298,7 @@ const PlusButton = styled.button`
   }
 `;
 
-const DateAlbum = ({ url, clearUrl }) => {
-  const [animate, setAnimate] = useState(false);
+const DateAlbum = () => {
   const [imgBoxes, setImgBoxes] = useState(
     Array(15)
       .fill(null)
@@ -340,24 +328,6 @@ const DateAlbum = ({ url, clearUrl }) => {
     slidesToScroll: 1,
     swipeToSlide: true,
   };
-
-  const pageMove = useCallback(() => {
-    setAnimate(true);
-    setTimeout(() => {
-      navigate(url);
-      clearUrl();
-    }, 1800);
-  }, [navigate, url, clearUrl]);
-
-  useEffect(() => {
-    if (url) {
-      if (window.location.pathname !== url) {
-        pageMove();
-      } else {
-        clearUrl();
-      }
-    }
-  }, [url, pageMove, clearUrl]);
 
   const codeModalOkBtnHandler = () => {
     closeNextModal();
@@ -389,21 +359,14 @@ const DateAlbum = ({ url, clearUrl }) => {
 
   const handleNext = async () => {
     try {
-      setAnimate(true);
-      setTimeout(() => {
+      const amount = await isAmountAxios(); // async 호출의 결과를 변수에 저장
+      if (amount !== null && amount % 1000 === 0) {
         navigate("/date-album2");
-      }, 1800);
-      // const amount = await isAmountAxios(); // async 호출의 결과를 변수에 저장
-      // if (amount !== null && amount % 1000 === 0) {
-      //   setAnimate(true);
-      //   setTimeout(() => {
-      //     navigate("/date-album2");
-      //   }, 1800);
-      // } else {
-      //   // 모달
-      //   nextModal();
-      //   console.log(amount);
-      // }
+      } else {
+        // 모달
+        nextModal();
+        console.log(amount);
+      }
     } catch (error) {
       console.error("Error in handleNext:", error);
       setModalContent("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
@@ -638,6 +601,7 @@ const DateAlbum = ({ url, clearUrl }) => {
             <AlbumTitle>♥ {coupleName} 의 앨범 ♥</AlbumTitle>
             <TitleLine onClick={handleTemaChange}>테마 변경</TitleLine>
             <ImgWrapper bgColor={bgColor}>{renderImageBoxes(0, 6)}</ImgWrapper>
+            <InputDetailDiv />
           </BookSign>
         </BookTheme>
         <BookTheme2>
@@ -654,12 +618,13 @@ const DateAlbum = ({ url, clearUrl }) => {
               )}
               {renderImageBoxes(6, 15)}
             </ImgWrapper2>
+            <InputDetailDiv>
+              <NextButton onClick={handleNext}>다음</NextButton>
+            </InputDetailDiv>
           </BookSign2>
         </BookTheme2>
       </StyledSlider>
-      {/* <InputDetailDiv>
-        <NextButton onClick={handleNext}>▶▶</NextButton>
-      </InputDetailDiv> */}
+
       <TemaChange
         open={temaChange}
         close={closeModal}

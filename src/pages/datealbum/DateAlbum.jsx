@@ -123,19 +123,19 @@ const InputDetailDiv = styled.div`
 
 const ImgWrapper = styled.div`
   width: 90%;
-  height: 50%;
+  height: 45%;
   background-color: ${(props) => props.bgColor};
   align-items: center;
   justify-content: space-evenly;
   padding-right: 1%;
-  margin-top: 5%;
+  margin-top: 15%;
   display: flex;
   flex-wrap: wrap;
 `;
 
 const ImgWrapper2 = styled.div`
   width: 90%;
-  height: 70%;
+  height: 60%;
   background-color: ${(props) => props.bgColor};
   padding-left: 0.4%;
   margin-top: 6%;

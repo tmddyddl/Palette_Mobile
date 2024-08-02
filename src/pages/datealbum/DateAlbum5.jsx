@@ -96,7 +96,7 @@ const BookSign2 = styled.div`
 
 const ImgWrapper2 = styled.div`
   width: 90%;
-  height: 70%;
+  height: 60%;
   background-color: ${(props) => props.bgColor};
   padding-left: 0.4%;
   margin-top: 6%;

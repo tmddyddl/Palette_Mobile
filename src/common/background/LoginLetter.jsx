@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import LetterOpenImg from "../../img/background/mobile/편지지2.jpg";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import logo from "../../img/background/logo.png";
 import chatLogo from "../../img/background/chatLogo.png";
 import BookMark from "../bookmark/BookMark";
-
+import MemberAxiosApi from "../../axiosapi/MemberAxiosApi";
+import { useState } from "react";
+import Modal from "../../pages/datediary/Modal";
+import visitLcck from "../../img/mainImg/방문자 잠금.gif";
+import soleModalImg from "../../img/mainImg/솔로잠금.gif";
 const Contain = styled.div`
   width: 100vw;
   height: 100vh;
@@ -81,9 +85,13 @@ const Logo2 = styled.div`
   background-repeat: no-repeat;
 `;
 
-const ChatLogo = styled.img`
+const ChatLogo = styled.div`
   width: 40px;
   height: 40px;
+  background-image: url(${(props) => props.chatImg});
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   &:hover {
     transform: scale(0.95);
@@ -110,8 +118,107 @@ const BookMarkBox = styled.div`
 `;
 
 const LoginLetter = ({ notLoginState }) => {
+  const email = sessionStorage.getItem("email");
+  const coupleName = sessionStorage.getItem("coupleName");
+  const navigator = useNavigate();
+  // 모달 내용
+  const [modalContent, setModalContent] = useState("");
+  //팝업 처리
+  const [modalOpen, setModalOpen] = useState(false);
+  const [notEqualCoupleName, setNotEqualCoupleName] = useState(false);
+
+  //코드 모달 확인
+  const codeModalOkBtnHandler = () => {
+    closeModal();
+    navigator("/login-page");
+  };
+  //솔로 모달
+  const soloModal = () => {
+    setModalOpen(true);
+    setModalContent("커플 연결을 위해 로그인 페이지로 이동합니다.");
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  // 주인인지 방문객인지 확인
+  const compareCoulpleNameFunction = async (emailData) => {
+    try {
+      const coupleNameData = await MemberAxiosApi.renderCoupleNameSearch(
+        emailData
+      );
+      if (coupleNameData.data !== coupleName) {
+        // 본인이 아닌 경우
+        return false; // 결과를 false로 반환
+      } else {
+        // 본인이면서 커플일 경우
+        return true; // 결과를 true로 반환
+      }
+    } catch (error) {
+      console.error("커플 이름 비교 오류:", error);
+      return false; // 오류 발생 시 false 반환
+    }
+  };
+  // 커플인지 확인하는 비동기함수
+  const isCoupleAxios = async (emailValue) => {
+    const coupleNameData = await MemberAxiosApi.renderCoupleNameSearch(
+      emailValue
+    );
+    const resCouple = await MemberAxiosApi.isCoupleTrue(coupleNameData.data);
+    return resCouple.data;
+  };
+  const OpenChatOnClickHandler = async () => {
+    try {
+      const isCouple = await compareCoulpleNameFunction(email);
+
+      if (isCouple) {
+        // 커플일 경우
+        if (await isCoupleAxios(email)) {
+          navigator(`/Chat`);
+        } else {
+          // 모달
+          soloModal();
+          console.log("솔로는 웁니다.");
+        }
+      } else {
+        // 커플이 아닌 경우
+        setModalOpen(true);
+        setNotEqualCoupleName(true);
+        setModalContent("방문자는 해당 기능이 잠겨있습니다.");
+        navigator(`/main-page`);
+      }
+    } catch (error) {
+      // 에러 처리
+      console.error("오류가 발생했습니다:", error);
+    }
+  };
+  //방문객 모달 확인버튼 이벤트함수
+  const visitCodeModalOkBtnHandler = () => {
+    closeModal();
+    navigator(`/${coupleName}/main-page`);
+  };
   return (
     <Contain notLoginState={notLoginState}>
+      {notEqualCoupleName ? (
+        <Modal
+          open={modalOpen}
+          header="방문객 기능잠금"
+          type={true}
+          confirm={visitCodeModalOkBtnHandler}
+          img={visitLcck}
+        >
+          {modalContent}
+        </Modal>
+      ) : (
+        <Modal
+          open={modalOpen}
+          header="솔로는 웁니다."
+          type={true}
+          confirm={codeModalOkBtnHandler}
+          img={soleModalImg}
+        >
+          {modalContent}
+        </Modal>
+      )}
       {!notLoginState && (
         <LogoBefore>
           <Link to="/">
@@ -125,9 +232,7 @@ const LoginLetter = ({ notLoginState }) => {
           <Link to={`/main-page`}>
             <Logo src={logo} />
           </Link>
-          <Link to={`/Chat`}>
-            <ChatLogo alt="logo" src={chatLogo} />
-          </Link>
+          <ChatLogo chatImg={chatLogo} onClick={OpenChatOnClickHandler} />
         </LogoDiv>
       )}
       {!notLoginState && (

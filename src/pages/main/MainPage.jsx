@@ -396,7 +396,7 @@ const BackMyHome = styled.div`
   aspect-ratio: 4.5/1;
   font-size: 11px;
   font-weight: 700;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #ffd2c2;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -632,6 +632,10 @@ const MainPage = () => {
                         <Btn
                           onClick={() => {
                             sessionStorage.setItem("email", "");
+                            sessionStorage.setItem("coupleName", "");
+                            sessionStorage.setItem("imgUrl", "");
+                            sessionStorage.setItem("myDarling", "");
+                            sessionStorage.setItem("kakaoImgUrl", "");
                             navigate("/");
                           }}
                         >

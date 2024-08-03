@@ -36,7 +36,7 @@ const DdayInputForm = styled.input`
 
 const DdayInputDiv = styled.div`
   width: 90%;
-  height: auto;
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

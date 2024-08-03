@@ -44,7 +44,7 @@ const PopTitle = styled.div`
   justify-content: center;
 `;
 const PageTitleleft = styled.div`
-  width: 40%;
+  width: 35%;
   height: 100%;
   font-size: 1.1rem;
   display: flex;
@@ -52,7 +52,7 @@ const PageTitleleft = styled.div`
   justify-content: flex-start;
 `;
 const PageTitleRight = styled.div`
-  width: 60%;
+  width: 65%;
   height: 100%;
   padding-right: 1%;
   font-size: 0.8rem;
@@ -150,8 +150,8 @@ const CloseDiv = styled.div`
   padding-right: 1%;
 `;
 const CloseButton = styled.div`
-  width: 10%;
-  height: 90%;
+  width: 15%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

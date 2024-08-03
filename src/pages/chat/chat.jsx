@@ -19,7 +19,7 @@ import { MdEmojiEmotions } from "react-icons/md";
 import chatBack1 from "../../img/chat/pcchatimg/9.jpg";
 import chatBack2 from "../../img/chat/pcchatimg/6.jpg";
 import chatBack3 from "../../img/chat/pcchatimg/8.jpg";
-import chatBack4 from "../../img/chat/pcchatimg/13.png";
+import chatBack4 from "../../img/background/theme/4.jpg";
 import chatBack5 from "../../img/chat/pcchatimg/21.png";
 import chatBack6 from "../../img/chat/pcchatimg/25.png";
 import chatBack7 from "../../img/chat/pcchatimg/31.png";
@@ -73,9 +73,8 @@ const Textarea = styled.div`
   height: ${({ isPlusMenuVisible }) =>
     isPlusMenuVisible
       ? "calc(68vh - 25vh)"
-      : "calc(68vh - 4.5vh); border-bottom: 1px solid gray;"}; // 기본 화면 크기
+      : "calc(68vh - 40px); border-bottom: 1px solid gray;"}; // 기본 화면 크기
 `;
-
 
 const Message = styled.div`
   max-width: 60%;
@@ -83,9 +82,11 @@ const Message = styled.div`
   margin: 10px;
   border-radius: 20px;
   background-color: ${(props) => (props.isSender ? "#DCF8C6" : "#E0E0E0")};
-  align-self: ${(props) => (props.isSender ? "flex-end" : "flex-start")};
   border: ${(props) =>
     props.isSender ? "1px solid #DCF8C6" : "1px solid #E0E0E0"};
+  word-wrap: break-word; /* 긴 단어 또는 URL이 줄 바꿈 되도록 설정 */
+  overflow-wrap: break-word; /* 긴 단어 또는 URL이 줄 바꿈 되도록 설정 */
+  white-space: pre-wrap; /* 공백 및 줄 바꿈을 유지하면서 줄 바꿈 적용 */
 `;
 
 const TopDiv = styled.div`
@@ -103,7 +104,7 @@ const TopDiv = styled.div`
 `;
 
 const TopText = styled.div`
-  width: 63%;
+  width: 45%;
   height: 95%;
   padding-left: 2%;
   display: flex;
@@ -113,7 +114,7 @@ const TopText = styled.div`
 `;
 
 const TopName = styled.div`
-  width: 40%;
+  width: 50%;
   height: 95%;
   padding-right: 2%;
   display: flex;
@@ -122,36 +123,31 @@ const TopName = styled.div`
   font-size: 13px;
 `;
 
-const TopBtn = styled.div`
-  width: 6%;
-  height: 60%;
+const RoomOut = styled.div`
+  width: 65px;
+  height: 20px;
+  margin-right: 2%;
   border-radius: 8px;
   display: flex;
-  border: 1px solid darkgray;
   align-items: center;
   justify-content: center;
   font-size: 13px;
   font-weight: bolder;
-  background-color: transparent;
+  background-color: #ffd2c2;
   cursor: pointer;
   &:hover {
+    font-size: 14px;
     background-color: #dadada;
-  }
-  @media screen and (max-width: 1200px) {
-    font-size: 12px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 9px;
   }
 `;
 
 const PlusMenu = styled.div`
   width: 100%;
-  height: 20%;
+  height: 80px;
   background-color: #dadada;
   display: ${(props) => (props.isVisible ? "flex" : "none")};
   position: absolute;
-  bottom: 8%;
+  bottom: 39px;
 `;
 
 const TemaMenu = styled.div`
@@ -212,7 +208,7 @@ const InputText = styled.div`
   z-index: 1;
   input {
     flex: 1;
-    height: 4vh;
+    height: 25px;
     font-size: 15px;
     border: 0;
     border-radius: 10px 0 0 10px;
@@ -222,7 +218,7 @@ const InputText = styled.div`
   }
   .send {
     width: 2%;
-    height: 4vh;
+    height: 25px;
     background-color: #fdff8f;
     margin-right: 2vw;
     border: 0;
@@ -268,7 +264,23 @@ const InputText = styled.div`
     transform: rotate(90deg);
   }
 `;
-
+// 메세지 옆에 해당 채팅 시간 나타내기
+const MessageTime = styled.div`
+  width: 50px;
+  height: 100%;
+  font-size: 9px;
+  display: flex;
+  flex-direction: ${(props) => (props.isSender ? "row-reverse" : "row")};
+  align-items: center;
+  font-weight: 500;
+`;
+const MessageBox = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: ${(props) => (props.isSender ? "row-reverse" : "row")};
+  align-items: flex-end;
+`;
 const ChatMain = ({ url, clearUrl }) => {
   const [isPlusMenuVisible, setPlusMenuVisible] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(chatBack7);
@@ -360,8 +372,16 @@ const ChatMain = ({ url, clearUrl }) => {
         message: `${coupleNickName[0]}+님이 나갔습니다`,
       })
     );
-    ws.current.close();
+    ws.current.close(); // WebSocket 종료
+    ws.current = null; // WebSocket 객체를 null로 설정
+    //DB에서 채팅방 삭제
+    deleteChatRoom(roomId);
     navigate("/Chat");
+  };
+  //채팅방 삭제하는 Axios함수
+  const deleteChatRoom = async (roomId) => {
+    const res = await ChatAxiosApi.deleteChatRoom(roomId);
+    console.log(res.data);
   };
   useEffect(() => {
     const coupleEmailAxios = async () => {
@@ -379,10 +399,10 @@ const ChatMain = ({ url, clearUrl }) => {
 
   useEffect(() => {
     const accessToken = Common.getAccessToken();
+    // 채팅방 정보가져오는 부분
     const getChatRoom = async () => {
       try {
         const rsp = await ChatAxiosApi.chatDetail(roomId);
-        // setChatList(rsp.chatData);
         setRoomName(rsp.data.name);
         console.log(rsp.data.chatData);
       } catch (e) {
@@ -397,9 +417,11 @@ const ChatMain = ({ url, clearUrl }) => {
         }
       }
     };
+    //채팅방 데이터 가져오는 부분
     const getPastMessages = async () => {
       try {
         const rsp = await ChatAxiosApi.pastChatDetail(roomId);
+        console.log("채팅 데이터 보자", rsp.data);
         setChatList(rsp.data);
       } catch (e) {
         console.log(e);
@@ -431,12 +453,9 @@ const ChatMain = ({ url, clearUrl }) => {
     }
     ws.current.onmessage = (evt) => {
       const data = JSON.parse(evt.data);
-      console.log("테스트" + data.message);
       setChatList((prevItems) => [...prevItems, data]);
     };
-  
   }, [socketConnected, roomId, sender, receiver]);
-
   // 화면 하단으로 자동 스크롤
   useEffect(() => {
     if (chatContainerRef.current) {
@@ -473,6 +492,7 @@ const ChatMain = ({ url, clearUrl }) => {
   };
   //삭제토글
   const handleRoomDeleteClick = () => {
+    // 서버에서 사용자 상태 확인 후 삭제 시도
     deleteModal();
   };
   const deleteModal = () => {
@@ -530,11 +550,22 @@ const ChatMain = ({ url, clearUrl }) => {
     const coupleName = sessionStorage.getItem("coupleName");
     coupleNickNameAxois(coupleName);
   }, []);
-  const clickTopBtn = () => {
+  const closeBtnOnClickHandler = () => {
     navigate(-1);
   };
   const truncateRoomName = (name) => {
-    return name.length > 10 ? name.slice(0, 10) + "..." : name;
+    return name.length > 5 ? name.slice(0, 5) + "..." : name;
+  };
+  // 날짜 표시형식 변환 함수
+  const formatDateToTime = (isoDateString) => {
+    console.log("ISO Date String:", isoDateString); // 디버깅용 로그
+    const date = new Date(isoDateString);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const period = hours < 12 ? "오전" : "오후";
+    const formattedHours = hours % 12 || 12;
+    const formattedMinutes = minutes.toString().padStart(2, "0");
+    return `${period} ${formattedHours}:${formattedMinutes}`;
   };
   return (
     <GlobalStyle>
@@ -553,7 +584,7 @@ const ChatMain = ({ url, clearUrl }) => {
           <TopDiv>
             <TopText>{coupleNickName[1]} 의 채팅</TopText>
             <TopName>채팅방 : {truncateRoomName(roomName)}</TopName>
-            {/* <TopBtn onClick={clickTopBtn}>나가기</TopBtn> */}
+            <RoomOut onClick={closeBtnOnClickHandler}>나가기</RoomOut>
           </TopDiv>
           <Textarea
             ref={chatContainerRef}
@@ -561,14 +592,16 @@ const ChatMain = ({ url, clearUrl }) => {
               isPlusMenuVisible || isTemaMenuVisible || isEmojiMenuVisible
             }
           >
-            {/* <MessageBox> */}
             {chatList.map((chat, index) => (
-              <Message key={index} isSender={chat.sender === sender}>
-                {chat.chatData}
-                {chat.message}
-              </Message>
+              <MessageBox key={index} isSender={chat.sender === sender}>
+                <Message isSender={chat.sender === sender}>
+                  {chat.message}
+                </Message>
+                <MessageTime isSender={chat.sender === sender}>
+                  {formatDateToTime(chat.regDate)}
+                </MessageTime>
+              </MessageBox>
             ))}
-            {/* </MessageBox> */}
           </Textarea>
           <PlusMenu isVisible={isPlusMenuVisible}>
             <PlusMenuBtn>

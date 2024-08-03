@@ -66,7 +66,7 @@ const ChatAxiosApi = {
     };
     return await AxiosInstance.post("/chat2/coupleEmail", member);
   },
-
+  // 채팅룸 삭제하기
   deleteChatRoom: async (roomId) => {
     try {
       console.log("Deleting chat room:", roomId);

@@ -132,13 +132,13 @@ const CoupleImg = ({ clothes = false }) => {
   //카카오 프로필 사진저장 비동기 함수
   const kakaoProfileImgAxios = async (emailvalue, kakaoProfile) => {
     const res = await MemberAxiosApi.profileUrlSave(emailvalue, kakaoProfile);
-    if (kakaoProfileUrl && res.data) {
+    if ((kakaoProfileUrl !==null && kakaoProfile !=="")&& res.data) {
       setImgUrl(kakaoProfile);
     }
   };
   useEffect(() => {
     const fetchData = async () => {
-      if (kakaoProfileUrl !== null) {
+      if (kakaoProfileUrl !==null && kakaoProfileUrl !=="") {
         await kakaoProfileImgAxios(email, kakaoProfileUrl);
       }
       const getCoupleName = await MemberAxiosApi.renderCoupleNameSearch(email);
@@ -146,8 +146,7 @@ const CoupleImg = ({ clothes = false }) => {
         setIsMyHome(true);
         await coupleNickNameAxios(email);
         await getUserSex();
-        const resCouple = await MemberAxiosApi.renderCoupleNameSearch(email);
-        await coupleProfileAxios(resCouple.data, email);
+        await coupleProfileAxios(getCoupleName.data, email);
       }
     };
     fetchData();
@@ -210,7 +209,7 @@ const CoupleImg = ({ clothes = false }) => {
       console.log("File uploaded successfully!");
 
       // 이전 이미지가 있는 경우 삭제
-      if (imgUrl) {
+      if (imgUrl && imgUrl !=="") {
         try {
           const oldFileRef = ref(profileStorage, imgUrl);
           await deleteObject(oldFileRef);

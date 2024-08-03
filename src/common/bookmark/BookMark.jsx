@@ -227,43 +227,6 @@ const BookMark = () => {
     }
   };
 
-  // const OpenChatOnClickHandler = async () => {
-  //   try {
-  //     const isCouple = await compareCoulpleNameFunction(email);
-
-  //     if (isCouple) {
-  //       // 커플일 경우
-  //       if (await isCoupleAxios(email)) {
-  //         navigator(`/Chat`);
-  //       } else {
-  //         // 모달
-  //         soloModal();
-  //         console.log("솔로는 웁니다.");
-  //       }
-  //     } else {
-  //       // 커플이 아닌 경우
-  //       setModalOpen(true);
-  //       setNotEqualCoupleName(true);
-  //       setModalContent("방문자는 해당 기능이 잠겨있습니다.");
-  //       navigator(`/${coupleName}/main-page`);
-  //     }
-  //   } catch (error) {
-  //     // 에러 처리
-  //     console.error("오류가 발생했습니다:", error);
-  //   }
-  // };
-
-  // const OpenChatOnClickHandler = async () => {
-  //   compareCoulpleNameFunction(email);
-  //   if ((await isCoupleAxios(email)) === true) {
-  //     onNavigate(`/Chat`);
-  //   } else {
-  //     // 모달
-  //     soloModal();
-  //     console.log("솔로는 웁니다.");
-  //   }
-  // };
-
   //방문객 모달 확인버튼 이벤트함수
   const visitCodeModalOkBtnHandler = () => {
     closeModal();

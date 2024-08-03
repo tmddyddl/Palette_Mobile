@@ -6,38 +6,6 @@ import ChatModal from "./ChatModal";
 import chat from "../../img/background/theme/chat.jpg";
 import chat_1 from "../../img/background/theme/chat-1.jpg";
 import MainAxios from "../../axiosapi/MainAxios";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-
-// const StyledSlider = styled(Slider)`
-//   .slick-list {
-//     overflow: hidden;
-//   }
-
-//   .slick-slide {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   }
-
-//   .slick-dots {
-//     bottom: 10px;
-
-//     li {
-//       margin: 0 5px;
-//     }
-
-//     button:before {
-//       font-size: 12px;
-//       color: gray;
-//     }
-
-//     .slick-active button:before {
-//       color: black;
-//     }
-//   }
-// `;
 
 const turnPageLeft = keyframes`
   0% {
@@ -394,7 +362,7 @@ function ChatList({ url, clearUrl }) {
       }
     };
     // 1초마다 채팅방 목록 업데이트
-    const intervalId = setInterval(fetchChatRooms, 1000);
+    const intervalId = setInterval(fetchChatRooms, 3000);
     // 컴포넌트 언마운트 시 인터벌 해제
     return () => clearInterval(intervalId);
   }, [email]);
@@ -430,7 +398,7 @@ function ChatList({ url, clearUrl }) {
     setCreateModal(true);
   };
   const truncateRoomName = (name) => {
-    return name.length > 10 ? name.slice(0, 10) + "..." : name;
+    return name.length > 5 ? name.slice(0, 5) + "..." : name;
   };
   return (
     <BookWrapper>

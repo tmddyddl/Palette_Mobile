@@ -43,7 +43,7 @@ const Button = styled.button`
   }
 `;
 
-const ChatRoomCreate = ({ onClose }) => {
+const ChatRoomCreate = ({ onClose}) => {
   const [chatRoomTitle, setChatRoomTitle] = useState("");
   const navigate = useNavigate();
   const [sender, setSender] = useState("");

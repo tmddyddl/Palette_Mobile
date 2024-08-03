@@ -117,7 +117,7 @@ const CloseDiv = styled.div`
   padding-right: 1%;
 `;
 const CloseButton = styled.div`
-  width: 10%;
+  width: 15%;
   height: 90%;
   display: flex;
   align-items: center;

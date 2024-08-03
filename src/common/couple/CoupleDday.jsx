@@ -78,11 +78,12 @@ const ButtonDiv = styled.div`
   align-items: center;
 `;
 
-const CoupleDday = ({ isMyHome }) => {
+const CoupleDday = () => {
   const coupleName = sessionStorage.getItem("coupleName");
   const [isDday, setIsDday] = useState();
   const [saveCoupleName, setSaveCoupleName] = useState("");
   const [saveDday, setSaveDday] = useState("");
+  const [isMyHome, setIsMyHome] = useState(true);
   const [isCoupleName, setIsCoupleName] = useState(false);
   const email = sessionStorage.getItem("email");
 
@@ -96,6 +97,11 @@ const CoupleDday = ({ isMyHome }) => {
     const loginCoupleName = await MemberAxiosApi.renderCoupleNameSearch(email);
     console.log("5. 이메일로 커플 이름 서치", loginCoupleName.data);
     setSaveCoupleName(loginCoupleName.data);
+    if (loginCoupleName.data !== coupleName) {
+      setIsMyHome(false);
+    } else {
+      setIsMyHome(true);
+    }
     console.log("6. 커플 이름 저장", loginCoupleName.data);
     // Dday 값 가져오기
     console.log("이거이거" + coupleName);

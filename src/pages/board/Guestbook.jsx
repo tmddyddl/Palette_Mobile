@@ -35,7 +35,7 @@ const GuestbookGrayBar = styled.div`
 const GuestbookWriteArea = styled.div`
   margin-top: 2vh;
   width: 87vw;
-  height: 9vh;
+  aspect-ratio: 5/1;
   border: 1px solid black;
   background-color: #eccdb0;
 `;
@@ -63,7 +63,7 @@ const GuestbookWriteButton = styled.div`
   margin-top: 0.1vh;
   margin-left: 60%;
   width: 80px;
-  height: 2vh;
+  height: 20px;
   font-size: 12px;
   font-weight: 600;
   display: flex;
@@ -86,7 +86,7 @@ const GuestbookArea = styled.div`
   margin-left: 16px;
   background-color: #eccdb0;
   width: 85vw;
-  height: 10vh;
+  aspect-ratio:4/1;
   border: 1px solid black;
 `;
 const GuestbookHead = styled.div`

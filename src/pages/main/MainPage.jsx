@@ -423,8 +423,6 @@ const MainPage = () => {
   const [isDday, setIsDday] = useState(false);
   //searchCouple 포함 리스트 저장
   const [searchCoupleList, setSearchCoupleList] = useState([]);
-  // 내 방이면 true 아니면 false
-  const [isMyHome, setIsMyHome] = useState(true);
   //갤러리에서 이미지 메인 화면에 오도록 저장하는 변수
   const [gallaryImg, setGallaryImg] = useState(Array(4).fill(null));
   //내홈으로 돌아가기 숨기기 변수
@@ -469,21 +467,19 @@ const MainPage = () => {
   };
 
   const handleSearch = (index) => {
-    const coupleName = searchCoupleList[index];
-    if (coupleName) {
-      sessionStorage.setItem("coupleName", coupleName);
+    const coupleNameData = searchCoupleList[index];
+    if (coupleNameData) {
+      sessionStorage.setItem("coupleName", coupleNameData);
       console.log(
         "오픈북 검색창 searchTerm",
         searchTerm,
         " coupleName",
-        coupleName
+        coupleNameData
       );
-      navigate(`/main-page`);
-      setIsMyHome(false);
       setSearchTerm(""); // 필요시 네비게이션 후 검색어 초기화
+      navigate(`/main-page`);
     }
   };
-
   //설정 폼 변화 함수
   const settingFromStatus = () => {
     setSettingForm(true);
@@ -549,7 +545,6 @@ const MainPage = () => {
   }, [searchTerm]);
   const goHomeOnClickHandler = () => {
     MycoupleNameSearch(email);
-    setIsMyHome(true);
   };
   const MycoupleNameSearch = async (emailValue) => {
     const myCoupleNameData = await MemberAxiosApi.renderCoupleNameSearch(
@@ -580,10 +575,10 @@ const MainPage = () => {
               <PaletteBanner />
             </PaletteDiv>
             <CoupleDiv>
-              <CoupleImg isMyHome={isMyHome} />
+              <CoupleImg />
             </CoupleDiv>
             <CoupleDiv>
-              <CoupleDday isMyHome={isMyHome} />
+              <CoupleDday />
               <VisitContainer>
                 {/* 여기 검색단어 맵으로 뿌려줄 예정 */}
                 {searchCoupleList.map((couple, index) => (

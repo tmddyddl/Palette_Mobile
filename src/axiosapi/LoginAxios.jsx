@@ -120,5 +120,11 @@ const LoginAxios = {
       member
     );
   },
+  //이미 커플이 완성되어 있는지 확인.
+  isExistCouple: async (coupleName) => {
+    return await axios.get(
+      Common.PALLETE_DOMAIN + `/auth/isExistCouple?coupleName=${coupleName}`
+    );
+  },
 };
 export default LoginAxios;

@@ -393,6 +393,8 @@ const SignupPage = () => {
   const [headerContents, SetHeaderContents] = useState("");
   //팝업 처리
   const [modalOpen, setModalOpen] = useState(false);
+  // 이미 커플이 완성되어 있는지 저장하는 변수
+  const [isExistCoupleState, SetIsExistCoupleState] = useState(false);
   //카카오 로그인 props
   const location = useLocation();
   const { kakaoProp, kakaoEmail, kakaopwd, kakaoName, kakaoImgUrl } =
@@ -632,19 +634,29 @@ const SignupPage = () => {
     );
   };
   // 카카오 커플이름 등록 버튼 함수
-  const kakaoCoupleNameBtnOnClickHandler = () => {
-    // 신규 커플 등록
-    if (coupleNameDuplication === true) {
-      coupleNameInsertAxois(kakaoEmail, inputCoupleName);
-      //등록 모달창
+  const kakaoCoupleNameBtnOnClickHandler = async () => {
+    //// 이미 커플이 완성되어 있지 확인하는 함수
+    const res = await LoginAxios.isExistCouple(inputCoupleName);
+    console.log("이미 커플 완성 여부:", res.data);
+    // 이미 커플이 완성되어 있는 경우
+    if (res.data) {
       setModalOpen(true);
-      SetHeaderContents("커플등록");
-      setModalContent("등록되었습니다.");
-    }
-    // 짝이 있는지 확인
-    else {
-      coupleEmailCheck(inputCoupleName);
-      setIsMyCoupleEmailForm(true);
+      SetHeaderContents("커플존재");
+      setModalContent("이미 커플이 존재합니다.");
+    } else {
+      // 신규 커플 등록
+      if (coupleNameDuplication === true) {
+        coupleNameInsertAxois(kakaoEmail, inputCoupleName);
+        //등록 모달창
+        setModalOpen(true);
+        SetHeaderContents("커플등록");
+        setModalContent("등록되었습니다.");
+      }
+      // 짝이 있는지 확인
+      else {
+        coupleEmailCheck(inputCoupleName);
+        setIsMyCoupleEmailForm(true);
+      }
     }
   };
   //커플이름 onChange 함수 (중복확인)
@@ -668,19 +680,30 @@ const SignupPage = () => {
     }
   };
   // 커플이름 등록 버튼 함수
-  const coupleNameBtnOnClickHandler = () => {
-    // 신규 커플 등록
-    if (coupleNameDuplication === true) {
-      coupleNameInsertAxois(inputEmail, inputCoupleName);
-      //등록 모달창
+  const coupleNameBtnOnClickHandler = async () => {
+    //// 이미 커플이 완성되어 있지 확인하는 함수
+    const res = await LoginAxios.isExistCouple(inputCoupleName);
+    console.log("이미 커플 완성 여부:", res.data);
+    // 이미 커플이 완성되어 있는 경우
+    if (res.data) {
+      //커플 모달창
       setModalOpen(true);
-      SetHeaderContents("커플등록");
-      setModalContent("등록되었습니다.");
-    }
-    // 짝이 있는지 확인
-    else {
-      coupleEmailCheck(inputCoupleName);
-      setIsMyCoupleEmailForm(true);
+      SetHeaderContents("커플존재");
+      setModalContent("이미 커플이 존재합니다.");
+    } else {
+      // 신규 커플 등록
+      if (coupleNameDuplication === true) {
+        coupleNameInsertAxois(inputEmail, inputCoupleName);
+        //등록 모달창
+        setModalOpen(true);
+        SetHeaderContents("커플등록");
+        setModalContent("등록되었습니다.");
+      }
+      // 짝이 있는지 확인
+      else {
+        coupleEmailCheck(inputCoupleName);
+        setIsMyCoupleEmailForm(true);
+      }
     }
   };
   //커플이름 Insert 비동기 함수

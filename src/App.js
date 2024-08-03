@@ -70,7 +70,7 @@ function App() {
             />
           </Route>
 
-          <Route element={<LoginLetter notLoginState={true} />}>
+          <Route element={<LoginLetter notLoginState={false} />}>
             <Route path="/modify" element={<Modify />} />
             <Route path="/withdrawal" element={<Withdrawal />} />
           </Route>

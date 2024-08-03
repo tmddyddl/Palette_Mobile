@@ -119,17 +119,16 @@ const Input = styled.input`
   display: none;
 `;
 
-const CoupleImg = ({ clothes = false, isMyHome }) => {
+const CoupleImg = ({ clothes = false }) => {
   const [coupleNickName, setCoupleNickName] = useState(["", ""]);
   const [imgUrl, setImgUrl] = useState();
   const [myDarling, setMyDarling] = useState();
-  const email = sessionStorage.getItem("email");
+  const [isMyHome, setIsMyHome] = useState(true);
   const coupleName = sessionStorage.getItem("coupleName");
-  const [IsExistImg, setIsExistImg] = useState([false, false]);
-  const [saveFirstEmail, setSaveFirstEmail] = useState("");
-
   //카카오 로그인시 프로필 자동 변경
   const kakaoProfileUrl = sessionStorage.getItem("kakaoImgUrl");
+  const email = sessionStorage.getItem("email");
+
   //카카오 프로필 사진저장 비동기 함수
   const kakaoProfileImgAxios = async (emailvalue, kakaoProfile) => {
     const res = await MemberAxiosApi.profileUrlSave(emailvalue, kakaoProfile);
@@ -138,9 +137,20 @@ const CoupleImg = ({ clothes = false, isMyHome }) => {
     }
   };
   useEffect(() => {
-    if (kakaoProfileUrl !== null) {
-      kakaoProfileImgAxios(email, kakaoProfileUrl);
-    }
+    const fetchData = async () => {
+      if (kakaoProfileUrl !== null) {
+        await kakaoProfileImgAxios(email, kakaoProfileUrl);
+      }
+      const getCoupleName = await MemberAxiosApi.renderCoupleNameSearch(email);
+      if (coupleName === getCoupleName.data) {
+        setIsMyHome(true);
+        await coupleNickNameAxios(email);
+        await getUserSex();
+        const resCouple = await MemberAxiosApi.renderCoupleNameSearch(email);
+        await coupleProfileAxios(resCouple.data, email);
+      }
+    };
+    fetchData();
   }, []);
   const coupleNickNameAxios = async (emailData) => {
     console.log("emailData : " + emailData);
@@ -150,33 +160,40 @@ const CoupleImg = ({ clothes = false, isMyHome }) => {
       emailData,
       resCouple.data
     );
-
     setCoupleNickName(resNickName.data);
     console.log("커플닉네임 확인:" + resNickName.data);
   };
-
   //세션 커플이름이 바뀌었을 경우
   useEffect(() => {
     const fetchData = async (coupleNameData) => {
       try {
-        console.log("커플이름 :" + coupleNameData);
-        // 커플이름에 해당하는 첫 번째 이메일을 검색하고 저장합니다.
-        const firstEmailResponse = await MemberAxiosApi.firstEmailGet(
-          coupleNameData
+        const getCoupleName = await MemberAxiosApi.renderCoupleNameSearch(
+          email
         );
-        const firstEmail = firstEmailResponse.data; // 예시에서는 firstEmailResponse에서 실제 데이터를 얻어오는 방법으로 수정해야 합니다.
-        setSaveFirstEmail(firstEmail);
-        // 첫 번째 이메일을 사용하여 다른 비동기 작업을 진행합니다.
-        await Promise.all([
-          coupleNickNameAxios(firstEmail),
-          coupleProfileAxios(coupleNameData, email),
-        ]);
+        // 방문했을 경우에만 해당 로직을 수행합니다.
+        console.log("본인의 커플이름 :" + getCoupleName.data);
+        console.log("현재 커플 이름:" + coupleNameData);
+        if (getCoupleName.data !== coupleNameData) {
+          setIsMyHome(false);
+          // 커플이름에 해당하는 첫 번째 이메일을 검색하고 저장합니다.
+          const firstEmailResponse = await MemberAxiosApi.firstEmailGet(
+            coupleNameData
+          );
+          const firstEmail = firstEmailResponse.data; // 예시에서는 firstEmailResponse에서 실제 데이터를 얻어오는 방법으로 수정해야 합니다.
+          // 첫 번째 이메일을 사용하여 다른 비동기 작업을 진행합니다.
+          await Promise.all([
+            coupleNickNameAxios(firstEmail),
+            coupleProfileAxios(coupleNameData, email),
+          ]);
+          console.log("isMyHome 상태 확인:",isMyHome);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData(coupleName);
   }, [coupleName]);
+
   //파일 업로드 이벤트 함수
   const AddImgBtnOnChangeHandler = (e) => {
     const selectedFile = e.target.files[0];
@@ -224,28 +241,49 @@ const CoupleImg = ({ clothes = false, isMyHome }) => {
       coupleNameData,
       emailData
     );
-    sessionStorage.setItem("imgUrl", manprofile);
-    sessionStorage.setItem("myDarling", womanprofile);
-
-    console.log(res.data);
-
+    console.log("CoupleNameData좀 보자", coupleNameData);
+    console.log("emailData보자", emailData);
+    console.log("커플 두사람의 profileImgUrl:", res.data);
     if (res.data[0]) {
       setImgUrl(res.data[0]);
-      setIsExistImg((prevState) => [true, prevState[1]]); // 첫 번째 요소를 true로 업데이트
       sessionStorage.setItem("imgUrl", res.data[0]);
     }
     if (res.data[1]) {
       setMyDarling(res.data[1]);
-      setIsExistImg((prevState) => [prevState[0], true]); // 두 번째 요소를 true로 업데이트
       sessionStorage.setItem("myDarling", res.data[1]);
     }
   };
-
+  //사용자의 기본 이미지 저장하기
+  const getUserSex = async () => {
+    try {
+      // 사용자의 성별 가져오기
+      const res = await MainAxios.mySexSearch(email);
+      console.log("Sex:", res.data);
+      // 이미지가 존재하는 확인
+      const existUrl = await MemberAxiosApi.searchProfileUrl(email);
+      console.log("내 프로필 이미지:", existUrl.data);
+      if (existUrl.data === null && res.data === "Man") {
+        const resMan = await MemberAxiosApi.profileUrlSave(email, manprofile);
+        console.log(resMan.data);
+      } else if (existUrl.data === null && res.data === "Waman") {
+        const resWoman = await MemberAxiosApi.profileUrlSave(
+          email,
+          womanprofile
+        );
+        console.log(resWoman.data);
+      }
+    } catch (error) {
+      console.error(
+        "An error occurred while fetching user sex or saving profile URL:",
+        error
+      );
+    }
+  };
   return (
     <Contain clothes={clothes}>
       <ProfileDiv clothes={clothes}>
         <ProfileImgDiv clothes={clothes}>
-          <Profile imageurl={IsExistImg[0] ? imgUrl : manprofile}>
+          <Profile imageurl={imgUrl}>
             {isMyHome && (
               <ProfileCover clothes={clothes}>
                 <Label htmlFor="fileInput">Choose File</Label>
@@ -268,7 +306,7 @@ const CoupleImg = ({ clothes = false, isMyHome }) => {
       </HeartDiv>
       <ProfileDiv clothes={clothes} direction={true}>
         <ProfileImgDiv clothes={clothes}>
-          <Profile imageurl={IsExistImg[1] ? myDarling : womanprofile} />
+          <Profile imageurl={myDarling} />
         </ProfileImgDiv>
         <TextDiv>
           <Text clothes={clothes}>{coupleNickName[1] || "달콩"}</Text>

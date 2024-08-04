@@ -519,12 +519,8 @@ const SignupPage = () => {
 
   //주민등록번호 따로 받은 자리 합치는 함수
   const combineRRN = (firstPart, secondPart) => {
-    // 문자열을 숫자로 변환
-    const firstNum = parseInt(firstPart, 10);
-    const secondNum = parseInt(secondPart, 10);
-
     // 계산 수행
-    return firstNum * 10 + secondNum;
+    return firstPart + secondPart;
   };
   //회원가입 비동기 함수
   const signUpAxios = async (

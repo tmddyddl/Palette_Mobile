@@ -214,7 +214,7 @@ const CoupleImg = ({ clothes = false }) => {
           const oldFileRef = ref(profileStorage, imgUrl);
           await deleteObject(oldFileRef);
           console.log("Previous file deleted successfully!");
-        } catch (error) {
+        } catch (error)   {
           console.error("Error deleting previous file:", error);
           // 이전 파일이 이미 삭제된 경우라도 진행합니다.
         }
@@ -252,8 +252,8 @@ const CoupleImg = ({ clothes = false }) => {
       sessionStorage.setItem("myDarling", res.data[1]);
     }
   };
-  //사용자의 기본 이미지 저장하기
-  const getUserSex = async () => {
+   //사용자의 기본 이미지 저장하기
+   const getUserSex = async () => {
     try {
       // 사용자의 성별 가져오기
       const res = await MainAxios.mySexSearch(email);
@@ -261,15 +261,38 @@ const CoupleImg = ({ clothes = false }) => {
       // 이미지가 존재하는 확인
       const existUrl = await MemberAxiosApi.searchProfileUrl(email);
       console.log("내 프로필 이미지:", existUrl.data);
-      if (existUrl.data === null && res.data === "Man") {
+      const isCoupleTrue = await MemberAxiosApi.isCoupleTrue(coupleName);
+      if (
+        (existUrl.data === null ||
+          existUrl.data === "" ||
+          existUrl.data === "notExist") &&
+        res.data === "Man"
+      ) {
         const resMan = await MemberAxiosApi.profileUrlSave(email, manprofile);
+     
         console.log(resMan.data);
-      } else if (existUrl.data === null && res.data === "Waman") {
+      } else if (
+        (existUrl.data === null ||
+          existUrl.data === "" ||
+          existUrl.data === "notExist") &&
+        res.data === "Woman"
+      ) {
         const resWoman = await MemberAxiosApi.profileUrlSave(
           email,
           womanprofile
         );
+        if (!(isCoupleTrue.data)) {
+          sessionStorage.setItem("myDarling", manprofile);
+        }
         console.log(resWoman.data);
+      }
+      if (!(isCoupleTrue.data)&&
+      res.data === "Man") {
+        sessionStorage.setItem("myDarling", womanprofile);
+      }
+      if (!(isCoupleTrue.data)&&
+      res.data === "Woman") {
+        sessionStorage.setItem("myDarling", manprofile);
       }
     } catch (error) {
       console.error(

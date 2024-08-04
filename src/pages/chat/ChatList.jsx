@@ -261,24 +261,15 @@ const EnterBtn = styled.div`
 
 function ChatList({ url, clearUrl }) {
   const [chatRooms, setChatRooms] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState(null);
-  const [previewMessages, setPreviewMessages] = useState([]);
   const navigate = useNavigate();
   const email = sessionStorage.getItem("email");
   const [createModal, setCreateModal] = useState(false);
   const [coupleNickName, setCoupleNickName] = useState(["", ""]);
 
   const [animate, setAnimate] = useState(false);
+  const coupleName = sessionStorage.getItem("coupleName");
 
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    swipeToSlide: true,
-  };
-
+ 
   const pageMove = useCallback(() => {
     setAnimate(true);
     setTimeout(() => {
@@ -301,19 +292,6 @@ function ChatList({ url, clearUrl }) {
   const closeModal = () => {
     setCreateModal(false);
   };
-
-  // useEffect(() => {
-  //   const fetchChatRooms = async () => {
-  //     try {
-  //       const response = await ChatAxiosApi.chatList(email);
-  //       const filteredRooms = filterChatRooms(response.data, email);
-  //       setChatRooms(filteredRooms);
-  //     } catch (error) {
-  //       console.error("Error fetching chat rooms:", error);
-  //     }
-  //   };
-  //   fetchChatRooms(); // 최초 한 번 호출
-  //   selectChatRoom(chatRooms.roomId);
 
   const coupleNickNameAxois = useCallback(
     async (couple) => {
@@ -361,7 +339,9 @@ function ChatList({ url, clearUrl }) {
         console.error("Error fetching chat rooms:", error);
       }
     };
-    // 1초마다 채팅방 목록 업데이트
+    //닉네임 뽑아오기
+    coupleNickNameAxois(coupleName);
+    // 3초마다 채팅방 목록 업데이트
     const intervalId = setInterval(fetchChatRooms, 3000);
     // 컴포넌트 언마운트 시 인터벌 해제
     return () => clearInterval(intervalId);
@@ -369,23 +349,6 @@ function ChatList({ url, clearUrl }) {
 
   const enterChatRoom = (roomId) => {
     navigate(`/chat/${roomId}`);
-  };
-
-  const selectChatRoom = async (roomId) => {
-    setSelectedRoom(roomId);
-    try {
-      const response = await ChatAxiosApi.pastChatDetail(roomId);
-      let messages = response.data;
-      // 최근에 온 1개까지 미리보기
-      messages = messages.reverse();
-      setPreviewMessages(
-        messages.length > 0
-          ? messages.slice(0, 1)
-          : [{ sender: "", message: "내용이 없습니다" }]
-      );
-    } catch (error) {
-      console.error("Error fetching chat room preview:", error);
-    }
   };
 
   const getNickNameByEmail = (email) => {

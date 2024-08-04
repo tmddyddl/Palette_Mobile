@@ -69,32 +69,45 @@ const Text = styled.div`
 const CoupleImg = () => {
   // 커플 닉네임 저장
   const [coupleNickName, setCoupleNickName] = useState(["", ""]);
-  const email = sessionStorage.getItem("email");
   const imgUrl = sessionStorage.getItem("imgUrl");
   const myDarling = sessionStorage.getItem("myDarling");
   const coupleName = sessionStorage.getItem("coupleName");
-  const [saveFirstEmail, setSaveFirstEmail] = useState("");
-
+  const email = sessionStorage.getItem("email");
+  useEffect(() => {
+    const fetchData = async () => {
+      const getCoupleName = await MemberAxiosApi.renderCoupleNameSearch(email);
+      if (coupleName === getCoupleName.data) {
+        await coupleNickNameAxios(email);
+      }
+    };
+    fetchData();
+  }, []);
   //세션 커플이름이 바뀌었을 경우
   useEffect(() => {
     const fetchData = async (coupleNameData) => {
       try {
-        console.log("커플이름 :" + coupleNameData);
-        // 커플이름에 해당하는 첫 번째 이메일을 검색하고 저장합니다.
-        const firstEmailResponse = await MemberAxiosApi.firstEmailGet(
-          coupleNameData
+        const getCoupleName = await MemberAxiosApi.renderCoupleNameSearch(
+          email
         );
-        const firstEmail = firstEmailResponse.data; // 예시에서는 firstEmailResponse에서 실제 데이터를 얻어오는 방법으로 수정해야 합니다.
-        setSaveFirstEmail(firstEmail);
-        // 첫 번째 이메일을 사용하여 다른 비동기 작업을 진행합니다.
-        await Promise.all([coupleNickNameAxios(firstEmail)]);
+        // 방문했을 경우에만 해당 로직을 수행합니다.
+        console.log("본인의 커플이름 :" + getCoupleName.data);
+        console.log("현재 커플 이름:" + coupleNameData);
+        if (getCoupleName.data !== coupleNameData) {
+          // 커플이름에 해당하는 첫 번째 이메일을 검색하고 저장합니다.
+          const firstEmailResponse = await MemberAxiosApi.firstEmailGet(
+            coupleNameData
+          );
+          const firstEmail = firstEmailResponse.data; // 예시에서는 firstEmailResponse에서 실제 데이터를 얻어오는 방법으로 수정해야 합니다.
+          // 첫 번째 이메일을 사용하여 다른 비동기 작업을 진행합니다.
+          await Promise.all([coupleNickNameAxios(firstEmail)]);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData(coupleName);
   }, [coupleName]);
-  //
+
   const coupleNickNameAxios = async (emailData) => {
     console.log("emailData : " + emailData);
     const resCouple = await MemberAxiosApi.renderCoupleNameSearch(emailData);
@@ -111,7 +124,7 @@ const CoupleImg = () => {
     <Contain>
       <ProfileDiv>
         <ProfileImgDiv>
-          <Profile imageurl={imgUrl ? imgUrl : manprofile} />
+          <Profile imageurl={imgUrl} />
         </ProfileImgDiv>
         <Text>{coupleNickName[0] || "알콩"}</Text>
       </ProfileDiv>
@@ -120,7 +133,7 @@ const CoupleImg = () => {
       </HeartDiv>
       <ProfileDiv>
         <ProfileImgDiv>
-          <Profile imageurl={myDarling ? myDarling : womanprofile} />
+          <Profile imageurl={myDarling} />
         </ProfileImgDiv>
         <Text>{coupleNickName[1] || "달콩"}</Text>
       </ProfileDiv>

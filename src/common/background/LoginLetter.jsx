@@ -177,6 +177,7 @@ const LoginLetter = ({ notLoginState }) => {
         } else {
           // 모달
           soloModal();
+          setSession();
           console.log("솔로는 웁니다.");
         }
       } else {
@@ -196,6 +197,14 @@ const LoginLetter = ({ notLoginState }) => {
     closeModal();
     navigator(`/${coupleName}/main-page`);
   };
+  // 세션 초기화 함수
+  const setSession = () =>{
+    sessionStorage.setItem("email", "");
+    sessionStorage.setItem("coupleName", "");
+    sessionStorage.setItem("imgUrl", "");
+    sessionStorage.setItem("myDarling", "");
+    sessionStorage.setItem("kakaoImgUrl", "");
+  }
   return (
     <Contain notLoginState={notLoginState}>
       {notEqualCoupleName ? (

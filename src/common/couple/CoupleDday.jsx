@@ -84,7 +84,6 @@ const CoupleDday = () => {
   const [saveCoupleName, setSaveCoupleName] = useState("");
   const [saveDday, setSaveDday] = useState("");
   const [isMyHome, setIsMyHome] = useState(true);
-  const [isCoupleName, setIsCoupleName] = useState(false);
   const email = sessionStorage.getItem("email");
 
   useEffect(() => {

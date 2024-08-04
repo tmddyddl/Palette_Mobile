@@ -361,6 +361,7 @@ const ChatMain = ({ url, clearUrl }) => {
 
     // 서버에 메시지 저장
     sendMessage(roomId, sender, receiver, inputMsg);
+    getPastMessages();
   };
   const onClickMsgClose = () => {
     // 채팅 종료
@@ -396,7 +397,16 @@ const ChatMain = ({ url, clearUrl }) => {
     };
     coupleEmailAxios();
   }, [email]);
-
+  //채팅방 데이터 가져오는 부분
+  const getPastMessages = async () => {
+    try {
+      const rsp = await ChatAxiosApi.pastChatDetail(roomId);
+      console.log("채팅 데이터 보자", rsp.data);
+      setChatList(rsp.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   useEffect(() => {
     const accessToken = Common.getAccessToken();
     // 채팅방 정보가져오는 부분
@@ -417,16 +427,7 @@ const ChatMain = ({ url, clearUrl }) => {
         }
       }
     };
-    //채팅방 데이터 가져오는 부분
-    const getPastMessages = async () => {
-      try {
-        const rsp = await ChatAxiosApi.pastChatDetail(roomId);
-        console.log("채팅 데이터 보자", rsp.data);
-        setChatList(rsp.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
+
     getChatRoom();
     getPastMessages();
   }, []);

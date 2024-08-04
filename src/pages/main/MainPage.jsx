@@ -415,8 +415,6 @@ const MainPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   // 설정 폼 변화
   const [settingForm, setSettingForm] = useState(false);
-  // 커플 이름 검색 함
-
   //디데이 값 저장
   const [saveDday, setSaveDday] = useState("");
   //디데이 존재하는지

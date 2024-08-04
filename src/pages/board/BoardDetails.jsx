@@ -223,7 +223,9 @@ const BoardDetails = ({ url, clearUrl }) => {
   const deleteOnClickHandler = () => {
     deleteBoardContentsAxios(id);
   };
-
+  const truncateRoomName = (name) => {
+    return name.length > 15 ? name.slice(0, 15) + "..." : name;
+  };
   return (
     <>
       <BookTheme>
@@ -251,7 +253,7 @@ const BoardDetails = ({ url, clearUrl }) => {
                 </Link>
               </EditBackContainer>
               <DetailsNumber>No. {boardDetails.id}</DetailsNumber>
-              <DetailsTitle>{boardDetails.title}</DetailsTitle>
+              <DetailsTitle>{truncateRoomName(boardDetails.title)}</DetailsTitle>
               <DetailsGrayBar />
               {boardDetails.imgUrl && (
                 <BoardImgDetail imageurl={boardDetails.imgUrl} />

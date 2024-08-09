@@ -819,7 +819,6 @@ const SignupPage = () => {
             <label>인증코드</label>
             <input
               className="InputCode"
-              value={saveCertificationCode}
               onChange={(e) => {
                 setSaveCertificationCode(e.target.value);
               }}

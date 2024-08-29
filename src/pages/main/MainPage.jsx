@@ -231,7 +231,7 @@ const VisitDiv = styled.div`
     width: 89%;
     height: 25px;
     padding-left: 5px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 0.507);
     border-radius: 10px;
     outline: none;
     color: #fff;
